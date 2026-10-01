@@ -1,0 +1,8 @@
+shared drugs 574/663, shared diseases 307/409
+source links among shared entities 1945, target links 1888, NEW target links to recover 0 out of 174273 candidate pairs
+MV-HGAT (ours)   AUC nan  AUPR 0.0000  (random AUPR = 0.0000)
+MBiRW            AUC nan  AUPR 0.0000  (random AUPR = 0.0000)
+DRRS             AUC nan  AUPR 0.0000  (random AUPR = 0.0000)
+SCMFDD           AUC nan  AUPR 0.0000  (random AUPR = 0.0000)
+NIMCGCN          AUC nan  AUPR 0.0000  (random AUPR = 0.0000)
+LAGCN            AUC nan  AUPR 0.0000  (random AUPR = 0.0000)

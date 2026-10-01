@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "AUC": 0.7152424033098302,
+    "AUPR": 0.08646925616823173,
+    "mean_per_disease_AUC": 0.7672383068919492,
+    "n_diseases": 100
+  },
+  "folds": [],
+  "label": "DRRS"
+}

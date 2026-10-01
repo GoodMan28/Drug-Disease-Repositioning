@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "AUC": 0.7095511725231056,
+    "AUPR": 0.06109430600211577,
+    "mean_per_disease_AUC": 0.6853896576914232,
+    "n_diseases": 100
+  },
+  "folds": [],
+  "label": "LAGCN"
+}

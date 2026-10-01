@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "AUC": 0.8015957699029002,
+    "AUPR": 0.16770453925740691,
+    "mean_per_disease_AUC": 0.8050877065987819,
+    "n_diseases": 100
+  },
+  "folds": [],
+  "label": "MBiRW"
+}

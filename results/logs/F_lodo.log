@@ -1,0 +1,51 @@
+Fdataset: 593 drugs, 313 diseases, 1933 known links (1.04% density)
+
+### MV-HGAT (ours)  [lodo]
+    25/100 diseases  running AUC 0.8679  (612s)
+    50/100 diseases  running AUC 0.8331  (1200s)
+    75/100 diseases  running AUC 0.8532  (1771s)
+    100/100 diseases  running AUC 0.8387  (2583s)
+==> MV-HGAT (ours): AUC 0.8387 | AUPR 0.1366 | mean per-disease AUC 0.8546
+
+### MBiRW  [lodo]
+    25/100 diseases  running AUC 0.7949  (1s)
+    50/100 diseases  running AUC 0.7790  (3s)
+    75/100 diseases  running AUC 0.7938  (5s)
+    100/100 diseases  running AUC 0.8016  (6s)
+==> MBiRW: AUC 0.8016 | AUPR 0.1677 | mean per-disease AUC 0.8051
+
+### DRRS  [lodo]
+    25/100 diseases  running AUC 0.7252  (99s)
+    50/100 diseases  running AUC 0.7110  (195s)
+    75/100 diseases  running AUC 0.7088  (292s)
+    100/100 diseases  running AUC 0.7152  (389s)
+==> DRRS: AUC 0.7152 | AUPR 0.0865 | mean per-disease AUC 0.7672
+
+### SCMFDD  [lodo]
+    25/100 diseases  running AUC 0.7512  (56s)
+    50/100 diseases  running AUC 0.7200  (112s)
+    75/100 diseases  running AUC 0.7180  (167s)
+    100/100 diseases  running AUC 0.7240  (230s)
+==> SCMFDD: AUC 0.7240 | AUPR 0.0784 | mean per-disease AUC 0.7550
+
+### NIMCGCN  [lodo]
+    25/100 diseases  running AUC 0.7370  (255s)
+    50/100 diseases  running AUC 0.6973  (445s)
+    75/100 diseases  running AUC 0.7172  (596s)
+    100/100 diseases  running AUC 0.7102  (767s)
+==> NIMCGCN: AUC 0.7102 | AUPR 0.0259 | mean per-disease AUC 0.7024
+
+### LAGCN  [lodo]
+    25/100 diseases  running AUC 0.7877  (117s)
+    50/100 diseases  running AUC 0.7356  (278s)
+    75/100 diseases  running AUC 0.7327  (400s)
+    100/100 diseases  running AUC 0.7096  (557s)
+==> LAGCN: AUC 0.7096 | AUPR 0.0611 | mean per-disease AUC 0.6854
+
+         method    AUC   AUPR  mean_per_disease_AUC  n_diseases
+          DRRS 0.7152 0.0865                0.7672         100
+         LAGCN 0.7096 0.0611                0.6854         100
+         MBiRW 0.8016 0.1677                0.8051         100
+MV-HGAT (ours) 0.8387 0.1366                0.8546         100
+       NIMCGCN 0.7102 0.0259                0.7024         100
+        SCMFDD 0.7240 0.0784                0.7550         100

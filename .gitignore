@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Large downloaded sources — regenerate with scripts/01_download_data.py
+data/raw/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/

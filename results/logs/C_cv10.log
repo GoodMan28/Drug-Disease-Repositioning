@@ -1,0 +1,87 @@
+Cdataset: 663 drugs, 409 diseases, 2532 known links (0.93% density)
+
+### MV-HGAT (ours)  [cv10]
+    rep 0 fold 0: AUC 0.9618  AUPR 0.6070  (26s)
+    rep 0 fold 1: AUC 0.9698  AUPR 0.6202  (49s)
+    rep 0 fold 2: AUC 0.9701  AUPR 0.5998  (72s)
+    rep 0 fold 3: AUC 0.9718  AUPR 0.6212  (96s)
+    rep 0 fold 4: AUC 0.9696  AUPR 0.6171  (119s)
+    rep 0 fold 5: AUC 0.9666  AUPR 0.6992  (142s)
+    rep 0 fold 6: AUC 0.9723  AUPR 0.5916  (166s)
+    rep 0 fold 7: AUC 0.9701  AUPR 0.5722  (189s)
+    rep 0 fold 8: AUC 0.9731  AUPR 0.6406  (215s)
+    rep 0 fold 9: AUC 0.9717  AUPR 0.6183  (239s)
+==> MV-HGAT (ours): AUC 0.9697 ± 0.0032 | AUPR 0.6187 ± 0.0322
+
+### MBiRW  [cv10]
+    rep 0 fold 0: AUC 0.8978  AUPR 0.4404  (0s)
+    rep 0 fold 1: AUC 0.9141  AUPR 0.4308  (0s)
+    rep 0 fold 2: AUC 0.9119  AUPR 0.4688  (0s)
+    rep 0 fold 3: AUC 0.9188  AUPR 0.4192  (0s)
+    rep 0 fold 4: AUC 0.9045  AUPR 0.3915  (0s)
+    rep 0 fold 5: AUC 0.9315  AUPR 0.5009  (0s)
+    rep 0 fold 6: AUC 0.9190  AUPR 0.4844  (0s)
+    rep 0 fold 7: AUC 0.9054  AUPR 0.4274  (0s)
+    rep 0 fold 8: AUC 0.9248  AUPR 0.4532  (0s)
+    rep 0 fold 9: AUC 0.9302  AUPR 0.4680  (0s)
+==> MBiRW: AUC 0.9158 ± 0.0106 | AUPR 0.4485 ± 0.0313
+
+### DRRS  [cv10]
+    rep 0 fold 0: AUC 0.9083  AUPR 0.5125  (4s)
+    rep 0 fold 1: AUC 0.9282  AUPR 0.5226  (7s)
+    rep 0 fold 2: AUC 0.9132  AUPR 0.4959  (10s)
+    rep 0 fold 3: AUC 0.9314  AUPR 0.5441  (14s)
+    rep 0 fold 4: AUC 0.9147  AUPR 0.5132  (17s)
+    rep 0 fold 5: AUC 0.9141  AUPR 0.5725  (21s)
+    rep 0 fold 6: AUC 0.9353  AUPR 0.5712  (24s)
+    rep 0 fold 7: AUC 0.9086  AUPR 0.4228  (28s)
+    rep 0 fold 8: AUC 0.9122  AUPR 0.5016  (31s)
+    rep 0 fold 9: AUC 0.9364  AUPR 0.5428  (35s)
+==> DRRS: AUC 0.9203 ± 0.0107 | AUPR 0.5199 ± 0.0412
+
+### SCMFDD  [cv10]
+    rep 0 fold 0: AUC 0.8988  AUPR 0.5963  (1s)
+    rep 0 fold 1: AUC 0.9262  AUPR 0.6258  (2s)
+    rep 0 fold 2: AUC 0.9337  AUPR 0.6553  (2s)
+    rep 0 fold 3: AUC 0.9196  AUPR 0.6294  (3s)
+    rep 0 fold 4: AUC 0.9142  AUPR 0.6197  (4s)
+    rep 0 fold 5: AUC 0.9438  AUPR 0.6761  (5s)
+    rep 0 fold 6: AUC 0.9250  AUPR 0.6427  (5s)
+    rep 0 fold 7: AUC 0.9113  AUPR 0.5680  (6s)
+    rep 0 fold 8: AUC 0.9364  AUPR 0.6785  (7s)
+    rep 0 fold 9: AUC 0.9434  AUPR 0.6659  (7s)
+==> SCMFDD: AUC 0.9252 ± 0.0138 | AUPR 0.6358 ± 0.0337
+
+### NIMCGCN  [cv10]
+    rep 0 fold 0: AUC 0.8755  AUPR 0.1181  (5s)
+    rep 0 fold 1: AUC 0.8813  AUPR 0.0925  (10s)
+    rep 0 fold 2: AUC 0.8758  AUPR 0.1392  (14s)
+    rep 0 fold 3: AUC 0.8708  AUPR 0.1051  (19s)
+    rep 0 fold 4: AUC 0.8753  AUPR 0.1071  (23s)
+    rep 0 fold 5: AUC 0.8938  AUPR 0.1396  (28s)
+    rep 0 fold 6: AUC 0.8840  AUPR 0.1221  (33s)
+    rep 0 fold 7: AUC 0.8722  AUPR 0.1078  (38s)
+    rep 0 fold 8: AUC 0.8808  AUPR 0.1189  (43s)
+    rep 0 fold 9: AUC 0.9006  AUPR 0.1156  (47s)
+==> NIMCGCN: AUC 0.8810 ± 0.0091 | AUPR 0.1166 ± 0.0140
+
+### LAGCN  [cv10]
+    rep 0 fold 0: AUC 0.8878  AUPR 0.2684  (4s)
+    rep 0 fold 1: AUC 0.8683  AUPR 0.2263  (7s)
+    rep 0 fold 2: AUC 0.8843  AUPR 0.3181  (10s)
+    rep 0 fold 3: AUC 0.8671  AUPR 0.2134  (14s)
+    rep 0 fold 4: AUC 0.8618  AUPR 0.2572  (17s)
+    rep 0 fold 5: AUC 0.8955  AUPR 0.3289  (20s)
+    rep 0 fold 6: AUC 0.8628  AUPR 0.3153  (23s)
+    rep 0 fold 7: AUC 0.8583  AUPR 0.2303  (26s)
+    rep 0 fold 8: AUC 0.8887  AUPR 0.2977  (29s)
+    rep 0 fold 9: AUC 0.8851  AUPR 0.1991  (33s)
+==> LAGCN: AUC 0.8760 ± 0.0129 | AUPR 0.2655 ± 0.0450
+
+         method    AUC  AUC_std   AUPR  AUPR_std  n_runs
+          DRRS 0.9203   0.0107 0.5199    0.0412      10
+         LAGCN 0.8760   0.0129 0.2655    0.0450      10
+         MBiRW 0.9158   0.0106 0.4485    0.0313      10
+MV-HGAT (ours) 0.9697   0.0032 0.6187    0.0322      10
+       NIMCGCN 0.8810   0.0091 0.1166    0.0140      10
+        SCMFDD 0.9252   0.0138 0.6358    0.0337      10

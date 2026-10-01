@@ -1,0 +1,5 @@
+relation,mean_beta
+view:chem_cdk,0.07551586
+view:chem_ecfp,0.079237565
+view:gene_r,0.078372784
+assoc>drug,0.7668736

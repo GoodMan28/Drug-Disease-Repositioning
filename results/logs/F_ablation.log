@@ -1,0 +1,46 @@
+
+### Full MV-HGAT
+==> AUC 0.9434 ± 0.0072 | AUPR 0.5004 ± 0.0285
+
+### w/o multi-view propagation head
+==> AUC 0.9338 ± 0.0046 | AUPR 0.4331 ± 0.0340
+
+### w/o degree gate
+==> AUC 0.9413 ± 0.0042 | AUPR 0.4785 ± 0.0217
+
+### w/o cold-start practice
+==> AUC 0.9442 ± 0.0036 | AUPR 0.5089 ± 0.0331
+
+### w/o hidden-link supervision
+==> AUC 0.9435 ± 0.0042 | AUPR 0.5461 ± 0.0202
+
+### w/o view attention (plain mean)
+==> AUC 0.9394 ± 0.0115 | AUPR 0.4776 ± 0.0428
+
+### w/o gene views
+==> AUC 0.9457 ± 0.0046 | AUPR 0.4676 ± 0.0241
+
+### + drug-gene-disease bridge
+==> AUC 0.9405 ± 0.0044 | AUPR 0.4764 ± 0.0222
+
+### w/o ECFP chemical view
+==> AUC 0.9391 ± 0.0066 | AUPR 0.4628 ± 0.0223
+
+### w/o MONDO semantic view
+==> AUC 0.9406 ± 0.0015 | AUPR 0.5097 ± 0.0129
+
+### benchmark similarities only
+==> AUC 0.9431 ± 0.0068 | AUPR 0.4810 ± 0.0184
+
+                          method    AUC  AUC_std   AUPR  AUPR_std  n_runs
+    benchmark similarities only 0.9431   0.0068 0.4810    0.0184       5
+                   Full MV-HGAT 0.9434   0.0072 0.5004    0.0285       5
+w/o view attention (plain mean) 0.9394   0.0115 0.4776    0.0428       5
+        w/o cold-start practice 0.9442   0.0036 0.5089    0.0331       5
+                w/o degree gate 0.9413   0.0042 0.4785    0.0217       5
+         w/o ECFP chemical view 0.9391   0.0066 0.4628    0.0223       5
+                 w/o gene views 0.9457   0.0046 0.4676    0.0241       5
+    w/o hidden-link supervision 0.9435   0.0042 0.5461    0.0202       5
+w/o multi-view propagation head 0.9338   0.0046 0.4331    0.0340       5
+        w/o MONDO semantic view 0.9406   0.0015 0.5097    0.0129       5
+     + drug-gene-disease bridge 0.9405   0.0044 0.4764    0.0222       5

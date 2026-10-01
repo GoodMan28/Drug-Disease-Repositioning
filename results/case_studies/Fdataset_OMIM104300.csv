@@ -1,0 +1,11 @@
+rank,drugbank_id,drug,score,CTD_curated,known_in_Cdataset,clinical_trials,top_evidence
+1,DB00915,Amantadine,0.9408,-,-,49,"chem_cdk (+0.108), chem_ecfp (+0.099)"
+2,DB00190,Carbidopa,0.7589,-,-,0,"pheno_mim (+0.222), sem_mondo (+0.084)"
+3,DB00413,Pramipexole,0.7392,-,-,1,"pheno_mim (+0.215), sem_mondo (+0.086)"
+4,DB00268,Ropinirole,0.7078,-,-,0,"pheno_mim (+0.217), sem_mondo (+0.087)"
+5,DB00245,Benztropine,0.6873,-,-,0,"pheno_mim (+0.250), sem_mondo (+0.096)"
+6,DB00810,Biperiden,0.6335,-,-,0,"pheno_mim (+0.139), sem_mondo (+0.077)"
+7,DB00387,Procyclidine,0.6135,-,-,0,"pheno_mim (+0.177), sem_mondo (+0.073)"
+8,DB01367,Rasagiline,0.5788,-,-,2,"pheno_mim (+0.137), sem_mondo (+0.072)"
+9,DB00747,Boro-Scopol,0.5734,marker/mechanism,-,0,"pheno_mim (+0.267), gene_r (+0.215)"
+10,DB00714,Apomorphine,0.5444,-,-,0,"pheno_mim (+0.121), sem_mondo (+0.064)"

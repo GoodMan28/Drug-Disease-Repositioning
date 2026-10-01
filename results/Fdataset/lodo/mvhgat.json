@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "AUC": 0.8386549544792459,
+    "AUPR": 0.1365677061340528,
+    "mean_per_disease_AUC": 0.8546485565880714,
+    "n_diseases": 100
+  },
+  "folds": [],
+  "label": "MV-HGAT (ours)"
+}

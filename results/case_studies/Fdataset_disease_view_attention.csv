@@ -1,0 +1,5 @@
+relation,mean_beta
+view:pheno_mim,0.19470297
+view:sem_mondo,0.20681298
+view:gene_d,0.185826
+assoc>disease,0.41265807

@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "AUC": 0.7239832553093737,
+    "AUPR": 0.07843251518556123,
+    "mean_per_disease_AUC": 0.7550008023315726,
+    "n_diseases": 100
+  },
+  "folds": [],
+  "label": "SCMFDD"
+}

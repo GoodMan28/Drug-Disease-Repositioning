@@ -1,0 +1,416 @@
+omim,name,mondo,ctd_ids,n_genes
+102100,Acromegaloid phenotype with cutis verticis gyrata and corneal leukoma,MONDO:0007050,MESH:C535654,0
+102300,"Restless legs syndrome, susceptibility to, 1",MONDO:0007053,MESH:C538443|MESH:D012148,5
+102400,Acroosteolysis,MONDO:0007056,MESH:D030981,1
+102500,Hajdu-Cheney syndrome,MONDO:0007057,MESH:C535663|MESH:C537586|MESH:D031845,1
+103100,Tonic pupil,MONDO:0018690,MESH:D000270|MESH:D015845,0
+103230,Congenital primary adrenocortical hypofunction,MONDO:0007071,MESH:C562711,0
+103285,ADULT syndrome,MONDO:0007072,MESH:C538052,1
+103780,Alcohol dependence,MONDO:0007079,MESH:D000437,32
+104130,Alopecia-epilepsy-pyorrhea-intellectual disability syndrome,MONDO:0007085,MESH:C537057,0
+104300,Alzheimer disease type 1,MONDO:0007088,MESH:C536594|MESH:D000544,104
+104310,Alzheimer disease 2,MONDO:0007089,MESH:C536595,1
+106100,Hereditary angioedema type 1,MONDO:0033946,MESH:D054179|MESH:D056829,4
+106400,Diffuse idiopathic skeletal hyperostosis,,MESH:D004057,0
+107320,Familial antiphospholipid syndrome,MONDO:8000014,MESH:C531622,0
+107550,"Aortic arch interruption, facial palsy, and retinal coloboma",MONDO:0007144,MESH:C566271,0
+107650,Obstructive sleep apnea syndrome,MONDO:0007147,MESH:D020181,1
+109100,Autoimmune disease,MONDO:0007179,MESH:D001327,44
+109200,"Alopecia, androgenetic, 1",MONDO:0007184,MESH:D000505,15
+109350,Gastroesophageal reflux disease,MONDO:0007186,MESH:D005764,4
+109543,"Leukemia, chronic lymphocytic, susceptibility to, 2",MONDO:0007190,MESH:D015451,38
+109800,Malignant tumor of urinary bladder,MONDO:0001187,MESH:D001749,153
+110100,"Blepharophimosis, ptosis, and epicanthus inversus syndrome",MONDO:0007201,MESH:C562419,1
+113610,Branchial myoclonus with spastic paraparesis and cerebellar ataxia,MONDO:0007234,MESH:C566188,0
+113800,Epidermolytic hyperkeratosis 1,MONDO:0700249,MESH:D017488,4
+114480,Malignant tumor of breast,MONDO:0016419,MESH:C562840|MESH:D001943,527
+114500,Colorectal carcinoma,MONDO:0005575,MESH:D015179,292
+114550,Hepatocellular carcinoma,MONDO:0007256,MESH:D006528,520
+114580,"Candidiasis, familial, 1",MONDO:0007257,MESH:C567779,0
+115000,Ventricular arrhythmias due to cardiac ryanodine receptor calcium release deficiency syndrome,MONDO:0020745,MESH:D001145,17
+115195,Hypertrophic cardiomyopathy 2,MONDO:0007266,MESH:C566171,1
+115300,Hereditary hypercarotenemia and vitamin A deficiency,MONDO:0007272,MESH:C567296,1
+115645,Cataract-aberrant oral frenula-growth delay syndrome,MONDO:0007277,MESH:C536691,0
+119500,Autosomal dominant popliteal pterygium syndrome,MONDO:0007334,MESH:C562509,1
+121200,"Seizures, benign familial neonatal, 1",MONDO:0007365,MESH:C567743|OMIM:121200,1
+121201,"Seizures, benign familial neonatal, 2",MONDO:0007366,MESH:C535466|OMIM:121201,1
+124200,Keratosis follicularis,MONDO:0007417,MESH:D007644,1
+125310,"Cerebral arteriopathy, autosomal dominant, with subcortical infarcts and leukoencephalopathy, type 1",MONDO:0000914,MESH:D046589,2
+125320,Dementia/parkinsonism with non-Alzheimer amyloid plaques,MONDO:0007433,MESH:C565115,0
+125600,Dermatosis papulosa nigra,MONDO:0007446,MESH:C562379,0
+125700,Central diabetes insipidus,MONDO:0007450,MESH:D020790,1
+125850,Maturity-onset diabetes of the young type 1,MONDO:0007452,MESH:C565101|OMIM:125850,1
+125851,Maturity-onset diabetes of the young type 2,MONDO:0007453,MESH:C564219,1
+125852,Type 1 diabetes mellitus 2,MONDO:0007454,MESH:C565100,1
+125853,Type 2 diabetes mellitus,MONDO:0005148,MESH:D003924,224
+126200,"Multiple sclerosis, susceptibility to",MONDO:0021571,MESH:D009103,61
+127350,Dyschondrosteosis-nephritis syndrome,MONDO:0007482,MESH:C565080,0
+127750,Lewy body dementia,MONDO:0007488,MESH:D020961,22
+128101,Torsion dystonia 4,MONDO:0007493,MESH:C536698|MESH:C538004,1
+131200,"Endometriosis, susceptibility to, 1",MONDO:0007541,MESH:D004715,162
+131300,Diaphyseal dysplasia,MONDO:0700385,MESH:D003966,1
+131440,"Myeloproliferative disorder, chronic, with eosinophilia",MONDO:0007546,MESH:C565054,0
+132090,Self-limited childhood occipital epilepsy,MONDO:0007558,MESH:D004828,1
+132100,Photoparoxysmal response 1,MONDO:0007559,OMIM:132100,0
+132300,Reading seizure,MONDO:0007560,MESH:D020195,0
+133239,Carcinoma of esophagus,MONDO:0007576,MESH:D004938,78
+133600,Exostoses of heel,,MESH:C563167,0
+133690,Exostoses-anetodermia-brachydactyly type E syndrome,MONDO:0007584,MESH:C565034,0
+134430,"Factor VII and Factor VIII, combined deficiency of",MONDO:0007595,MESH:C565025,0
+134500,Factor VIII deficiency,MONDO:0010602,MESH:D006467,2
+134510,"Factor VIII and Factor IX, combined deficiency of",MONDO:0007597,MESH:C565024,0
+134520,"Factors VIII, IX and XI, combined deficiency of",MONDO:0007598,MESH:C565023,0
+134600,Fanconi renotubular syndrome 1,MONDO:0024525,MESH:D005198,5
+134750,Felty syndrome,MONDO:0007603,MESH:D005258,0
+135550,Gingival fibromatosis-progressive deafness syndrome,MONDO:0007612,MESH:C535886,0
+136200,Flushing of ears and somnolence,MONDO:0007623,,0
+137215,Hereditary diffuse gastric adenocarcinoma,MONDO:0100488,MESH:D013274,305
+137400,Fissured tongue,MONDO:0007655,MESH:D014063,0
+137580,Tourette syndrome,MONDO:0007661,MESH:D005879,3
+137750,"Glaucoma 1, open angle, A",MONDO:0007664,MESH:C564234,1
+137760,Primary open angle glaucoma,MONDO:0100553,MESH:D005902,12
+137800,Glioma susceptibility 1,MONDO:0024498,MESH:D005910,74
+138800,Euthyroid goiter,MONDO:0007681,MESH:C562732|OMIM:138800,1
+140300,Hashimoto thyroiditis,MONDO:0007699,MESH:D050031,6
+140600,Osteoarthritis susceptibility 2,MONDO:0007704,MESH:D010003,95
+140850,Cavernous hemangiomas of face-supraumbilical midline raphe syndrome,MONDO:0007706,MESH:C538144,0
+143100,Huntington disease,MONDO:0007739,MESH:D006816,12
+143465,Attention deficit hyperactivity disorder,MONDO:0100518,MESH:D001289,22
+143500,Gilbert syndrome,MONDO:0007745,MESH:D005878,2
+143880,Autosomal recessive infantile hypercalcemia,MONDO:0020739,MESH:C562999,2
+143890,"Hypercholesterolemia, familial, 1",MONDO:0007750,MESH:D006938|OMIM:143890,16
+144010,"Hypercholesterolemia, autosomal dominant, type B",MONDO:0007751,MESH:D006938,13
+144110,Palmoplantar hyperhidrosis,MONDO:0007754,MESH:C563185,0
+144250,"Hyperlipidemia, familial combined, LPL related",MONDO:0007759,MESH:D006950,3
+144400,,,,0
+144650,Familial type 5 hyperlipoproteinemia,MONDO:0007762,MESH:D006954,1
+144700,Clear cell carcinoma of kidney,MONDO:0007763,MESH:D002292,126
+145100,Hyperpigmentation of eyelid,MONDO:0007769,MESH:C562400,0
+145200,Hyperpigmentation of Fuldauer and Kuijpers,MONDO:0007770,MESH:C564164,0
+145500,Essential hypertension,MONDO:0007781,MESH:D000075222,24
+145590,"Hyperthermia, cutaneous, with headaches and nausea",MONDO:0007782,MESH:C564156,0
+145600,"Malignant hyperthermia, susceptibility to, 1",MONDO:0007783,MESH:C535694,1
+145750,Hypertriglyceridemia 1,MONDO:0007788,MESH:D006953,1
+146110,Hypogonadotropic hypogonadism 7 with or without anosmia,MONDO:0007794,MESH:C562785,26
+146200,"Hypoparathyroidism, familial isolated 1",MONDO:0007796,MESH:C537156,2
+146255,"Hypoparathyroidism, deafness, renal disease syndrome",MONDO:0007797,MESH:C537907,1
+146500,"Multiple system atrophy 1, susceptibility to",MONDO:0020715,MESH:D019578,1
+146700,Ichthyosis vulgaris,MONDO:0007810,MESH:D016112,1
+146850,Immune suppression,,OMIM:146850,0
+147480,"Cholestasis, intrahepatic, of pregnancy, 1",MONDO:0007829,MESH:C535932,4
+147530,Insensitivity to pain with hyperplastic Myelinopathy,MONDO:0007830,,0
+147540,"Insect Stings, hypersensitivity to",MONDO:0007831,,0
+148000,"Kaposi sarcoma, susceptibility to",MONDO:0007845,MESH:D012514,2
+148100,Keloid formation,MONDO:0007847,,0
+150600,Legg-Calve-Perthes disease,MONDO:0007885,MESH:D007873,1
+150699,Uterine leiomyoma,MONDO:0007886,MESH:D007889|OMIM:150699,8
+151380,Acute monocytic leukemia,MONDO:0007896,MESH:D007948,2
+151400,B-cell chronic lymphocytic leukemia,MONDO:0004948,MESH:D015451,38
+151590,Lichen sclerosus et atrophicus,MONDO:0007899,MESH:D018459,0
+152700,Systemic lupus erythematosus,MONDO:0007915,MESH:D008180,58
+153800,Age related macular degeneration 2,MONDO:0007932,MESH:C562479,1
+153880,Cystoid macular edema,MONDO:0007935,MESH:D008269,2
+154275,"Malignant hyperthermia, susceptibility to, 2",MONDO:0007939,MESH:C535695,0
+154276,"Malignant hyperthermia, susceptibility to, 3",MONDO:0007940,MESH:C535696,0
+155100,Macrothrombocytopenia and granulocyte inclusions with or without nephritis or sensorineural hearing loss,MONDO:0015912,MESH:C535507|MESH:C537831,1
+155600,"Melanoma, cutaneous malignant, susceptibility to, 1",MONDO:0007963,MESH:D000096142,12
+155601,"Melanoma, cutaneous malignant, susceptibility to, 2",MONDO:0007964,MESH:D000096142|MESH:D004416,12
+156000,Meniere disease,MONDO:0007972,MESH:D008575,0
+156190,Mental and growth retardation with amblyopia,MONDO:0007973,MESH:C563591,0
+157300,"Migraine with or without aura, susceptibility to, 1",MONDO:0008000,OMIM:157300,3
+157700,MVP1,MONDO:0024529,OMIM:157700,0
+157950,Ankylosis of tooth,MONDO:0008007,MESH:D020254,0
+158280,Motion sickness,MONDO:0008015,MESH:D009041,0
+160300,"Myopathy, distal, infantile-onset",MONDO:0008049,,0
+160750,Myositis disease,MONDO:0600024,MESH:C000598744|MESH:D009220,5
+161400,Narcolepsy 1,MONDO:0008062,MESH:C563534,1
+161900,Progressive hereditary glomerulonephritis without deafness,MONDO:0008071,MESH:C562889,0
+164230,Obsessive-compulsive disorder,MONDO:0008114,MESH:D009771,6
+165150,Ophthalmoplegia-intellectual disability-lingua scrotalis syndrome,MONDO:0008130,MESH:C563498,0
+165199,"Optic atrophy, hearing loss, and peripheral neuropathy, autosomal dominant",MONDO:0008131,MESH:C563497,0
+165720,Osteoarthritis susceptibility 1,MONDO:0008143,MESH:D010003,95
+166300,Multicentric carpo-tarsal osteolysis with or without nephropathy,MONDO:0008152,MESH:C567171|OMIM:166300,1
+166710,Osteoporosis,MONDO:0005298,MESH:D010024,59
+166760,"Otitis media, susceptibility to",MONDO:0008162,MESH:D010033,1
+167320,Inclusion body myopathy with Paget disease of bone and frontotemporal dementia type 1,MONDO:0008178,MESH:C563476,3
+167870,Panic disorder 1,MONDO:0008187,MESH:D016584,4
+168100,Juvenile paralysis agitans of Hunt,MONDO:0008193,MESH:C562469,0
+168600,"Parkinson disease, late-onset",MONDO:0008199,OMIM:168600,10
+168601,Autosomal dominant Parkinson disease 1,MONDO:0008200,MESH:C566823|OMIM:168601,1
+170900,Pernicious anemia,MONDO:0008228,MESH:D000752,0
+171300,Pheochromocytoma,MONDO:0008233,MESH:D010673,14
+173200,Pityriasis rubra pilaris,MONDO:0008251,MESH:C531784|MESH:D010916,1
+174800,McCune-Albright syndrome,MONDO:0018919,MESH:D005359,1
+175100,Familial multiple polyposis syndrome,MONDO:0021056,MESH:D011125,15
+175505,gastric adenocarcinoma and proximal polyposis of the stomach,MONDO:0017790,MESH:C566775,0
+175510,"Polyps, multiple and recurrent inflammatory fibroid, gastrointestinal",MONDO:0008285,MESH:C566774,0
+176800,"Pronation-supination of the forearm, impairment of",MONDO:0008314,MESH:C566757,0
+176807,Prostate cancer,MONDO:0700275,MESH:C537243|MESH:D011471,670
+178600,"Pulmonary hypertension, primary, 1",MONDO:0024533,MESH:D006976|MESH:D065627,43
+179600,Raynaud disease,MONDO:0008364,MESH:D011928,3
+179800,Distal renal tubular acidosis,MONDO:0008368,MESH:D000141,2
+179830,Proximal renal tubular acidosis,MONDO:0008369,MESH:D000141,2
+181000,"Sarcoidosis, susceptibility to, 1",MONDO:0008399,MESH:D012507,8
+181460,"Schistosoma mansoni infection, susceptibility/resistance to",MONDO:0859050,MESH:D012555,2
+181500,Schizophrenia,MONDO:0005090,MESH:D012559,173
+182000,Seborrheic keratosis,MONDO:0008420,MESH:D017492,1
+182280,Small cell lung carcinoma,MONDO:0008433,MESH:D055752,39
+182830,"Spastic paraplegia, optic atrophy, and dementia",MONDO:0008444,MESH:C566679,0
+184700,Polycystic ovaries,MONDO:0008487,MESH:D011085,144
+187360,Temporal arteritis,MONDO:0008538,MESH:D013700,0
+187950,Thrombocythemia 1,MONDO:0008554,MESH:D013922,5
+188030,Autoimmune thrombocytopenic purpura,MONDO:0008558,MESH:D016553,1
+188050,Thrombophilia due to thrombin defect,MONDO:0008559,MESH:D019851,9
+188470,"Thyroid cancer, nonmedullary, 2",MONDO:0008566,MESH:C572845,7
+188890,"Tobacco addiction, susceptibility to",MONDO:0100460,MESH:D014029,30
+189600,Torticollis,MONDO:0008583,MESH:C535425|MESH:D014103,1
+189800,Preeclampsia/eclampsia 1,MONDO:0100467,MESH:D011225,20
+190300,"Tremor, hereditary essential, 1",MONDO:0008590,MESH:C536545,1
+190310,Tremor-nystagmus-duodenal ulcer syndrome,MONDO:0008591,MESH:C536406,0
+190400,Trigeminal neuralgia,MONDO:0008599,MESH:D014277,12
+191100,Tuberous sclerosis 1,MONDO:0008612,MESH:C565346,1
+191390,Inflammatory bowel disease 11,MONDO:0008617,MESH:C567154|MESH:D003093,69
+191800,"Urinary bladder, atony of",MONDO:0008630,,0
+192000,Congenital uterine anomaly,MONDO:0008635,MESH:C562565,0
+192200,Varicose disease,MONDO:0008638,MESH:D014648,4
+193200,Vitiligo-associated multiple autoimmune disease susceptibility 6,MONDO:0700077,OMIM:193200,0
+193400,von Willebrand disease type 1,MONDO:0008668,MESH:D056725,1
+194070,Nephroblastoma,MONDO:0008679,MESH:D009396,29
+194200,Wolff-Parkinson-White pattern,MONDO:0008685,MESH:D014927,1
+200170,Acanthosis nigricans-insulin resistance-muscle cramps-acral enlargement syndrome,MONDO:0008696,MESH:C536000,0
+202370,Peroxisome biogenesis disorder 2B,MONDO:0008736,OMIM:202370,1
+202400,Congenital afibrinogenemia,MONDO:0008737,MESH:D000347,4
+203700,Progressive sclerosing poliodystrophy,MONDO:0008758,MESH:D002549|OMIM:203700,1
+205700,Autoimmune hemolytic anemia,MONDO:0020108,MESH:D000744,1
+206200,Iron-refractory iron deficiency anemia,MONDO:0008788,MESH:C562385,1
+208085,"Arthrogryposis, renal dysfunction, and cholestasis 1",MONDO:0008822,MESH:C535382,2
+208230,Progressive pseudorheumatoid dysplasia,MONDO:0008827,MESH:C535387,1
+208300,Chylous ascites,MONDO:0008829,MESH:D002915,0
+208550,"Asthma, nasal polyps, and aspirin intolerance",MONDO:0008834,MESH:C565935,2
+208700,Ataxia with myoclonic epilepsy and presenile dementia,MONDO:0008836,MESH:C565933,0
+208750,"Ataxia, deafness, and cardiomyopathy",MONDO:0008837,MESH:C565932,0
+208920,"Ataxia, early-onset, with oculomotor apraxia and hypoalbuminemia",MONDO:0008842,MESH:C538013,1
+209850,Autism,MONDO:0005260,MESH:D001321,257
+210050,"Berry aneurysm, cirrhosis, pulmonary emphysema, and cerebral calcification",MONDO:0008859,MESH:C565905,0
+211980,Lung cancer,MONDO:0008903,MESH:D008175,280
+212050,Predisposition to invasive fungal disease due to CARD9 deficiency,MONDO:0008905,MESH:C537979|OMIM:212050,2
+212110,,,,0
+212112,Dilated cardiomyopathy-hypergonadotropic hypogonadism syndrome,MONDO:0008915,MESH:C535703|OMIM:212112,1
+212130,Cardiomyopathy associated with myopathy and sudden death,MONDO:0008916,MESH:C565881,0
+212140,Renal carnitine transport defect,MONDO:0008919,MESH:C536778,1
+212350,Sengers syndrome,MONDO:0008922,MESH:C538280,2
+215140,Greenberg dysplasia,MONDO:0008974,MESH:C535858|OMIM:215140,1
+215470,Ataxia-hypogonadism-choroidal dystrophy syndrome,MONDO:0008980,MESH:C565850,1
+217150,Multiple pterygium-malignant hyperthermia syndrome,MONDO:0009012,MESH:C565679,0
+217200,"Convulsive disorder, familial, with prenatal or early onset",MONDO:0009013,MESH:C565678,0
+218200,"Cranial nerves, recurrent paresis of",MONDO:0009030,MESH:C565672,0
+218800,Crigler-Najjar syndrome type 1,MONDO:0021020,MESH:D003414,1
+219700,Cystic fibrosis,MONDO:0009061,MESH:D003550,9
+219750,Ocular cystinosis,MONDO:0009064,MESH:C535765,1
+219800,Nephropathic cystinosis,MONDO:0100151,MESH:C535335|MESH:D003554,1
+220100,Cystinuria,MONDO:0009067,MESH:D003555,2
+220120,D-Glyceric aciduria,MONDO:0009070,MESH:C535767,1
+222100,Diabetes mellitus type 1,MONDO:0005147,MESH:D003922,39
+223350,Dohle bodies and leukemia,MONDO:0009122,MESH:C565617,0
+225740,"Encephalopathy, axonal, with necrotizing myopathy, cardiomyopathy, and cataracts",MONDO:0009164,MESH:C565596,0
+225755,Bonnemann-Meinecke-Reich syndrome,MONDO:0009167,MESH:C565594,0
+226000,Endocardial fibroelastosis,MONDO:0009169,MESH:D004695,0
+226150,Enterocolitis,MONDO:0009172,MESH:D004760,2
+227300,"Factor V and factor VIII, combined deficiency of, type 1",MONDO:0009206,MESH:C565577|OMIM:227300,1
+230450,Gamma-glutamylcysteine synthetase deficiency,MONDO:0009259,MESH:C565557,1
+230800,Gaucher disease type I,MONDO:0009265,MESH:D005776,4
+230900,Gaucher disease type II,MONDO:0009266,MESH:D005776,4
+231000,Gaucher disease type III,MONDO:0009267,MESH:D005776,4
+231090,"Hydatidiform mole, recurrent, 1",MONDO:0009273,MESH:D006828,2
+231200,Bernard Soulier syndrome,MONDO:0009276,MESH:D001606,3
+231900,Glutathione synthetase deficiency without 5-oxoprolinuria,MONDO:0009284,MESH:C536835|OMIM:231900,1
+233100,Familial renal glucosuria,MONDO:0009297,MESH:D006030,1
+233810,"Growth retardation, small and puffy hands and feet, and eczema",MONDO:0009313,MESH:C537621|MESH:C565528,0
+234700,Congenital heart block,MONDO:0009326,MESH:C535758,0
+236000,Classic Hodgkin lymphoma,MONDO:0009348,MESH:D006689,16
+237450,Rotor syndrome,MONDO:0009379,MESH:D006933|OMIM:237450,2
+237500,Dubin-Johnson syndrome,MONDO:0009380,MESH:D007566,1
+238800,Hypermetabolism due to defect in mitochondria,MONDO:0009391,MESH:C565498,0
+239350,"Hyperphosphatemia, polyuria, and seizures",MONDO:0009399,MESH:C565494,0
+240200,Familial Hypoadrenocorticism,MONDO:0015129,MESH:D000075262|MESH:D000224,4
+240400,Scurvy,MONDO:0009412,MESH:D001206|MESH:D012614,1
+241100,Male hypogonadism,MONDO:0009421,MESH:D005058,0
+241519,"Hypophosphatemia, renal, with intracerebral calcifications",MONDO:0009429,MESH:C565478,0
+242100,Autosomal recessive congenital ichthyosis 2,MONDO:0009439,MESH:C538603,2
+243200,Benign intracranial hypertension,MONDO:0009468,MESH:D011559,0
+246300,"Leprosy, susceptibility to, 3",MONDO:0009518,MESH:D007918,9
+246400,Letterer-Siwe disease,MONDO:0009519,MESH:D006646,0
+246470,"Leukemia, acute myelocytic, with polyposis coli and colon cancer",MONDO:0009521,MESH:C565441,0
+247200,Miller Dieker syndrome,MONDO:0009532,MESH:D054221,2
+247640,"Lymphoblastic leukemia, acute, with lymphomatous features",MONDO:0009539,MESH:C565429,0
+248190,Renal hypomagnesemia 5 with ocular involvement,MONDO:0009548,MESH:C536148|MESH:C565423,1
+249100,Familial Mediterranean fever,MONDO:0009572,MESH:D010505,1
+250790,Methemoglobinemia type 4,MONDO:0009605,MESH:C567102,1
+252320,Peripheral motor neuropathy-dysautonomia syndrome,MONDO:0009648,MESH:C536988,0
+254200,Myasthenia gravis,MONDO:0009688,MESH:D009157,5
+254400,Mycosis fungoides,MONDO:0009691,MESH:D009182,1
+254450,Myelofibrosis,MONDO:0009692,MESH:D055728,5
+254500,Multiple myeloma,MONDO:0009693,MESH:D009101,41
+254770,Juvenile myoclonic epilepsy,MONDO:0009696,MESH:D020190,4
+254800,Unverricht-Lundborg syndrome,MONDO:0009698,MESH:D020194,1
+255900,Myxedema,MONDO:0009718,MESH:D009230,0
+256370,"Nephrotic syndrome, type 4",MONDO:0009733,OMIM:256370,1
+256700,"Neuroblastoma, susceptibility to, 1",MONDO:0009741,MESH:D009447,56
+257200,"Niemann-Pick disease, type A",MONDO:0009756,MESH:D052536,1
+257220,"Niemann-Pick disease, type C1",MONDO:0009757,MESH:D052556,1
+258360,Onychotrichodysplasia and neutropenia,MONDO:0009781,MESH:C537752,0
+259050,Primrose syndrome,MONDO:0009798,MESH:C536420,1
+259500,Osteosarcoma,MONDO:0002629,MESH:D012516,46
+259660,lethal osteosclerotic bone dysplasia,MONDO:0009821,MESH:C535282,1
+260300,Parkinsonian-pyramidal syndrome,MONDO:0009830,MESH:C538104,1
+260480,"Pancreatitis, sclerosing cholangitis, and sicca complex",MONDO:0009836,MESH:C564906,0
+260570,Pelger-Huet-like anomaly and episodic fever with abdominal pain,MONDO:0009842,MESH:C564899,0
+260970,"Peripheral neuropathy, ataxia, focal necrotizing encephalopathy, and spongy degeneration of brain",MONDO:0009851,MESH:C564894,0
+261100,Imerslund-Grasbeck syndrome,MONDO:0100156,MESH:C538556,1
+261515,Bifunctional peroxisomal enzyme deficiency,MONDO:0009855,MESH:C537286|OMIM:261515,1
+263300,Acquired polycythemia vera,MONDO:0009891,MESH:D011087,3
+263800,Familial hypokalemia-hypomagnesemia,MONDO:0009904,MESH:D053579,1
+264120,Prolactin deficiency with obesity and enlarged testes,MONDO:0009912,MESH:C564870,0
+264700,"Vitamin D-dependent rickets, type 1",MONDO:0020723,MESH:C562688,1
+265400,"Pulmonary hypertension, primary, 5",MONDO:0009935,MESH:C564862,0
+266120,Hemolytic anemia due to pyrimidine 5' nucleotidase deficiency,MONDO:0009946,MESH:C564859,1
+266600,Crohn disease,MONDO:0009960,MESH:D003424|MESH:D015212,77
+267730,Reticulum cell sarcoma,MONDO:0009975,MESH:D008228,18
+267740,Retinal degeneration and epilepsy,MONDO:0009976,MESH:C564847,0
+268220,Alveolar rhabdomyosarcoma,MONDO:0009994,MESH:D018232,5
+268320,Ectodermal dysplasia-blindness syndrome,MONDO:0010001,MESH:C535865,0
+270960,Spermatogenic failure 4,MONDO:0010052,MESH:C536875|OMIM:270960,1
+273300,Germ cell tumor of testis,MONDO:0010108,MESH:C563236,13
+273800,Glanzmann thrombasthenia,MONDO:0031332,MESH:D013915,2
+275000,Graves disease,MONDO:0100489,MESH:D006111,22
+276300,Mismatch repair cancer syndrome 1,MONDO:0010159,MESH:C536928,3
+277350,"Hypercarotenemia and vitamin A deficiency, autosomal recessive",MONDO:0010182,MESH:C567486,0
+277440,Vitamin D-dependent rickets type II with alopecia,MONDO:0010186,MESH:C562794,1
+277460,Familial isolated deficiency of vitamin E,MONDO:0010188,MESH:C535393,3
+277480,von Willebrand disease type 3,MONDO:0010191,MESH:D056729,1
+277730,Wernicke-Korsakoff syndrome,MONDO:0010198,MESH:C538669|MESH:D020915,0
+277900,Wilson disease,MONDO:0010200,MESH:D006527,24
+278200,Wooly hair-hypotrichosis-everted lower lip-outstanding ears syndrome,MONDO:0010207,MESH:C536746,0
+300100,Adrenoleukodystrophy,MONDO:0018544,MESH:D000326,6
+300125,"Migraine, familial typical, susceptibility to, 2",MONDO:0010253,OMIM:300125,0
+300136,"Diabetes mellitus, insulin-dependent, X-linked, susceptibility to",MONDO:0010255,OMIM:300136,0
+300232,"Spondyloepimetaphyseal dysplasia, Bieganski type",MONDO:0010275,MESH:C536671|OMIM:300232,1
+300425,"Autism, susceptibility to, X-linked 1",MONDO:0010321,OMIM:300425,1
+300491,"Epilepsy, X-linked 1, with variable learning disabilities and behavior disorders",MONDO:0010339,MESH:C564505,1
+300494,"Asperger syndrome, X-linked, susceptibility to, 1",MONDO:0010340,,0
+300495,"Autism, susceptibility to, X-linked 2",MONDO:0010341,MESH:D038901|OMIM:300495,24
+300496,"Autism, susceptibility to, X-linked 3",MONDO:0010342,MESH:D001321,257
+303110,Choroideremia-deafness-obesity syndrome,MONDO:0010558,MESH:C537793,0
+304790,Insulin-dependent diabetes mellitus secretory diarrhea syndrome,MONDO:0010580,MESH:C580192,1
+304900,"Diabetes insipidus, neurohypophyseal, X-linked",,,0
+305300,,,,0
+307700,Hypoparathyroidism - X-linked,MONDO:0010618,MESH:C562782|MESH:C563238,0
+308205,"IFAP syndrome 1, with or without BRESHECK syndrome",MONDO:0100213,MESH:C536085,1
+308350,"Developmental and epileptic encephalopathy, 1",MONDO:0010632,MESH:C567924,2
+308600,"Jaundice, familial obstructive, of infancy",MONDO:0010634,MESH:C564118,0
+310468,X-linked recessive nephrolithiasis with renal failure,MONDO:0010687,MESH:C562901,1
+311360,Premature ovarian failure 1,MONDO:0010706,MESH:D016649,7
+312910,Spastic paraparesis-deafness syndrome,MONDO:0010732,MESH:C536692,0
+540000,MELAS syndrome,MONDO:0010789,MESH:D017241,22
+556500,"Parkinson disease, mitochondrial",MONDO:0010796,MESH:C564015,2
+600081,"Vitamin D hydroxylation-deficient rickets, type 1B",MONDO:0010810,MESH:C564005,1
+600082,Benign prostatic hyperplasia,MONDO:0010811,MESH:D011470,4
+600116,Autosomal recessive juvenile Parkinson disease 2,MONDO:0010820,MESH:D020734,26
+600131,"Epilepsy, childhood absence, susceptibility to, 1",MONDO:0020759,MESH:D004832,7
+600263,"Helicobacter pylori infection, susceptibility to",MONDO:0010853,MESH:D016481,7
+600319,Type 1 diabetes mellitus 4,MONDO:0010862,MESH:C563959,0
+600351,"Enteropathy, familial, with villous edema and immunoglobulin G2 deficiency",MONDO:0010874,MESH:C563949,0
+600467,"Malignant hyperthermia, susceptibility to, 4",MONDO:0010893,MESH:C535697,0
+600496,Maturity-onset diabetes of the young type 3,MONDO:0010894,MESH:C563933,1
+600631,Nocturnal enuresis,MONDO:0010910,MESH:D053206,0
+600634,prolactin-producing pituitary gland adenoma,MONDO:0010911,MESH:D015175,3
+600803,Low phospholipid associated cholelithiasis,MONDO:0010939,OMIM:600803,1
+600807,Inherited susceptibility to asthma,MONDO:0010940,MESH:D001249,90
+600808,"Nocturnal enuresis, 2",MONDO:0010941,MESH:C563439,0
+601004,"Portal vein, cavernous transformation of",MONDO:0010978,MESH:C563407,0
+601042,Dystonia 9,MONDO:0010983,MESH:C563401,1
+601208,Type 1 diabetes mellitus 11,MONDO:0011016,MESH:C563371,0
+601318,Type 1 diabetes mellitus 13,MONDO:0011033,MESH:C563352,0
+601367,Ischemic stroke,,MESH:D000083242,12
+601518,"Prostate cancer, hereditary, 1",MONDO:0011098,MESH:C537243,60
+601608,Spastic paraplegia and Evans syndrome,MONDO:0011115,MESH:C566652,0
+601626,Acute myeloid leukemia,MONDO:0018874,MESH:D015470,124
+601665,Obesity,MONDO:0019182,MESH:D009765,185
+601666,Type 1 diabetes mellitus 15,MONDO:0011123,MESH:C566645,0
+601682,Glaucoma type 1C,MONDO:0011129,OMIM:601682,0
+601744,"Systemic lupus erythematosus, susceptibility to, 1",MONDO:0011138,MESH:D008180,58
+601887,"Malignant hyperthermia, susceptibility to, 5",MONDO:0011163,MESH:C535698,1
+601888,"Malignant hyperthermia, susceptibility to, 6",MONDO:0011164,MESH:C535699,0
+601941,Type 1 diabetes mellitus 6,MONDO:0011167,MESH:C566603,0
+601942,Type 1 diabetes mellitus 10,MONDO:0011168,MESH:C566602,1
+602068,Tegumentary leishmaniasis susceptibility,MONDO:0011179,,0
+602080,"Paget disease of bone 2, early-onset",MONDO:0011183,MESH:D010001,9
+602096,Alzheimer disease 5,MONDO:0011194,MESH:C566578,0
+602134,"Tremor, hereditary essential, 2",MONDO:0011201,MESH:C536546,0
+602404,"Parkinson disease 3, autosomal dominant",MONDO:0011220,MESH:C566552,0
+602439,,,,0
+602522,Bartter disease type 4A,MONDO:0011242,MESH:C566530,1
+603165,Atopic eczema,MONDO:0004980,MESH:C566404|MESH:D003876,39
+603266,Type 1 diabetes mellitus 17,MONDO:0011302,MESH:C566395,0
+603388,"Graves disease, susceptibility to, 2",MONDO:0011314,MESH:D006111,22
+604278,Autosomal recessive proximal renal tubular acidosis,MONDO:0011422,MESH:C567038,1
+604302,Systemic-onset juvenile idiopathic arthritis,MONDO:0011429,MESH:C565798|MESH:D001171,137
+604416,Pyogenic arthritis-pyoderma gangrenosum-acne syndrome,MONDO:0011462,MESH:C536253,2
+604827,"Epilepsy, idiopathic generalized, susceptibility to, 7",MONDO:0011491,MESH:D020190,4
+605021,Familial infantile myoclonic epilepsy,MONDO:0011506,MESH:D004831|OMIM:605021,7
+605055,"Alzheimer disease, familial early-onset, with coexisting amyloid and prion pathology",MONDO:0011513,MESH:C565728,0
+605218,"Systemic lupus erythematosus, susceptibility to, 2",MONDO:0011520,MESH:D008180,58
+605480,"Systemic lupus erythematosus, susceptibility to, 3",MONDO:0011560,MESH:D008180,58
+605526,Alzheimer disease 6,MONDO:0011561,MESH:C565325,0
+605804,"Dermatitis, atopic, 3",MONDO:0011597,MESH:C565292,0
+605805,"Dermatitis, atopic, 4",MONDO:0011598,MESH:C565291,0
+605839,,,,0
+605841,"Narcolepsy 2, susceptibility to",MONDO:0011607,MESH:D009290,12
+605844,"Dermatitis, atopic, 5",MONDO:0011608,MESH:C565280,0
+606054,Propionic acidemia,MONDO:0011628,MESH:D056693,2
+606324,Autosomal recessive early-onset Parkinson disease 7,MONDO:0011658,MESH:C565238,1
+606369,Macrocephaly and epileptic encephalopathy,MONDO:0016532,MESH:C535500|MESH:D065768,0
+606703,"Dyskinesia with orofacial involvement, autosomal dominant",MONDO:0800028,MESH:C564676,1
+606764,Gastrointestinal stromal tumor,MONDO:0011719,MESH:D046152,46
+606798,"Blepharospasm, benign essential, susceptibility to",MONDO:0100532,MESH:C535428,1
+606842,Cardioneuromyopathy with hyaline masses and nemaline rods,MONDO:0011734,MESH:C564655,0
+606889,Alzheimer disease 4,MONDO:0011743,MESH:C536596,2
+607060,Autosomal dominant Parkinson disease 8,MONDO:0011764,OMIM:607060,1
+607154,Allergic rhinitis,MONDO:0100177,MESH:D065631,15
+607202,"Celiac disease, susceptibility to, 5",MONDO:0011793,MESH:D002446,44
+607225,Infantile-onset ascending hereditary spastic paralysis,MONDO:0011797,MESH:C537217,1
+607373,"Autism, susceptibility to, 8",MONDO:0011824,MESH:D001321,257
+607411,PDA1,MONDO:0024560,MESH:D004374,6
+607459,"Sensory ataxic neuropathy, dysarthria, and ophthalmoparesis",MONDO:0011835,MESH:C537583,2
+607498,"Migraine with or without aura, susceptibility to, 3",MONDO:0011845,OMIM:607498,0
+607499,Susceptibility to bulimia nervosa,MONDO:0011846,MESH:D052018,0
+607501,"Migraine without aura, susceptibility to, 4",MONDO:0011847,MESH:D020326,7
+607508,"Migraine with or without aura, susceptibility to, 5",MONDO:0011850,OMIM:607508,0
+607516,"Migraine with or without aura, susceptibility to, 6",MONDO:0011851,MESH:C564385|OMIM:607516,0
+607554,"Atrial fibrillation, familial, 3",MONDO:0011857,MESH:C563817,1
+607616,"Niemann-Pick disease, type B",MONDO:0011871,MESH:D052537,1
+607625,"Niemann-Pick disease, type C2",MONDO:0011873,MESH:C536119,1
+607628,"Epilepsy, idiopathic generalized, susceptibility to, 11",MONDO:0011875,MESH:C562694,5
+607631,"Epilepsy, juvenile absence, susceptibility to, 1",MONDO:0020772,MESH:D004832,7
+607681,"Febrile seizures, familial, 8",MONDO:0011891,MESH:C565811|OMIM:607681,1
+607682,"Epilepsy, idiopathic generalized, susceptibility to, 9",MONDO:0011892,MESH:C562694,5
+607685,Idiopathic hypereosinophilic syndrome,MONDO:0011895,MESH:D017681,3
+607688,"Parkinson disease 11, autosomal dominant, susceptibility to",MONDO:0011896,MESH:C564345,1
+607822,Alzheimer disease 3,MONDO:0011913,MESH:C536598|MESH:C564330,2
+607850,Osteoarthritis susceptibility 3,MONDO:0011923,MESH:D010003,95
+608013,Gaucher disease perinatal lethal,MONDO:0011945,MESH:C564306,1
+608033,Familial acute necrotizing encephalopathy,MONDO:0011953,OMIM:608033,1
+608049,"Autism, susceptibility to, 3",MONDO:0011956,MESH:D001321,257
+608088,cerebellar ataxia with neuropathy and bilateral vestibular areflexia syndrome,MONDO:0044720,MESH:C564296,1
+608105,Rolandic epilepsy-paroxysmal exercise-induced dystonia-writer cramp syndrome,MONDO:0011970,MESH:C535499,1
+608217,"Seizures, benign familial neonatal, 3",MONDO:0011990,MESH:C564274,1
+608232,Chronic myeloid leukemia,MONDO:0011996,MESH:D015464,16
+608266,Parathyroid carcinoma,MONDO:0012004,MESH:D010282,1
+608320,"Coronary artery disease, autosomal dominant, 1",MONDO:0012011,MESH:C564258,1
+608437,"Systemic lupus erythematosus, susceptibility to, 4",MONDO:0012036,MESH:D008180,58
+608456,Familial adenomatous polyposis 2,MONDO:0012041,MESH:C563924,1
+608583,"Atrial fibrillation, familial, 1",MONDO:0012066,MESH:C538261,0
+608622,"HYPERTENSION, DIASTOLIC, RESISTANCE TO",,MESH:C563897,1
+608636,15q11q13 microduplication syndrome,MONDO:0012081,MESH:C557830|MESH:D001321,257
+608895,"Macular degeneration, age-related, 3",MONDO:0012145,MESH:C563838,1
+608907,Alzheimer disease 9,MONDO:0012153,MESH:C563834,1

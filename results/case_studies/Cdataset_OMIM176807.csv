@@ -1,0 +1,11 @@
+rank,drugbank_id,drug,score,CTD_curated,known_in_Fdataset,clinical_trials,top_evidence
+1,DB00563,Methotrexate,0.9934,therapeutic,-,0,"pheno_mim (+0.085), gene_d (+0.060)"
+2,DB00997,Doxorubicin,0.9808,therapeutic,-,28,"gene_d (+0.161), pheno_mim (+0.074)"
+3,DB00947,Fulvestrant,0.9616,-,-,16,"chem_cdk (+0.114), chem_ecfp (+0.088)"
+4,DB01229,Paclitaxel,0.9516,therapeutic,-,55,"chem_ecfp (+0.129), pheno_mim (+0.083)"
+5,DB00655,Estrone,0.9378,marker/mechanism,-,0,"chem_cdk (+0.187), chem_ecfp (+0.131)"
+6,DB00544,5-Fluorouracil,0.901,therapeutic,-,17,"gene_d (+0.278), pheno_mim (+0.234)"
+7,DB00441,Gemcitabine,0.8918,therapeutic,-,17,"gene_d (+0.154), pheno_mim (+0.130)"
+8,DB00398,Sorafenib,0.8865,-,-,15,"gene_d (+0.151), pheno_mim (+0.123)"
+9,DB00445,Epirubicin,0.832,therapeutic,-,2,"pheno_mim (+0.166), gene_d (+0.142)"
+10,DB00624,Testosterone,0.8273,marker/mechanism|therapeutic,-,125,"pheno_mim (+0.199), gene_d (+0.181)"

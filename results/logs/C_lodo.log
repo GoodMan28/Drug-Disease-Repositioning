@@ -1,0 +1,6 @@
+Cdataset: 663 drugs, 409 diseases, 2532 known links (0.93% density)
+
+### MV-HGAT (ours)  [lodo]
+    25/100 diseases  running AUC 0.8404  (938s)
+    50/100 diseases  running AUC 0.8418  (1625s)
+    75/100 diseases  running AUC 0.8511  (2232s)

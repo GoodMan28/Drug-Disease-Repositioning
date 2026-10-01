@@ -1,0 +1,11 @@
+rank,drugbank_id,drug,score,CTD_curated,known_in_Fdataset,clinical_trials,top_evidence
+1,DB00915,Amantadine,0.9016,-,-,49,"chem_ecfp (+0.179), chem_cdk (+0.147)"
+2,DB01219,Dantrolene,0.7388,-,-,0,"gene_d (+0.225), pheno_mim (+0.207)"
+3,DB00268,Ropinirole,0.5113,-,-,0,"assoc (+0.311), gene_r (+0.171)"
+4,DB00413,Pramipexole,0.5075,-,-,1,"assoc (+0.323), sem_mondo (+0.120)"
+5,DB01367,Rasagiline,0.5057,-,-,2,"assoc (+0.225), chem_cdk (+0.165)"
+6,DB00167,L-Isoleucine,0.4822,-,-,0,"assoc (+0.205), pheno_mim (+0.175)"
+7,DB01235,Levodopa,0.4467,-,-,1,"assoc (+0.261), pheno_mim (+0.119)"
+8,DB00392,(+-)-Ethopropazine,0.3784,-,-,0,"assoc (+0.297), pheno_mim (+0.101)"
+9,DB00419,Miglustat,0.3444,-,-,0,"pheno_mim (+0.295), gene_d (+0.128)"
+10,DB00494,Entacapone,0.3169,therapeutic,-,0,"assoc (+0.225), sem_mondo (+0.093)"

@@ -1,0 +1,11 @@
+rank,drugbank_id,drug,score,CTD_curated,known_in_Cdataset,clinical_trials,top_evidence
+1,DB00603,Medroxyprogesterone Acetate,0.9967,marker/mechanism|therapeutic,-,0,"chem_ecfp (+0.008), chem_cdk (+0.007)"
+2,DB00655,Estrone,0.9956,-,-,0,"chem_ecfp (+0.031), chem_cdk (+0.020)"
+3,DB00399,Zoledronic Acid,0.9869,therapeutic,-,12,"gene_r (+0.038), pheno_mim (+0.017)"
+4,DB00007,Leuprolide,0.984,-,-,3,"pheno_mim (+0.046), chem_ecfp (+0.038)"
+5,DB00541,(+)-Vincristine,0.9645,-,-,0,"chem_ecfp (+0.103), pheno_mim (+0.100)"
+6,DB00717,Norethindrone,0.9628,-,-,0,"gene_r (+0.082), chem_cdk (+0.065)"
+7,DB00169,Vitamin D3,0.9532,-,-,1,"chem_cdk (+0.056), chem_ecfp (+0.053)"
+8,DB00762,Irinotecan,0.9512,-,-,17,"gene_r (+0.275), pheno_mim (+0.062)"
+9,DB01196,Estramustine,0.9495,-,-,0,"chem_ecfp (+0.188), pheno_mim (+0.085)"
+10,DB00977,Ethinylestradiol,0.9477,-,-,0,"chem_cdk (+0.148), chem_ecfp (+0.076)"

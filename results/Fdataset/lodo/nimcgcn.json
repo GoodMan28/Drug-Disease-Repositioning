@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "AUC": 0.7102372150119051,
+    "AUPR": 0.02588480188424582,
+    "mean_per_disease_AUC": 0.702400844934582,
+    "n_diseases": 100
+  },
+  "folds": [],
+  "label": "NIMCGCN"
+}
