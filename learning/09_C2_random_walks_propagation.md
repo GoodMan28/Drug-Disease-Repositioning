@@ -251,12 +251,12 @@ $$\boxed{\;F^* = (1-\alpha)\,(I-\alpha\tilde S)^{-1}\,Y\;}$$
 **Fixed point from an objective.** Zhou et al. show $F^*$ minimises
 $$\mathcal Q(F) = \frac12\sum_{i,j} S_{ij}\left\lVert \frac{F_i}{\sqrt{d_i}} - \frac{F_j}{\sqrt{d_j}}\right\rVert^2 + \mu\sum_i \lVert F_i - Y_i\rVert^2 ,$$
 where $F_i$ is row $i$. The first term (**smoothness**) penalises different scores on strongly connected nodes; the second (**fitting**) keeps scores close to the known labels. To minimise, first rewrite the smoothness term. Expanding the square,
-$$\frac12\sum_{ij}S_{ij}\left(\frac{\lVert F_i\rVert^2}{d_i} - \frac{2F_i^\top F_j}{\sqrt{d_id_j}} + \frac{\lVert F_j\rVert^2}{d_j}\right) = \sum_i\lVert F_i\rVert^2 - \sum_{ij}\tilde S_{ij}F_i^\top F_j = \operatorname{tr}\!\big(F^\top(I-\tilde S)F\big),$$
+$$\frac12\sum_{ij}S_{ij}\left(\frac{\lVert F_i\rVert^2}{d_i} - \frac{2F_i^\top F_j}{\sqrt{d_id_j}} + \frac{\lVert F_j\rVert^2}{d_j}\right) = \sum_i\lVert F_i\rVert^2 - \sum_{ij}\tilde S_{ij}F_i^\top F_j = \mathrm{tr}\!\big(F^\top(I-\tilde S)F\big),$$
 using $\sum_j S_{ij}/d_i = 1$. The matrix $\mathcal L = I-\tilde S$ is the **normalised graph Laplacian** (you met it in Unit A2). So
-$$\mathcal Q(F) = \operatorname{tr}(F^\top\mathcal LF) + \mu\lVert F-Y\rVert_F^2 .$$
+$$\mathcal Q(F) = \mathrm{tr}(F^\top\mathcal LF) + \mu\lVert F-Y\rVert_F^2 .$$
 It is a convex quadratic (since $\mathcal L$ is positive semi-definite). Setting the gradient to zero:
 $$2\mathcal LF + 2\mu(F-Y) = 0 \iff F - \tilde SF + \mu F = \mu Y \iff F = \frac{1}{1+\mu}\tilde SF + \frac{\mu}{1+\mu}Y .$$
-With $\alpha = 1/(1+\mu)$ this is exactly the fixed point of the iteration: $F^* = (1-\alpha)(I-\alpha\tilde S)^{-1}Y$. So **label propagation = graph-Laplacian-regularised smoothing of the labels**. You will meet the same Laplacian penalty $\operatorname{tr}(U^\top LU)$ in SCMFDD (Chapter 10) — there it smooths latent factors instead of scores.
+With $\alpha = 1/(1+\mu)$ this is exactly the fixed point of the iteration: $F^* = (1-\alpha)(I-\alpha\tilde S)^{-1}Y$. So **label propagation = graph-Laplacian-regularised smoothing of the labels**. You will meet the same Laplacian penalty $\mathrm{tr}(U^\top LU)$ in SCMFDD (Chapter 10) — there it smooths latent factors instead of scores.
 
 ### 4.3 Zhu & Ghahramani (2002): clamped propagation and harmonic functions
 
@@ -1574,11 +1574,11 @@ This is why MV-HGAT includes the propagation head and a degree gate: for a cold 
 | Convergence rate of a walk | error $\sim\lvert\lambda_2\rvert^t$ | spectral gap $1-\lvert\lambda_2\rvert$ |
 | PageRank | $\mathbf r = (1-\beta)(I-\beta P^\top)^{-1}\mathbf v$, $\beta=0.85$ | dangling rows → uniform |
 | RWR / personalised PageRank | $\mathbf p = (1-\alpha)(I-\alpha W)^{-1}\mathbf e = (1-\alpha)\sum_t\alpha^tW^t\mathbf e$ | mean walk length $\alpha/(1-\alpha)$ |
-| Label propagation (Zhou) | $F^* = (1-\alpha)(I-\alpha\tilde S)^{-1}Y$ | minimises $\operatorname{tr}(F^\top\mathcal LF)+\mu\lVert F-Y\rVert^2$, $\alpha = 1/(1+\mu)$ |
+| Label propagation (Zhou) | $F^* = (1-\alpha)(I-\alpha\tilde S)^{-1}Y$ | minimises $\mathrm{tr}(F^\top\mathcal LF)+\mu\lVert F-Y\rVert^2$, $\alpha = 1/(1+\mu)$ |
 | Harmonic (Zhu) | $F_U = (D_{UU}-S_{UU})^{-1}S_{UL}Y_L$ | labels clamped; absorbing walk |
 | Convergence | $\mathbf x\leftarrow M\mathbf x+\mathbf b$ converges iff $\rho(M)<1$ | iterations $\approx\ln\varepsilon/\ln\alpha$ |
 | MBiRW logistic | $L(x) = 1/(1+e^{-15x+\ln9999})$ | soft threshold at $x\approx0.61$ |
-| MBiRW step | $R\leftarrow\operatorname{avg}\{\alpha M_rR+(1-\alpha)A_0,\ \alpha RM_d+(1-\alpha)A_0\}$ | $\alpha=0.3$, $l=r=2$ |
+| MBiRW step | $R\leftarrow\mathrm{avg}\{\alpha M_rR+(1-\alpha)A_0,\ \alpha RM_d+(1-\alpha)A_0\}$ | $\alpha=0.3$, $l=r=2$ |
 | Project propagation | drug view $K_vA$; disease view $AK_u^\top$; $K$ = row-normalised top-$k$, zero diagonal | $k=10$, one step |
 | MV-HGAT logit | $\text{gate}\cdot\mathbf h_i^\top W\mathbf h_j + \sum_vw_vP_v[i,j] + b$ | $w_v=\text{softplus}\cdot s\ge0$ |
 

@@ -373,7 +373,7 @@ $$ Z = \hat A\, X\, \Theta. $$
 Adding a nonlinearity and stacking gives the **GCN layer**:
 $$ \boxed{\,H^{(l+1)} = \sigma\big(\hat A\, H^{(l)}\, W^{(l)}\big),\qquad \hat A = \tilde D^{-1/2}(A + I)\tilde D^{-1/2}\,} $$
 and the 2-layer model of the paper for node classification:
-$$ Z = \operatorname{softmax}\big(\hat A\ \operatorname{ReLU}(\hat A X W^{(0)})\ W^{(1)}\big). $$
+$$ Z = \mathrm{softmax}\big(\hat A\ \mathrm{ReLU}(\hat A X W^{(0)})\ W^{(1)}\big). $$
 
 Node-wise, the same layer reads
 $$ h_i^{(l+1)} = \sigma\Big( \sum_{j \in \mathcal N(i)\cup\{i\}} \frac{1}{\sqrt{\tilde d_i\,\tilde d_j}}\; W^{(l)\top} h_j^{(l)} \Big). $$
@@ -1000,7 +1000,7 @@ What this shows:
 Two common diagnostics, both used above or in the exercises:
 
 * **Mean pairwise cosine similarity** of node embeddings (→ 1 under over-smoothing).
-* **Normalised Dirichlet energy** $E(H) = \operatorname{tr}(H^\top \tilde L H) / \operatorname{tr}(H^\top H)$ with $\tilde L = I - \hat A$: the share of the signal's energy that sits in "non-smooth" directions (→ 0 under over-smoothing). Exercise 12 computes it on the running example.
+* **Normalised Dirichlet energy** $E(H) = \mathrm{tr}(H^\top \tilde L H) / \mathrm{tr}(H^\top H)$ with $\tilde L = I - \hat A$: the share of the signal's energy that sits in "non-smooth" directions (→ 0 under over-smoothing). Exercise 12 computes it on the running example.
 
 ### 8.4 Over-squashing: too much information through too narrow a pipe
 
@@ -1731,7 +1731,7 @@ Cheapest *valid* procedure: add the drug to all matrices, re-run `build`, and **
 (A third, smaller point: `_GCN` applies ReLU after the last layer, so the dot-product decoder only sees non-negative embeddings and cannot express "anti-correlated" profiles; drop the final ReLU or add a linear projection as NIMCGCN does.) Any such change must be tuned on the validation split, never on the test folds.
 </details>
 
-**Exercise 12 (★★, coding).** Compute the normalised Dirichlet energy $E(H) = \operatorname{tr}(H^\top\tilde L H)/\operatorname{tr}(H^\top H)$, $\tilde L = I - \hat A$, of $H^{(k)} = \hat A^k X$ for the 4-node example ($X$ from Section 5.2) at $k = 0, 1, 2, 5, 10, 20$. How fast does it decay, and why?
+**Exercise 12 (★★, coding).** Compute the normalised Dirichlet energy $E(H) = \mathrm{tr}(H^\top\tilde L H)/\mathrm{tr}(H^\top H)$, $\tilde L = I - \hat A$, of $H^{(k)} = \hat A^k X$ for the 4-node example ($X$ from Section 5.2) at $k = 0, 1, 2, 5, 10, 20$. How fast does it decay, and why?
 
 <details><summary>Solution</summary>
 

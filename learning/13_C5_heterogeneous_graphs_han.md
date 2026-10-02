@@ -41,7 +41,7 @@ When you finish this unit you should be able to do the following.
 | $\alpha^\Phi_{ij}$ | node-level attention of $i$ on neighbour $j$ within $\Phi$ |
 | $z_i^\Phi$ | node $i$'s embedding computed from meta-path / relation $\Phi$ only |
 | $\beta_\Phi$, $\beta_i^\Phi$ | semantic (view) attention weight: global (HAN) or node-specific (this project) |
-| $\sigma$ | an activation; $\operatorname{sigmoid}$ is written out when meant |
+| $\sigma$ | an activation; $\mathrm{sigmoid}$ is written out when meant |
 
 A note on **"view", "relation" and "meta-path"**: in this project the three words often refer to the same object. A *view* is one way of measuring similarity, for example `chem_ecfp`. Inside the model each view becomes a *relation*, a set of typed edges such as drug ← drug. Some of those relations come from *meta-paths*: `gene_r` is the drug–gene–drug meta-path, collapsed into a direct drug–drug edge. Section 2.2 makes the distinction precise.
 
@@ -211,7 +211,7 @@ M_{DGS}=\begin{bmatrix}2&0\\1&0\\0&1\end{bmatrix},\qquad
 \cos(d_2,s_1)=\frac{1}{\sqrt1\cdot\sqrt2}=0.707.
 $$
 
-*DSD.* $M_{DSD}=AA^\top=\operatorname{diag}(1,0,1)$. No two drugs share an indication, so the co-indication meta-path gives **no** off-diagonal neighbours, and $d_2$ (no known indication) is not even connected to itself through it. Keep this in mind: in section 2.6, $d_2$'s DSD view will be *empty*, and we will need a mask.
+*DSD.* $M_{DSD}=AA^\top=\mathrm{diag}(1,0,1)$. No two drugs share an indication, so the co-indication meta-path gives **no** off-diagonal neighbours, and $d_2$ (no known indication) is not even connected to itself through it. Keep this in mind: in section 2.6, $d_2$'s DSD view will be *empty*, and we will need a mask.
 
 You will verify all these numbers in code (section 4.1).
 
@@ -279,7 +279,7 @@ Parameters: $B\,d_\text{in}d_\text{out} + |\mathcal{R}|B$. *Interpretation:* the
 **Block-diagonal decomposition.** Every relation matrix is block-diagonal:
 
 $$
-W_r = \operatorname{blockdiag}\big(Q_{1r},\dots,Q_{Br}\big),\qquad Q_{br}\in\mathbb{R}^{(d_\text{out}/B)\times(d_\text{in}/B)}.
+W_r = \mathrm{blockdiag}\big(Q_{1r},\dots,Q_{Br}\big),\qquad Q_{br}\in\mathbb{R}^{(d_\text{out}/B)\times(d_\text{in}/B)}.
 $$
 
 Parameters: $|\mathcal{R}|\,B\,(d_\text{in}/B)(d_\text{out}/B)=|\mathcal{R}|\,d_\text{in}d_\text{out}/B$. *Interpretation:* the hidden dimensions are split into $B$ groups that do not talk to each other within a relation. It is a **sparsity constraint**, sensible when the latent features cluster into groups that interact mainly among themselves.
@@ -362,7 +362,7 @@ In the project this is `MVHGAT.inp`, one `nn.Linear` for drugs (input size $3\cd
 Exactly GAT (Unit C4), restricted to meta-path neighbours (including $i$ itself) and with an attention vector $a_\Phi$ *specific to the meta-path*:
 
 $$
-e^\Phi_{ij} = \operatorname{LeakyReLU}\big(a_\Phi^\top [\,h_i' \,\Vert\, h_j'\,]\big),\qquad
+e^\Phi_{ij} = \mathrm{LeakyReLU}\big(a_\Phi^\top [\,h_i' \,\Vert\, h_j'\,]\big),\qquad
 \alpha^\Phi_{ij} = \frac{\exp(e^\Phi_{ij})}{\sum_{k\in\mathcal{N}^\Phi(i)} \exp(e^\Phi_{ik})},
 $$
 
@@ -504,7 +504,7 @@ MV-HGAT uses **all three**. That is unusual and deliberate. Early fusion gives t
 | max-pooling | $z_{i,k}=\max_v m^v_{i,k}$ | 0 | picks the strongest evidence per dimension; brittle to outliers |
 | global attention (HAN) | $z_i=\sum_v\beta_v m_i^v$ | $d\,d_a+d_a+d_a$ | one interpretable weight per view; convex combination |
 | node-specific attention | $z_i=\sum_v\beta_i^v m_i^v$ | same | per-node weights; masking of missing views; convex |
-| gating | $z_i=\sum_v g_i^v m_i^v$, $g_i^v=\operatorname{sigmoid}(u^\top m_i^v+c)$ | $d+1$ | views do **not** compete; weights need not sum to one; can amplify agreement or switch all views off |
+| gating | $z_i=\sum_v g_i^v m_i^v$, $g_i^v=\mathrm{sigmoid}(u^\top m_i^v+c)$ | $d+1$ | views do **not** compete; weights need not sum to one; can amplify agreement or switch all views off |
 | late fusion | $\text{score}=\sum_v w_v f_v(i,j)$ | $P$ | per-view scores are explicit, so the explanation is faithful; no interaction between views before scoring |
 
 **Guidelines.**
@@ -531,7 +531,7 @@ with type-specific key/query/value projections, an edge-type matrix $W^{\text{AT
 **Simple-HGN and the reality check (Lv et al., KDD 2021, "Are we really making much progress?").** The authors reproduced 12 recent heterogeneous GNNs (including HAN, HGT, MAGNN, HetGNN, GTN and RGCN) with their official code and settings, and compared them against properly configured baselines. Their headline finding: **simple homogeneous GNNs such as GCN and GAT had been "largely underestimated due to improper settings"**, and GAT with proper inputs generally matched or beat all of the specialised models. Each paper had used its own data processing, splits and evaluation set-up, which made fair comparison impossible. They released the **Heterogeneous Graph Benchmark (HGB)** and proposed **Simple-HGN**: a GAT whose attention also sees a learnable **edge-type embedding**,
 
 $$
-\alpha_{ij}=\operatorname{softmax}_j\Big(\operatorname{LeakyReLU}\big(a^\top[W h_i\Vert W h_j\Vert W_r\, r_{\psi(\langle i,j\rangle)}]\big)\Big),
+\alpha_{ij}=\mathrm{softmax}_j\Big(\mathrm{LeakyReLU}\big(a^\top[W h_i\Vert W h_j\Vert W_r\, r_{\psi(\langle i,j\rangle)}]\big)\Big),
 $$
 
 plus residual connections (on nodes and on attention scores) and $L_2$ normalisation of the output embeddings. It beat the specialised models on HGB. *Lesson for this project:* compare against strong, fairly tuned baselines on identical splits (the project does this in `04_ablation.py` and with the "benchmark similarities only" variant), and do not assume architectural novelty is what produces gains.
@@ -582,7 +582,7 @@ Before the code, here is the project's encoder written in the notation of this c
 **Input projection (HAN's type-specific $M_\phi$).**
 
 $$
-h_i^{(0)}=\operatorname{Dropout}\big(\operatorname{ELU}(M_{\phi(i)}x_i)\big),\qquad
+h_i^{(0)}=\mathrm{Dropout}\big(\mathrm{ELU}(M_{\phi(i)}x_i)\big),\qquad
 x_i = [\,\text{similarity rows of all views}\;\Vert\;\text{visible link row}\,].
 $$
 
@@ -590,7 +590,7 @@ $$
 
 $$
 u_j=W^{r}_{\text{src}}h_j,\quad v_i=W^{r}_{\text{dst}}h_i,\qquad
-e^{r,k}_{ij}=\operatorname{LeakyReLU}_{0.2}\big(a^{r,k\top}_{\text{dst}}v_i^{k}+a^{r,k\top}_{\text{src}}u_j^{k}\big),
+e^{r,k}_{ij}=\mathrm{LeakyReLU}_{0.2}\big(a^{r,k\top}_{\text{dst}}v_i^{k}+a^{r,k\top}_{\text{src}}u_j^{k}\big),
 $$
 
 $$
@@ -610,7 +610,7 @@ $$
 **Update with skip connection (R-GCN's $W_0$) and LayerNorm.**
 
 $$
-h_i^{(l+1)}=\operatorname{Dropout}\Big(\operatorname{ELU}\big(\operatorname{LayerNorm}_{\phi(i)}(z_i+S_{\phi(i)}h_i^{(l)})\big)\Big).
+h_i^{(l+1)}=\mathrm{Dropout}\Big(\mathrm{ELU}\big(\mathrm{LayerNorm}_{\phi(i)}(z_i+S_{\phi(i)}h_i^{(l)})\big)\Big).
 $$
 
 **Jumping knowledge and decoder** (decoder details in Unit C6):
@@ -1072,8 +1072,8 @@ gate (drugs x diseases) at initialisation:
 
 - `betas[0]["drug"]` holds the layer-1 relation names for drugs and a $(R\times n)$ matrix of weights. Each column sums to 1.
 - **Drug 3 has no visible links**, so its `assoc>drug` relation is invalid and gets $\beta=0$; its whole weight goes to the chemical view. The other drugs split roughly 45/55 because the model is untrained.
-- `view_weights` at initialisation is $\operatorname{softplus}(0)\times5=\ln2\times5=3.466$ for every view.
-- The **degree gate** at initialisation is $\operatorname{sigmoid}(\log(1+\deg_i))\cdot\operatorname{sigmoid}(\log(1+\deg_j))$. A useful identity: $\operatorname{sigmoid}(\ln(1+d))=\frac{1+d}{2+d}$, so degrees 0, 1, 2 give 0.5, 0.667, 0.75. For drug 0 (degree 1) and disease 0 (degree 2) the gate is $0.667\times0.75=0.5$, matching the printed matrix. Drug 3 (degree 0) has the smallest gates. The gate is covered properly in Unit C6.
+- `view_weights` at initialisation is $\mathrm{softplus}(0)\times5=\ln2\times5=3.466$ for every view.
+- The **degree gate** at initialisation is $\mathrm{sigmoid}(\log(1+\deg_i))\cdot\mathrm{sigmoid}(\log(1+\deg_j))$. A useful identity: $\mathrm{sigmoid}(\ln(1+d))=\frac{1+d}{2+d}$, so degrees 0, 1, 2 give 0.5, 0.667, 0.75. For drug 0 (degree 1) and disease 0 (degree 2) the gate is $0.667\times0.75=0.5$, matching the printed matrix. Drug 3 (degree 0) has the smallest gates. The gate is covered properly in Unit C6.
 
 ---
 
@@ -1549,7 +1549,7 @@ for rel, (dst, src) in self.relations.items():
     out, has = self.gat[rel](h[dst], h[src], graphs[rel])
 ```
 
-`self.gat[rel]` is the `DenseGAT` belonging to relation `rel`. Inside it, every destination node $i$ scores every source node $j$ with $e_{ij}=\operatorname{LeakyReLU}(a_\text{dst}^\top W_\text{dst}h_i+a_\text{src}^\top W_\text{src}h_j)$ per head, masks non-neighbours with $-\infty$, and normalises **over neighbours** (`torch.softmax(e, dim=1)` on a `dst x src x heads` tensor). The weighted sum gives one message per node per relation (`out`), plus a validity flag (`has`). This is HAN's node-level attention within one "meta-path", with relation-specific weights as in R-GCN.
+`self.gat[rel]` is the `DenseGAT` belonging to relation `rel`. Inside it, every destination node $i$ scores every source node $j$ with $e_{ij}=\mathrm{LeakyReLU}(a_\text{dst}^\top W_\text{dst}h_i+a_\text{src}^\top W_\text{src}h_j)$ per head, masks non-neighbours with $-\infty$, and normalises **over neighbours** (`torch.softmax(e, dim=1)` on a `dst x src x heads` tensor). The weighted sum gives one message per node per relation (`out`), plus a validity flag (`has`). This is HAN's node-level attention within one "meta-path", with relation-specific weights as in R-GCN.
 
 **Level 2, semantic (view) attention**, comes after the loop:
 
@@ -1584,10 +1584,10 @@ The costs: per-node weights are noisier (estimated from one node's messages), ca
 | Jaccard via counts | $M_{ij}/(M_{ii}+M_{jj}-M_{ij})$ |
 | R-GCN | $h_i'=\sigma(W_0h_i+\sum_r\sum_{j\in\mathcal{N}^r(i)}c_{i,r}^{-1}W_rh_j)$ |
 | basis decomposition | $W_r=\sum_b a_{rb}V_b$; params $Bd^2+\lvert\mathcal{R}\rvert B$ |
-| block-diagonal | $W_r=\operatorname{blockdiag}(Q_{1r},\dots,Q_{Br})$; params $\lvert\mathcal{R}\rvert d^2/B$ |
-| HAN node level | $\alpha^\Phi_{ij}=\operatorname{softmax}_{j\in\mathcal{N}^\Phi(i)}\operatorname{LeakyReLU}(a_\Phi^\top[h_i'\Vert h_j'])$ |
-| HAN semantic level | $w_\Phi=\frac1{\lvert V\rvert}\sum_i q^\top\tanh(Wz_i^\Phi+b)$, $\beta=\operatorname{softmax}(w)$ |
-| node-specific (project) | $\beta_i^\Phi=\operatorname{softmax}_\Phi\big(q^\top\tanh(Wz_i^\Phi+b)\big)$ with mask |
+| block-diagonal | $W_r=\mathrm{blockdiag}(Q_{1r},\dots,Q_{Br})$; params $\lvert\mathcal{R}\rvert d^2/B$ |
+| HAN node level | $\alpha^\Phi_{ij}=\mathrm{softmax}_{j\in\mathcal{N}^\Phi(i)}\mathrm{LeakyReLU}(a_\Phi^\top[h_i'\Vert h_j'])$ |
+| HAN semantic level | $w_\Phi=\frac1{\lvert V\rvert}\sum_i q^\top\tanh(Wz_i^\Phi+b)$, $\beta=\mathrm{softmax}(w)$ |
+| node-specific (project) | $\beta_i^\Phi=\mathrm{softmax}_\Phi\big(q^\top\tanh(Wz_i^\Phi+b)\big)$ with mask |
 | softmax Jacobian | $\partial\beta_\Phi/\partial w_\Psi=\beta_\Phi(\delta_{\Phi\Psi}-\beta_\Psi)$ |
 | convexity | attention fusion cannot amplify: $\lVert z\rVert\le\max\lVert z^\Phi\rVert$ |
 | fusion menu | concat · mean · max · global attention · node attention · gating · late fusion |

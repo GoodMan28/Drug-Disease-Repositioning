@@ -218,7 +218,7 @@ edge list: [(1, 2), (1, 3), (2, 3), (3, 4), (4, 5)]
 * In a directed graph: **out-degree** $\deg^+(i)=\sum_j A_{ij}$ (row sums) and **in-degree**
   $\deg^-(j)=\sum_i A_{ij}$ (column sums).
 * In a weighted graph, the row sum $\sum_j w_{ij}$ is the **weighted degree** or **strength**.
-* The **degree matrix** is the diagonal matrix $D=\operatorname{diag}(\mathbf d)$.
+* The **degree matrix** is the diagonal matrix $D=\mathrm{diag}(\mathbf d)$.
 * A node of degree 0 is **isolated**; a node of very high degree relative to the rest is a **hub**.
 * **Density** of a simple undirected graph: $\rho = m/\binom n2 = 2m/(n(n-1))$, the fraction of possible
   edges that are present. **Average degree** $\bar d = 2m/n$.
@@ -310,9 +310,9 @@ from its 1-hop neighbours. Two layers: from neighbours' neighbours — the 2-hop
 | **Path** | walk with no repeated node | $1,3,4,5$ (length 3) |
 | **Cycle** | closed trail $v_0=v_k$, $k\ge3$, no other repetition | $1,2,3,1$ (the triangle) |
 
-The **length** is the number of edges. The **distance** $\operatorname{dist}(u,v)$ is the length of a shortest
+The **length** is the number of edges. The **distance** $\mathrm{dist}(u,v)$ is the length of a shortest
 path ($\infty$ if none exists). The **diameter** is the largest finite distance. In $G_5$,
-$\operatorname{dist}(1,5)=3$ and the diameter is 3.
+$\mathrm{dist}(1,5)=3$ and the diameter is 3.
 
 Walks are the natural object for *matrices* (Section 6); paths are the natural object for *distances*.
 
@@ -422,7 +422,7 @@ $$
 **Triangles.** A closed walk of length 3 is a triangle traversed from one of its 3 nodes in one of 2
 directions, so
 $$
-\#\text{triangles} = \frac{\operatorname{tr}(A^3)}{6} = \frac{2+2+2+0+0}{6}=1. \checkmark
+\#\text{triangles} = \frac{\mathrm{tr}(A^3)}{6} = \frac{2+2+2+0+0}{6}=1. \checkmark
 $$
 
 **Reachability.** $j$ is within $k$ hops of $i$ iff $\big((I+A)^k\big)_{ij}>0$ (the identity lets walks
@@ -599,7 +599,7 @@ graph is bipartite with $U=$ drugs and $W=$ diseases; the conceptual drug–gene
 > **Theorem (König, 1936).** A graph is bipartite if and only if it contains no cycle of odd length.
 
 *Proof sketch.* (⇒) Along any cycle the sides alternate $U,W,U,W,\dots$, so returning to the start takes
-an even number of steps. (⇐) In each component pick a root $r$ and put $v$ in $U$ if $\operatorname{dist}(r,v)$ is
+an even number of steps. (⇐) In each component pick a root $r$ and put $v$ in $U$ if $\mathrm{dist}(r,v)$ is
 even, in $W$ otherwise. If an edge joined two nodes at distances of the same parity, the two shortest
 paths plus that edge would contain an odd cycle. $\square$ (Algorithmically: 2-colour with BFS; a
 conflict proves an odd cycle.) $G_5$ is not bipartite — it has the triangle 1–2–3.
@@ -1129,9 +1129,9 @@ indicator vector, $x^\top Lx$ is the **cut size**.
 **In the project.**
 * `sym_norm(S)` in `methods.py` computes $D^{-1/2}SD^{-1/2}$ (with $d=0$ replaced by 1 to avoid division by
   zero). `SCMFDD` builds `Lr = I - sym_norm(Sr)` — the normalised Laplacian of the drug similarity graph —
-  and adds $\lambda\,\operatorname{tr}(U^\top L_rU)$ to its loss. By the identity above (applied column by column),
-  $\operatorname{tr}(U^\top LU)=\tfrac12\sum_{ij}S_{ij}\lVert u_i/\sqrt{d_i}-u_j/\sqrt{d_j}\rVert^2$: **similar drugs are pushed
-  to have similar latent factors**. This answers A2's self-check "what does $\operatorname{tr}(U^\top LU)$ penalise?".
+  and adds $\lambda\,\mathrm{tr}(U^\top L_rU)$ to its loss. By the identity above (applied column by column),
+  $\mathrm{tr}(U^\top LU)=\tfrac12\sum_{ij}S_{ij}\lVert u_i/\sqrt{d_i}-u_j/\sqrt{d_j}\rVert^2$: **similar drugs are pushed
+  to have similar latent factors**. This answers A2's self-check "what does $\mathrm{tr}(U^\top LU)$ penalise?".
 * `knn_kernel` is a random-walk normalisation $D^{-1}W$ of the (directed, weighted) kNN graph.
 * `NIMCGCN` uses `sym_norm(Sr * knn_mask(Sr, k))` as its GCN propagation matrix.
 
@@ -1574,7 +1574,7 @@ print(len(walks), [ "-".join(str(v + 1) for v in w) for w in walks])
 </details>
 
 **Exercise 4 [M ★★].** For a simple undirected graph prove (a) $(A^2)_{ij}=|\mathcal N(i)\cap\mathcal N(j)|$ for
-$i\ne j$; (b) $\operatorname{tr}(A^2)=2m$; (c) $\operatorname{tr}(A^3)=6\times\#\text{triangles}$.
+$i\ne j$; (b) $\mathrm{tr}(A^2)=2m$; (c) $\mathrm{tr}(A^3)=6\times\#\text{triangles}$.
 
 <details><summary>Solution</summary>
 
@@ -1947,12 +1947,12 @@ disease–gene–disease meta-paths (with Jaccard instead of cosine, then `knn_m
 | Graph | $G=(V,E)$, $n=\lvert V\rvert$, $m=\lvert E\rvert$ |
 | Adjacency matrix | $A_{ij}=1$ (or $w_{ij}$) if $i\sim j$; symmetric iff undirected |
 | Project mask convention | `mask[dst, src]` — who receives from whom |
-| Degree / degree matrix | $\mathbf d=A\mathbf 1$, $D=\operatorname{diag}(\mathbf d)$; in/out-degree = column/row sums |
+| Degree / degree matrix | $\mathbf d=A\mathbf 1$, $D=\mathrm{diag}(\mathbf d)$; in/out-degree = column/row sums |
 | Handshake | $\sum_v\deg(v)=2m$; bipartite: $\sum$ left $=\sum$ right $=m$ |
 | Density | $2m/(n(n-1))$ |
 | $k$-hop neighbourhood | nodes at distance $\le k$; reachable iff $((I+A)^k)_{ij}>0$ |
 | Walk counting | $(A^k)_{ij}$ = # walks of length $k$; weighted: sum of weight products |
-| Common neighbours / triangles | $(A^2)_{ij}$; $\operatorname{tr}(A^3)/6$ |
+| Common neighbours / triangles | $(A^2)_{ij}$; $\mathrm{tr}(A^3)/6$ |
 | Components | BFS/DFS labelling; `scipy.sparse.csgraph.connected_components` |
 | Bipartite | no odd cycles; biadjacency $B$; full $\begin{pmatrix}0&B\\B^\top&0\end{pmatrix}$; projections $BB^\top$, $B^\top B$ |
 | Heterogeneous graph | $(V,E,\phi,\psi)$; schema; one matrix per relation |
@@ -1974,7 +1974,7 @@ disease–gene–disease meta-paths (with Jaccard instead of cosine, then `knn_m
 | `similarity.jaccard` | normalised entity–gene–entity meta-path (`gene_r`, `gene_d`) |
 | `similarity.cosine_cross` | normalised drug–gene–disease meta-path (bridge) |
 | `MVHGATMethod.build` | network schema (`relations`) + one mask per relation (`graphs`) |
-| `methods.sym_norm`, `SCMFDD` | $D^{-1/2}SD^{-1/2}$, Laplacian regulariser $\operatorname{tr}(U^\top LU)$ |
+| `methods.sym_norm`, `SCMFDD` | $D^{-1/2}SD^{-1/2}$, Laplacian regulariser $\mathrm{tr}(U^\top LU)$ |
 | `np.block([[Sr, A], [A.T, Sd]])` (DRRS, LAGCN) | heterogeneous graph squashed into one weighted adjacency |
 
 **Numbers to remember (Fdataset):** 593 drugs, 313 diseases, 1,933 links (density 1.04%); drug degree

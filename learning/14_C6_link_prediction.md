@@ -228,7 +228,7 @@ A knowledge graph is a set of triples $(h,r,t)$: *(aspirin, treats, headache)*, 
 | **TransE** (Bordes et al. 2013) | $-\lVert h+r-t\rVert$ | $\mathbb{R}^d$ | relation = translation |
 | **RESCAL** (Nickel et al. 2011) | $h^\top M_rt$ | $\mathbb{R}^d$, $M_r\in\mathbb{R}^{d\times d}$ | full bilinear; many parameters |
 | **DistMult** (Yang et al. 2015) | $\langle h,r,t\rangle=\sum_k h_kr_kt_k$ | $\mathbb{R}^d$ | diagonal RESCAL; **always symmetric** |
-| **ComplEx** (Trouillon et al. 2016) | $\operatorname{Re}\big(\sum_k h_kr_k\bar t_k\big)$ | $\mathbb{C}^d$ | conjugation breaks symmetry |
+| **ComplEx** (Trouillon et al. 2016) | $\mathrm{Re}\big(\sum_k h_kr_k\bar t_k\big)$ | $\mathbb{C}^d$ | conjugation breaks symmetry |
 | **RotatE** (Sun et al. 2019) | $-\lVert h\circ r-t\rVert$, $\lvert r_k\rvert=1$ | $\mathbb{C}^d$ | relation = rotation |
 
 **Relation patterns.** A *symmetric* relation (r(x,y) ⇒ r(y,x), e.g. "is similar to") is natural for DistMult, which can model nothing else. TransE can only model it with $r=0$, which collapses $h$ and $t$. An *antisymmetric* relation ("treats": a drug treats a disease, never the reverse) suits TransE, ComplEx and RotatE, but not DistMult. *Inversion* ("treats" vs "treated-by") and *composition* ("inhibits ∘ is-involved-in ⇒ may-treat") are handled by RotatE (rotations compose by adding angles) and partly by TransE (translations add). This is why RotatE is a sensible default for rich biomedical KGs (Decagon-style multi-relational drug graphs).
@@ -272,7 +272,7 @@ Let $\ell^+$ be the logit of a positive pair and $\ell^-$ of a negative one.
 **Binary cross-entropy (pointwise).** From the Bernoulli likelihood (Unit A3):
 
 $$
-\mathcal{L}_\text{BCE}=-\log\sigma(\ell^+)-\log\big(1-\sigma(\ell^-)\big)=\operatorname{softplus}(-\ell^+)+\operatorname{softplus}(\ell^-).
+\mathcal{L}_\text{BCE}=-\log\sigma(\ell^+)-\log\big(1-\sigma(\ell^-)\big)=\mathrm{softplus}(-\ell^+)+\mathrm{softplus}(\ell^-).
 $$
 
 Gradients: $\partial\mathcal{L}/\partial\ell^+=\sigma(\ell^+)-1$ and $\partial\mathcal{L}/\partial\ell^-=\sigma(\ell^-)$. BCE cares about **absolute** levels: it wants positives high *and* negatives low, each on its own. The project uses BCE via `F.binary_cross_entropy_with_logits`, which is numerically stable.
@@ -391,12 +391,12 @@ hide |= cold[pos % n_d]          # pos indexes the flattened matrix; pos % n_d i
 
 The model is now trained on exactly the LODO situation in every epoch: "score drugs for a disease you cannot see any links of".
 
-**(b) Propagation head (`prop_head = True`).** It adds $\sum_v w_vP_v[i,j]$ to the logit, one term per view, with $w_v=\operatorname{softplus}(\theta_v)\cdot5\ge0$ (`MVHGAT.view_weights`). For a cold disease $j$ the drug-view terms vanish, but the disease-view terms $P_u[i,j]=\sum_lK_u[j,l]A[i,l]$, "does drug $i$ treat diseases similar to $j$?", remain. They need no training and no edges of $j$. This is the guilt-by-association prior, made explicit and **inductive by construction**: it only needs $j$'s similarity row.
+**(b) Propagation head (`prop_head = True`).** It adds $\sum_v w_vP_v[i,j]$ to the logit, one term per view, with $w_v=\mathrm{softplus}(\theta_v)\cdot5\ge0$ (`MVHGAT.view_weights`). For a cold disease $j$ the drug-view terms vanish, but the disease-view terms $P_u[i,j]=\sum_lK_u[j,l]A[i,l]$, "does drug $i$ treat diseases similar to $j$?", remain. They need no training and no edges of $j$. This is the guilt-by-association prior, made explicit and **inductive by construction**: it only needs $j$'s similarity row.
 
 **(c) Degree gate (`degree_gate = True`).** The GNN term is multiplied by
 
 $$
-g(i,j)=\operatorname{sigmoid}\big(a+b\log(1+\deg_i)\big)\cdot\operatorname{sigmoid}\big(c+d\log(1+\deg_j)\big),
+g(i,j)=\mathrm{sigmoid}\big(a+b\log(1+\deg_i)\big)\cdot\mathrm{sigmoid}\big(c+d\log(1+\deg_j)\big),
 $$
 
 with $a,b,c,d$ learned (initialised to $0,1,0,1$). With visible degree 0 the gate is small and the score leans on the propagation head; with many links it approaches 1 and the collaborative GNN term counts fully. This is a two-expert **mixture with a learned gate on degree**. In the toy demo of section 4.6, the learned disease factor is 0.59 at degree 0, 0.73 at 1, 0.88 at 5 and 0.96 at 20.
@@ -1182,7 +1182,7 @@ def view_weights(self):
     return F.softplus(self.prop_w) * self.prop_scale
 ```
 
-$w_v=\operatorname{softplus}(\theta_v)\cdot s\ge0$. Initialised with $\theta_v=0$ and $s=5$, so $w_v=5\ln2\approx3.47$. Non-negativity encodes the prior that "neighbours treat it" can only *raise* a score.
+$w_v=\mathrm{softplus}(\theta_v)\cdot s\ge0$. Initialised with $\theta_v=0$ and $s=5$, so $w_v=5\ln2\approx3.47$. Non-negativity encodes the prior that "neighbours treat it" can only *raise* a score.
 
 ```python
 def gnn_gate(self, deg_r, deg_d):
@@ -1191,7 +1191,7 @@ def gnn_gate(self, deg_r, deg_d):
            torch.sigmoid(g[2] + g[3] * torch.log1p(deg_d))[None, :]
 ```
 
-The degree gate of section 2.10 as an outer product: a drug factor (column vector) times a disease factor (row vector) gives a $593\times313$ gate. At initialisation $g=(0,1,0,1)$, so each factor is $\operatorname{sigmoid}(\ln(1+d))=\frac{1+d}{2+d}$: 0.5 at degree 0, 0.667 at 1, 0.917 at 10. `self.bias` starts at −3, so an "empty" pair begins with $\sigma(-3)\approx0.05$.
+The degree gate of section 2.10 as an outer product: a drug factor (column vector) times a disease factor (row vector) gives a $593\times313$ gate. At initialisation $g=(0,1,0,1)$, so each factor is $\mathrm{sigmoid}(\ln(1+d))=\frac{1+d}{2+d}$: 0.5 at degree 0, 0.667 at 1, 0.917 at 10. `self.bias` starts at −3, so an "empty" pair begins with $\sigma(-3)\approx0.05$.
 
 ### 5.5 Evaluation: `evaluation.py`
 
@@ -1495,8 +1495,8 @@ Decoder side: the drug-view propagation terms are zero for its column ($K_rA[:,j
 | bipartite | CN ≡ 0 across sides; use $AA^\top A$ (item-CF) or similarity paths $K_vA$, $AK_u^\top$ |
 | DeepWalk / node2vec | random walks + skip-gram with negative sampling; node2vec's $p,q$ bias BFS/DFS; transductive |
 | decoders | dot $h_u^\top h_v$; bilinear $h_u^\top Wh_v$; MLP$([h_u\Vert h_v])$ |
-| KG | TransE $-\lVert h+r-t\rVert$; DistMult $\langle h,r,t\rangle$ (symmetric); ComplEx $\operatorname{Re}\langle h,r,\bar t\rangle$; RotatE $-\lVert h\circ r-t\rVert$ |
-| BCE | $\operatorname{softplus}(-\ell^+)+\operatorname{softplus}(\ell^-)$; punishes miscalibration |
+| KG | TransE $-\lVert h+r-t\rVert$; DistMult $\langle h,r,t\rangle$ (symmetric); ComplEx $\mathrm{Re}\langle h,r,\bar t\rangle$; RotatE $-\lVert h\circ r-t\rVert$ |
+| BCE | $\mathrm{softplus}(-\ell^+)+\mathrm{softplus}(\ell^-)$; punishes miscalibration |
 | BPR | $-\log\sigma(\ell^+-\ell^-)$; smooth AUC surrogate; shift-invariant |
 | margin | $\max(0,\gamma-\ell^++\ell^-)$ |
 | sampling offset | $\ell^*=\text{true log-odds}+\log(\rho_+/\rho_-)$; ranks unchanged; project ≈ +3.9 |
@@ -1567,7 +1567,7 @@ Decoder side: the drug-view propagation terms are zero for its column ($K_rA[:,j
 - **Cold start**: predicting links for a node with no observed links (here: a disease with no known drugs).
 - **Cold-start practice**: hiding all links of a random subset of nodes during training, to simulate cold start (`cold_frac`).
 - **Common neighbours (CN)**: number of shared neighbours of two nodes; always 0 across the sides of a bipartite graph.
-- **Degree gate**: the learned factor $\operatorname{sigmoid}(a+b\log(1+\deg))$ that scales the GNN term by how many visible links a node has.
+- **Degree gate**: the learned factor $\mathrm{sigmoid}(a+b\log(1+\deg))$ that scales the GNN term by how many visible links a node has.
 - **DistMult / ComplEx / RotatE / TransE / RESCAL**: knowledge-graph scoring functions (section 2.5).
 - **DropEdge**: randomly removing a fraction of edges from the message graph each epoch.
 - **Edge leakage**: supervising on edges that are also inputs to the encoder, so that the model learns to detect rather than predict edges.

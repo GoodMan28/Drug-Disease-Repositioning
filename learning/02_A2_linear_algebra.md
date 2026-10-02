@@ -31,7 +31,7 @@ course is assumed; every concept is defined before it is used.
    compute in the project.
 2. Use the transpose rules, including $(AB)^\top = B^\top A^\top$, and recognise symmetric,
    diagonal, orthogonal and positive semidefinite matrices; prove that every Gram matrix is PSD.
-3. Define rank, compute it for small matrices, and explain why $\operatorname{rank}(UV^\top) \le k$.
+3. Define rank, compute it for small matrices, and explain why $\mathrm{rank}(UV^\top) \le k$.
 4. Compute the eigenvalues/eigenvectors of a 2 × 2 matrix by hand, state the spectral theorem
    for symmetric matrices and prove its two key facts (real eigenvalues, orthogonal eigenvectors).
 5. Compute an SVD by hand for a 2 × 2 matrix, derive it from the eigendecomposition of $A^\top A$,
@@ -41,7 +41,7 @@ course is assumed; every concept is defined before it is used.
 7. Build the degree matrix, the Laplacian $L = D - S$ and the normalised operators
    $D^{-1/2} S D^{-1/2}$ and $I - D^{-1/2} S D^{-1/2}$; prove the quadratic-form identities and the
    spectral bounds; explain why normalisation is needed.
-8. Prove $\operatorname{tr}(U^\top L U) = \tfrac12 \sum_{ij} S_{ij}\lVert u_i - u_j\rVert^2$ and
+8. Prove $\mathrm{tr}(U^\top L U) = \tfrac12 \sum_{ij} S_{ij}\lVert u_i - u_j\rVert^2$ and
    explain why it is a smoothness penalty, including its gradient.
 9. Read `methods.py::sym_norm`, `DRRS`, `SCMFDD`, `MBiRW`, `data.py::knn_kernel` and the
    bilinear decoder in `model.py::MVHGAT.forward`, and state the linear algebra behind every line.
@@ -58,7 +58,7 @@ operations:
 | `data.py::knn_kernel` → `K @ A` | row mixing: each drug gets the weighted average association profile of its neighbours |
 | `methods.py::MBiRW` → `Mr @ R`, `R @ Md` | left multiplication mixes drug rows; right multiplication mixes disease columns |
 | `methods.py::sym_norm` | $D^{-1/2} S D^{-1/2}$, the symmetric normalisation of a graph |
-| `methods.py::SCMFDD` | $\lVert A - UV^\top\rVert_F^2 + \lambda \operatorname{tr}(U^\top L_r U) + \dots$: low rank + Laplacian smoothness |
+| `methods.py::SCMFDD` | $\lVert A - UV^\top\rVert_F^2 + \lambda \mathrm{tr}(U^\top L_r U) + \dots$: low rank + Laplacian smoothness |
 | `methods.py::DRRS` | singular value thresholding: SVD, shrink singular values, rebuild |
 | `model.py::MVHGAT.forward` | bilinear decoder $H_r W H_d^\top$ |
 | `similarity.py::jaccard`, `cosine_cross` | $GG^\top$ counts shared genes; normalised inner products |
@@ -98,7 +98,7 @@ links) is no better than chance.
   $x_i$ is the $i$-th entry. $\mathbf{1}$ is the all-ones vector.
 * Matrices: uppercase, $A \in \mathbb{R}^{n\times m}$ has $n$ rows and $m$ columns; $A_{ij}$ is
   the entry in row $i$, column $j$; $A_{i,:}$ is row $i$ (a row vector); $A_{:,j}$ is column $j$.
-* $A^\top$: transpose. $I$ or $I_n$: identity. $\operatorname{diag}(d)$: diagonal matrix with $d$ on the diagonal.
+* $A^\top$: transpose. $I$ or $I_n$: identity. $\mathrm{diag}(d)$: diagonal matrix with $d$ on the diagonal.
 * Project symbols: $A$ = drug × disease association matrix ($n_r \times n_d$);
   $S_r$, $S_d$ = drug/disease similarity matrices; $D$ = degree matrix; $L$ = Laplacian;
   $U, V$ = factor matrices; $H_r, H_d$ = embedding matrices (one row per drug/disease).
@@ -363,14 +363,14 @@ numbers (provided the shapes match). Two project uses:
 
 ### 4.3 Diagonal matrices: scaling rows and columns
 
-For $d \in \mathbb{R}^n$, $\operatorname{diag}(d)$ has $d_i$ on the diagonal and zeros elsewhere.
+For $d \in \mathbb{R}^n$, $\mathrm{diag}(d)$ has $d_i$ on the diagonal and zeros elsewhere.
 
-**Fact.** $\operatorname{diag}(d)\,M$ multiplies **row** $i$ of $M$ by $d_i$; $M \operatorname{diag}(d)$
+**Fact.** $\mathrm{diag}(d)\,M$ multiplies **row** $i$ of $M$ by $d_i$; $M \mathrm{diag}(d)$
 multiplies **column** $j$ of $M$ by $d_j$.
 
-*Proof.* $(\operatorname{diag}(d)M)_{ij} = \sum_k d_i\,[k = i]\,M_{kj} = d_i M_{ij}$; similarly on the right. $\square$
+*Proof.* $(\mathrm{diag}(d)M)_{ij} = \sum_k d_i\,[k = i]\,M_{kj} = d_i M_{ij}$; similarly on the right. $\square$
 
-So $\operatorname{diag}(d)\,S\,\operatorname{diag}(d)$ has entries $d_i S_{ij} d_j$. NumPy never needs to
+So $\mathrm{diag}(d)\,S\,\mathrm{diag}(d)$ has entries $d_i S_{ij} d_j$. NumPy never needs to
 form the diagonal matrix: `S * d[:, None] * d[None, :]` gives the same result with $O(n^2)$ work
 instead of the $O(n^3)$ of two dense products. This is exactly `methods.py::sym_norm`.
 
@@ -459,7 +459,7 @@ not depend on how many neighbours a node has.
   size, the **dimension**.
 * The **column space** of $A$ is the span of its columns ($\{Ax : x\}$); the **row space** is the
   span of its rows.
-* The **rank** of $A$, $\operatorname{rank}(A)$, is the dimension of its column space: the maximum
+* The **rank** of $A$, $\mathrm{rank}(A)$, is the dimension of its column space: the maximum
   number of linearly independent columns.
 
 **Theorem (row rank = column rank).** The maximum number of independent rows equals the maximum
@@ -473,11 +473,11 @@ Applying the same argument to $A^\top$ shows column rank ≤ row rank. $\square$
 
 Consequences used constantly:
 
-1. $\operatorname{rank}(A) \le \min(n, m)$. A matrix with $\operatorname{rank}(A) = \min(n,m)$ is **full rank**.
-2. $\operatorname{rank}(AB) \le \min(\operatorname{rank} A, \operatorname{rank} B)$ — columns of $AB$
+1. $\mathrm{rank}(A) \le \min(n, m)$. A matrix with $\mathrm{rank}(A) = \min(n,m)$ is **full rank**.
+2. $\mathrm{rank}(AB) \le \min(\mathrm{rank} A, \mathrm{rank} B)$ — columns of $AB$
    lie in the column space of $A$ (view 2), rows of $AB$ in the row space of $B$ (view 3).
 3. An outer product $xy^\top$ ($x, y \ne 0$) has rank exactly 1.
-4. **If $U \in \mathbb{R}^{n\times k}$ and $V \in \mathbb{R}^{m \times k}$, then $\operatorname{rank}(UV^\top) \le k$.**
+4. **If $U \in \mathbb{R}^{n\times k}$ and $V \in \mathbb{R}^{m \times k}$, then $\mathrm{rank}(UV^\top) \le k$.**
    A $k$-factor model can only ever produce rank-$k$ score matrices, however large $n$ and $m$ are.
 5. The bilinear decoder's logits $H_r W H_d^\top$ have rank at most 192 (the embedding width), so
    this term alone is a low-rank model; MV-HGAT adds the propagation terms on top.
@@ -486,7 +486,7 @@ Consequences used constantly:
 
 $$M = \begin{pmatrix}1 & 2 & 3\\ 2 & 4 & 6\\ 1 & 0 & 1\end{pmatrix}.$$
 Row 2 is twice row 1, so the rows are dependent. Rows 1 and 3 are independent (neither is a multiple
-of the other). So $\operatorname{rank}(M) = 2$. Column view: column 3 = column 1 + column 2
+of the other). So $\mathrm{rank}(M) = 2$. Column view: column 3 = column 1 + column 2
 ($3 = 1+2$, $6 = 2 + 4$, $1 = 1 + 0$), and columns 1, 2 are independent — again rank 2.
 
 **Rank in the project data.** Fdataset's $A$ has 313 columns, but only 246 *distinct* ones
@@ -562,7 +562,7 @@ Non-symmetric matrices can have complex eigenvalues; symmetric ones cannot, as w
 **Theorem (spectral theorem).** If $M \in \mathbb{R}^{n\times n}$ is symmetric, then all its eigenvalues
 are real, and there is an orthonormal basis of $\mathbb{R}^n$ made of eigenvectors of $M$. Equivalently
 $$M = Q\Lambda Q^\top = \sum_{i=1}^n \lambda_i\, q_i q_i^\top,$$
-with $Q = [q_1, \dots, q_n]$ orthogonal and $\Lambda = \operatorname{diag}(\lambda_1, \dots, \lambda_n)$.
+with $Q = [q_1, \dots, q_n]$ orthogonal and $\Lambda = \mathrm{diag}(\lambda_1, \dots, \lambda_n)$.
 
 We prove the two facts that do most of the work; the existence of a full orthonormal basis when
 eigenvalues repeat is proved by induction in any linear algebra text (e.g. Strang, *Introduction to
@@ -605,8 +605,8 @@ with equality at the corresponding eigenvectors.
 Conversely if $M \succeq 0$ then $\lambda_i = q_i^\top M q_i \ge 0$. (That is why §4.6 tested PSD via the
 smallest eigenvalue.)
 
-**Trace and determinant.** $\operatorname{tr}(M) = \sum_i \lambda_i$ and $\det(M) = \prod_i \lambda_i$
-(for any square matrix, counting complex eigenvalues). Check on the example: $\operatorname{tr} = 4 = 3 + 1$, $\det = 3 = 3\cdot1$.
+**Trace and determinant.** $\mathrm{tr}(M) = \sum_i \lambda_i$ and $\det(M) = \prod_i \lambda_i$
+(for any square matrix, counting complex eigenvalues). Check on the example: $\mathrm{tr} = 4 = 3 + 1$, $\det = 3 = 3\cdot1$.
 
 **Numerics.** Use `np.linalg.eigh` (or `eigvalsh`) for symmetric matrices: it is faster, more
 accurate, returns real eigenvalues in **ascending** order and orthonormal eigenvectors (as columns).
@@ -749,7 +749,7 @@ eig(A^T A): [ 5. 45.] = s^2 = [45.  5.]
 
 Define the **truncated SVD** $A_k = \sum_{i=1}^k \sigma_i u_i v_i^\top$ (keep the top $k$ patterns).
 
-**Theorem (Eckart–Young 1936; Mirsky 1960).** For every matrix $B$ with $\operatorname{rank}(B) \le k$,
+**Theorem (Eckart–Young 1936; Mirsky 1960).** For every matrix $B$ with $\mathrm{rank}(B) \le k$,
 $$\lVert A - B\rVert_2 \ \ge\ \lVert A - A_k\rVert_2 = \sigma_{k+1},\qquad
 \lVert A - B\rVert_F \ \ge\ \lVert A - A_k\rVert_F = \sqrt{\textstyle\sum_{i > k}\sigma_i^2}.$$
 So the truncated SVD is the **best** rank-$k$ approximation in both the spectral and the Frobenius
@@ -757,7 +757,7 @@ norm (both norms are defined in §9).
 
 *Proof for the spectral norm.* First, $A - A_k = \sum_{i>k}\sigma_iu_iv_i^\top$ is itself an SVD whose
 largest singular value is $\sigma_{k+1}$, so $\lVert A - A_k\rVert_2 = \sigma_{k+1}$. Now let
-$\operatorname{rank}(B) \le k$. Its null space $\{x : Bx = 0\}$ has dimension at least $m - k$. The span of
+$\mathrm{rank}(B) \le k$. Its null space $\{x : Bx = 0\}$ has dimension at least $m - k$. The span of
 $v_1,\dots,v_{k+1}$ has dimension $k+1$. Two subspaces of $\mathbb{R}^m$ whose dimensions add up to more
 than $m$ intersect in a non-zero vector, so there is a unit vector $w = \sum_{i=1}^{k+1} c_i v_i$ with
 $Bw = 0$ and $\sum c_i^2 = 1$. Then
@@ -840,7 +840,7 @@ sparse.
 * `np.linalg.svd(A, full_matrices=False)` returns $U_{n\times p}$, $s$ (a 1-D array, descending),
   $V^\top_{p\times m}$ with $p = \min(n,m)$. Cost $O(nm\min(n,m))$.
 * `np.linalg.svd(A, compute_uv=False)` returns only singular values (cheaper).
-* Rebuilding $U_k\operatorname{diag}(s_k)V_k^\top$: write `(U[:, :k] * s[:k]) @ Vt[:k]` — broadcasting
+* Rebuilding $U_k\mathrm{diag}(s_k)V_k^\top$: write `(U[:, :k] * s[:k]) @ Vt[:k]` — broadcasting
   multiplies column $i$ of $U$ by $s_i$ (= right-multiplying by a diagonal matrix, §4.3). DRRS writes
   `(U * S) @ V.T` for the same reason.
 * **Randomised SVD** (`torch.svd_lowrank`, `sklearn.utils.extmath.randomized_svd`; Halko, Martinsson &
@@ -854,27 +854,27 @@ sparse.
 ## 8. The trace
 
 The **trace** of a square matrix is the sum of its diagonal entries:
-$\operatorname{tr}(M) = \sum_i M_{ii}$. It looks humble, but it is the tool that turns sums over
+$\mathrm{tr}(M) = \sum_i M_{ii}$. It looks humble, but it is the tool that turns sums over
 matrix entries into compact algebra.
 
 **Properties.**
 
-1. Linear: $\operatorname{tr}(A + B) = \operatorname{tr}A + \operatorname{tr}B$, $\operatorname{tr}(cA) = c\operatorname{tr}A$; and $\operatorname{tr}(A^\top) = \operatorname{tr}(A)$.
-2. **Cyclic:** for $A \in \mathbb{R}^{n\times m}$, $B\in\mathbb{R}^{m\times n}$, $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
+1. Linear: $\mathrm{tr}(A + B) = \mathrm{tr}A + \mathrm{tr}B$, $\mathrm{tr}(cA) = c\mathrm{tr}A$; and $\mathrm{tr}(A^\top) = \mathrm{tr}(A)$.
+2. **Cyclic:** for $A \in \mathbb{R}^{n\times m}$, $B\in\mathbb{R}^{m\times n}$, $\mathrm{tr}(AB) = \mathrm{tr}(BA)$
    (even though $AB$ is $n\times n$ and $BA$ is $m \times m$).
-   *Proof.* $\operatorname{tr}(AB) = \sum_i\sum_k A_{ik}B_{ki} = \sum_k\sum_i B_{ki}A_{ik} = \operatorname{tr}(BA)$. $\square$
-   Hence $\operatorname{tr}(ABC) = \operatorname{tr}(CAB) = \operatorname{tr}(BCA)$ — cyclic shifts only, not arbitrary reorderings.
-3. **Frobenius inner product:** $\operatorname{tr}(A^\top B) = \sum_{i,j} A_{ij}B_{ij} =: \langle A, B\rangle_F$,
+   *Proof.* $\mathrm{tr}(AB) = \sum_i\sum_k A_{ik}B_{ki} = \sum_k\sum_i B_{ki}A_{ik} = \mathrm{tr}(BA)$. $\square$
+   Hence $\mathrm{tr}(ABC) = \mathrm{tr}(CAB) = \mathrm{tr}(BCA)$ — cyclic shifts only, not arbitrary reorderings.
+3. **Frobenius inner product:** $\mathrm{tr}(A^\top B) = \sum_{i,j} A_{ij}B_{ij} =: \langle A, B\rangle_F$,
    the dot product of the two matrices viewed as long vectors. In particular
-   $\operatorname{tr}(A^\top A) = \sum_{ij} A_{ij}^2$.
-4. **Sum of eigenvalues:** $\operatorname{tr}(M) = \sum_i\lambda_i$. For symmetric $M = Q\Lambda Q^\top$:
-   $\operatorname{tr}(Q\Lambda Q^\top) = \operatorname{tr}(\Lambda Q^\top Q) = \operatorname{tr}\Lambda$ by cyclicity.
-5. A quadratic form is a trace: $x^\top M x = \operatorname{tr}(x^\top M x) = \operatorname{tr}(M x x^\top)$.
-6. $\operatorname{tr}(U^\top M U) = \sum_{f=1}^{k} U_{:,f}^\top M\, U_{:,f}$: the trace of $U^\top M U$
+   $\mathrm{tr}(A^\top A) = \sum_{ij} A_{ij}^2$.
+4. **Sum of eigenvalues:** $\mathrm{tr}(M) = \sum_i\lambda_i$. For symmetric $M = Q\Lambda Q^\top$:
+   $\mathrm{tr}(Q\Lambda Q^\top) = \mathrm{tr}(\Lambda Q^\top Q) = \mathrm{tr}\Lambda$ by cyclicity.
+5. A quadratic form is a trace: $x^\top M x = \mathrm{tr}(x^\top M x) = \mathrm{tr}(M x x^\top)$.
+6. $\mathrm{tr}(U^\top M U) = \sum_{f=1}^{k} U_{:,f}^\top M\, U_{:,f}$: the trace of $U^\top M U$
    sums the quadratic forms of the **columns** of $U$ (its diagonal entries are exactly those forms).
 
-Property 6 is what makes $\operatorname{tr}(U^\top L U)$ in SCMFDD meaningful (§11). Property 3 suggests
-a cheaper implementation: $\operatorname{tr}(U^\top (LU)) = \sum_{ij} U_{ij}(LU)_{ij}$, i.e.
+Property 6 is what makes $\mathrm{tr}(U^\top L U)$ in SCMFDD meaningful (§11). Property 3 suggests
+a cheaper implementation: $\mathrm{tr}(U^\top (LU)) = \sum_{ij} U_{ij}(LU)_{ij}$, i.e.
 `(U * (L @ U)).sum()`, which avoids forming the $k\times k$ matrix $U^\top L U$.
 
 ```python
@@ -915,12 +915,12 @@ norm (it fails homogeneity) but appears in sparsity problems.
 
 | Norm | Definition | In singular values | Interpretation |
 |---|---|---|---|
-| **Frobenius** $\lVert A\rVert_F$ | $\sqrt{\sum_{ij}A_{ij}^2} = \sqrt{\operatorname{tr}(A^\top A)}$ | $\sqrt{\sum_i \sigma_i^2}$ | the matrix as a long vector; least-squares error |
+| **Frobenius** $\lVert A\rVert_F$ | $\sqrt{\sum_{ij}A_{ij}^2} = \sqrt{\mathrm{tr}(A^\top A)}$ | $\sqrt{\sum_i \sigma_i^2}$ | the matrix as a long vector; least-squares error |
 | **Spectral** $\lVert A\rVert_2$ | $\max_{\lVert x\rVert_2 = 1}\lVert Ax\rVert_2$ | $\sigma_1$ | largest stretch; operator norm |
 | **Nuclear** $\lVert A\rVert_*$ | — | $\sum_i \sigma_i$ | convex surrogate of rank |
 
-*Proof of the singular-value formulas.* Frobenius: $\operatorname{tr}(A^\top A) = \operatorname{tr}(V\Sigma^\top U^\top U\Sigma V^\top)
-= \operatorname{tr}(\Sigma^\top\Sigma\, V^\top V) = \sum_i\sigma_i^2$. Spectral: for a unit $x$ write
+*Proof of the singular-value formulas.* Frobenius: $\mathrm{tr}(A^\top A) = \mathrm{tr}(V\Sigma^\top U^\top U\Sigma V^\top)
+= \mathrm{tr}(\Sigma^\top\Sigma\, V^\top V) = \sum_i\sigma_i^2$. Spectral: for a unit $x$ write
 $c = V^\top x$ (also a unit vector, as $V$ is orthogonal); then $\lVert Ax\rVert^2 = \lVert U\Sigma c\rVert^2 = \sum_i \sigma_i^2c_i^2 \le \sigma_1^2$,
 with equality at $x = v_1$. $\square$
 
@@ -955,7 +955,7 @@ model does, is secretly a nuclear-norm (low-rank-encouraging) penalty on the pro
 
 ### 9.3 Why the nuclear norm stands in for rank
 
-$\operatorname{rank}(X)$ is the number of non-zero singular values — the $\ell_0$ "norm" of the vector
+$\mathrm{rank}(X)$ is the number of non-zero singular values — the $\ell_0$ "norm" of the vector
 $\sigma(X)$. $\lVert X\rVert_*$ is the $\ell_1$ norm of the same vector. In ordinary sparse regression,
 $\ell_1$ (the lasso) replaces the intractable $\ell_0$ because it is the tightest convex function below
 $\ell_0$ on the unit box. The matrix analogue (Fazel 2002): on the set $\{X : \lVert X\rVert_2 \le 1\}$, the
@@ -977,11 +977,11 @@ it as a heuristic and evaluates by cross-validation.
 **Scalar warm-up: soft thresholding.** Minimise $f(x) = \tfrac12(x - y)^2 + \tau|x|$ over $x\in\mathbb{R}$
 ($\tau > 0$). For $x > 0$, $f'(x) = x - y + \tau = 0 \Rightarrow x = y - \tau$, valid if $y > \tau$; for $x < 0$,
 $x = y + \tau$, valid if $y < -\tau$; otherwise the minimum is at the kink $x = 0$. So the minimiser is the
-**soft-threshold** $\operatorname{sign}(y)\max(|y| - \tau, 0)$: shrink towards 0 by $\tau$, and kill anything
+**soft-threshold** $\mathrm{sign}(y)\max(|y| - \tau, 0)$: shrink towards 0 by $\tau$, and kill anything
 smaller than $\tau$.
 
-**Matrix version.** For $Y = U\operatorname{diag}(\sigma)V^\top$ define
-$$\mathcal{D}_\tau(Y) = U\operatorname{diag}\big(\max(\sigma_i - \tau, 0)\big)V^\top .$$
+**Matrix version.** For $Y = U\mathrm{diag}(\sigma)V^\top$ define
+$$\mathcal{D}_\tau(Y) = U\mathrm{diag}\big(\max(\sigma_i - \tau, 0)\big)V^\top .$$
 **Theorem (Cai, Candès & Shen 2010).** $\mathcal{D}_\tau(Y) = \arg\min_X\ \tfrac12\lVert X - Y\rVert_F^2 + \tau\lVert X\rVert_*$.
 
 *Why (sketch).* Both terms are unitarily invariant, and (by von Neumann's trace inequality) for fixed
@@ -1056,7 +1056,7 @@ A weighted undirected graph on $n$ nodes is a symmetric matrix $S \in \mathbb{R}
 $S_{ij} \ge 0$: the weight of the edge between $i$ and $j$ (0 = no edge). A similarity view *is* such a
 graph (a complete one); a kNN-sparsified view `S * knn_mask(S, k)` keeps only strong edges. The
 **degree** of node $i$ is $d_i = \sum_j S_{ij}$ — in matrix form $d = S\mathbf{1}$ — and the
-**degree matrix** is $D = \operatorname{diag}(d)$. With self-similarity $S_{ii} = 1$ included (as in the
+**degree matrix** is $D = \mathrm{diag}(d)$. With self-similarity $S_{ii} = 1$ included (as in the
 project's similarity matrices), $d_i \ge 1$.
 
 ### 10.2 The (unnormalised) graph Laplacian
@@ -1221,20 +1221,20 @@ thanks to the self-loops.
 
 ---
 
-## 11. The smoothness penalty $\operatorname{tr}(U^\top L U)$
+## 11. The smoothness penalty $\mathrm{tr}(U^\top L U)$
 
 ### 11.1 From one signal to an embedding matrix
 
 Let $U \in \mathbb{R}^{n\times k}$ hold a $k$-dimensional latent vector $u_i^\top$ (row $i$) for each of $n$
 drugs. By trace property 6 and §10.2 applied to each column $U_{:,f}$:
-$$\operatorname{tr}(U^\top L U) = \sum_{f=1}^k U_{:,f}^\top L\, U_{:,f} = \sum_{f=1}^k \frac12\sum_{i,j}S_{ij}(U_{if} - U_{jf})^2 = \frac12\sum_{i,j} S_{ij}\,\lVert u_i - u_j\rVert_2^2 .$$
+$$\mathrm{tr}(U^\top L U) = \sum_{f=1}^k U_{:,f}^\top L\, U_{:,f} = \sum_{f=1}^k \frac12\sum_{i,j}S_{ij}(U_{if} - U_{jf})^2 = \frac12\sum_{i,j} S_{ij}\,\lVert u_i - u_j\rVert_2^2 .$$
 And with the normalised Laplacian (what SCMFDD's code uses):
-$$\operatorname{tr}(U^\top L_{\text{sym}} U) = \frac12\sum_{i,j}S_{ij}\left\lVert \frac{u_i}{\sqrt{d_i}} - \frac{u_j}{\sqrt{d_j}}\right\rVert_2^2 .$$
+$$\mathrm{tr}(U^\top L_{\text{sym}} U) = \frac12\sum_{i,j}S_{ij}\left\lVert \frac{u_i}{\sqrt{d_i}} - \frac{u_j}{\sqrt{d_j}}\right\rVert_2^2 .$$
 
 **What it penalises.** The latent vectors of *similar* drugs being *far apart*. Each pair contributes its
 squared distance, weighted by its similarity: two drugs with similarity 0.9 and very different latent
 factors cost a lot; two unrelated drugs (similarity 0) can be anywhere. Minimising
-$$\underbrace{\lVert A - UV^\top\rVert_F^2}_{\text{fit known links}} + \underbrace{\mu(\lVert U\rVert_F^2 + \lVert V\rVert_F^2)}_{\text{small factors}} + \underbrace{\lambda\big(\operatorname{tr}(U^\top L_rU) + \operatorname{tr}(V^\top L_dV)\big)}_{\text{similar} \Rightarrow \text{close}}$$
+$$\underbrace{\lVert A - UV^\top\rVert_F^2}_{\text{fit known links}} + \underbrace{\mu(\lVert U\rVert_F^2 + \lVert V\rVert_F^2)}_{\text{small factors}} + \underbrace{\lambda\big(\mathrm{tr}(U^\top L_rU) + \mathrm{tr}(V^\top L_dV)\big)}_{\text{similar} \Rightarrow \text{close}}$$
 (SCMFDD, Zhang et al. 2018) therefore trades off fitting the observed links against keeping the
 factor matrices **smooth on the similarity graphs**. A drug with *no* known links receives no signal from
 the first term, but the third term pulls its factors towards those of its similar drugs, so it inherits
@@ -1248,15 +1248,15 @@ makes the penalty insensitive to how many neighbours a drug has (hubs would othe
 * $u = (1, 3, 5)$: $(1-3)^2 + (3-5)^2 = 8$ — a smooth ramp is cheaper than a jump of the same total size,
   because squares punish big differences.
 * Two-dimensional $U = \begin{pmatrix}1&0\\1&0\\5&2\end{pmatrix}$:
-  $\operatorname{tr}(U^\top L U) = \lVert u_1 - u_2\rVert^2 + \lVert u_2 - u_3\rVert^2 = 0 + (16 + 4) = 20$.
+  $\mathrm{tr}(U^\top L U) = \lVert u_1 - u_2\rVert^2 + \lVert u_2 - u_3\rVert^2 = 0 + (16 + 4) = 20$.
 
 ### 11.2 The gradient: smoothing is propagation
 
-**Fact.** For symmetric $L$, $\nabla_U \operatorname{tr}(U^\top L U) = 2LU$.
+**Fact.** For symmetric $L$, $\nabla_U \mathrm{tr}(U^\top L U) = 2LU$.
 
-*Proof.* Perturb $U$ by $E$: $\operatorname{tr}((U+E)^\top L(U+E)) - \operatorname{tr}(U^\top LU) = \operatorname{tr}(E^\top LU) + \operatorname{tr}(U^\top LE) + \operatorname{tr}(E^\top LE)$.
-By transpose invariance and symmetry, $\operatorname{tr}(U^\top LE) = \operatorname{tr}(E^\top L^\top U) = \operatorname{tr}(E^\top LU)$.
-So the first-order change is $2\operatorname{tr}(E^\top LU) = \langle E, 2LU\rangle_F$, i.e. the gradient is $2LU$. $\square$
+*Proof.* Perturb $U$ by $E$: $\mathrm{tr}((U+E)^\top L(U+E)) - \mathrm{tr}(U^\top LU) = \mathrm{tr}(E^\top LU) + \mathrm{tr}(U^\top LE) + \mathrm{tr}(E^\top LE)$.
+By transpose invariance and symmetry, $\mathrm{tr}(U^\top LE) = \mathrm{tr}(E^\top L^\top U) = \mathrm{tr}(E^\top LU)$.
+So the first-order change is $2\mathrm{tr}(E^\top LU) = \langle E, 2LU\rangle_F$, i.e. the gradient is $2LU$. $\square$
 
 A gradient step on the penalty alone, with step size $\eta$ and weight $\lambda$, is
 $$U \leftarrow U - 2\eta\lambda L_{\text{sym}}U = (1 - 2\eta\lambda)\,U + 2\eta\lambda\,\tilde S\, U,$$
@@ -1436,7 +1436,7 @@ Line by line against §9.4: `np.block` builds the heterogeneous matrix; `Om` is 
 including unknown drug–disease pairs and zero similarities, is treated as *missing*, and every non-zero
 as observed; `delta` is the Cai–Candès–Shen step $1.2/p$; `tau` scales with $\sigma_1(T)$ so that the
 threshold is meaningful whatever the matrix's magnitude; `torch.svd_lowrank` is the randomised SVD of
-§7.6 returning $U$, $S$ and $V$ (not $V^\top$), so $\mathcal{D}_\tau(Y) = U\operatorname{diag}(S)V^\top$ is
+§7.6 returning $U$, $S$ and $V$ (not $V^\top$), so $\mathcal{D}_\tau(Y) = U\mathrm{diag}(S)V^\top$ is
 `(U * S) @ V.T`; on the first iteration $Y = 0$, so the code factorises $T$ instead to obtain sensible
 singular vectors. The prediction is the completed off-diagonal block: drug–disease scores borrowed from
 the low-rank structure *shared* with the similarity blocks.
@@ -1517,7 +1517,7 @@ i.e. $D_1^{-1/2}(G_1G_2^\top)D_2^{-1/2}$ — a symmetric-normalisation of the dr
 | "$L = D - S$ changes with self-loops" | self-loops cancel in $L$ (not in $D^{-1/2}SD^{-1/2}$!) | know which operator your code uses |
 | Forgetting the ½ in $\tfrac12\sum_{i,j}$ | ordered pairs count each edge twice | $\tfrac12\sum_{i,j}$ = $\sum_{\text{edges}}$ |
 | "The Laplacian penalty alone gives good factors" | its minimiser is constant on components | always pair with a data-fit term |
-| Computing $\operatorname{tr}(U^\top L U)$ by forming a big matrix | wasteful | `(U * (L @ U)).sum()` |
+| Computing $\mathrm{tr}(U^\top L U)$ by forming a big matrix | wasteful | `(U * (L @ U)).sum()` |
 
 ---
 
@@ -1604,7 +1604,7 @@ $U \in \mathbb{R}^{593\times 128}$ can never reach rank 238.
 <details><summary>Solution</summary>
 
 $P$: column 2 = 2 × column 1 → rank 1. $Q$: row 3 = row 1 + row 2, rows 1 and 2 independent → rank 2.
-$xy^\top$: an outer product of non-zero vectors → rank 1. $\operatorname{rank}(UV^\top) \le \operatorname{rank}(U) \le 128 < 238$
+$xy^\top$: an outer product of non-zero vectors → rank 1. $\mathrm{rank}(UV^\top) \le \mathrm{rank}(U) \le 128 < 238$
 (§5.1, consequence 2); SCMFDD with $k = 128$ therefore cannot reproduce the training matrix exactly —
 which is intended: it must generalise.
 
@@ -1632,7 +1632,7 @@ $\det(N - \lambda I) = (4-\lambda)(3-\lambda) - 2 = \lambda^2 - 7\lambda + 10 = 
 $\lambda = 5$: $(N - 5I)v = \begin{pmatrix}-1&1\\2&-2\end{pmatrix}v = 0 \Rightarrow v = (1, 1)$.
 $\lambda = 2$: $\begin{pmatrix}2&1\\2&1\end{pmatrix}v = 0 \Rightarrow v = (1, -2)$.
 $(1,1)\cdot(1,-2) = -1 \ne 0$: **not orthogonal**. The eigenvalues are real here, but orthogonality of
-eigenvectors is guaranteed only for symmetric matrices. (Check: $\operatorname{tr} N = 7 = 5 + 2$, $\det N = 10 = 5\cdot2$.)
+eigenvectors is guaranteed only for symmetric matrices. (Check: $\mathrm{tr} N = 7 = 5 + 2$, $\det N = 10 = 5\cdot2$.)
 
 ```python
 import numpy as np
@@ -1732,16 +1732,16 @@ Output:
 
 </details>
 
-**Exercise 9 [M].** Show that $\operatorname{tr}(U^\top L U) \ge 0$ for any $U$ when $S \ge 0$, and that it is 0
+**Exercise 9 [M].** Show that $\mathrm{tr}(U^\top L U) \ge 0$ for any $U$ when $S \ge 0$, and that it is 0
 iff all rows of $U$ are equal within each connected component. Then express it through the eigenpairs
 $(\lambda_i, q_i)$ of $L$.
 
 <details><summary>Solution</summary>
 
-By §11, $\operatorname{tr}(U^\top L U) = \tfrac12\sum_{ij}S_{ij}\lVert u_i - u_j\rVert^2$, a sum of non-negative terms. It is 0
+By §11, $\mathrm{tr}(U^\top L U) = \tfrac12\sum_{ij}S_{ij}\lVert u_i - u_j\rVert^2$, a sum of non-negative terms. It is 0
 iff $u_i = u_j$ whenever $S_{ij} > 0$, i.e. (following paths) iff $u$ is constant on each connected component.
 Spectrally, write $L = \sum_i \lambda_i q_iq_i^\top$:
-$\operatorname{tr}(U^\top LU) = \sum_i \lambda_i \operatorname{tr}(U^\top q_iq_i^\top U) = \sum_i \lambda_i \lVert q_i^\top U\rVert_2^2$.
+$\mathrm{tr}(U^\top LU) = \sum_i \lambda_i \mathrm{tr}(U^\top q_iq_i^\top U) = \sum_i \lambda_i \lVert q_i^\top U\rVert_2^2$.
 The penalty charges each "graph frequency" component of $U$ by its eigenvalue: smooth components
 ($\lambda \approx 0$) are free, oscillating ones (large $\lambda$) are expensive — a low-pass filter.
 
@@ -1863,7 +1863,7 @@ illustration.
 
 **Exercise 13 [P].** Build a toy SCMFDD: 3 drugs × 4 diseases where drug 2 has **no** known links but is very
 similar to drug 0. Minimise
-$\lVert A - UV^\top\rVert_F^2 + \mu(\lVert U\rVert_F^2 + \lVert V\rVert_F^2) + \lambda\operatorname{tr}(U^\top L_rU)$ with hand-written
+$\lVert A - UV^\top\rVert_F^2 + \mu(\lVert U\rVert_F^2 + \lVert V\rVert_F^2) + \lambda\mathrm{tr}(U^\top L_rU)$ with hand-written
 gradients for $\lambda \in \{0, 2, 10\}$ and inspect drug 2's predicted row.
 
 <details><summary>Solution</summary>
@@ -2042,10 +2042,10 @@ hundreds of thousands of unknown cells from a couple of thousand known ones.
   low rank with side information: DRRS completes a block matrix that includes the similarity matrices, SCMFDD adds
   Laplacian smoothness, and MV-HGAT's bilinear decoder (rank ≤ 192) is complemented by a similarity-propagation head.
 
-### Q3. What does $\operatorname{tr}(U^\top L U)$ penalise?
+### Q3. What does $\mathrm{tr}(U^\top L U)$ penalise?
 
 **Short answer.** Differences between the latent vectors of similar entities:
-$$\operatorname{tr}(U^\top L U) = \tfrac12\sum_{i,j}S_{ij}\,\lVert u_i - u_j\rVert_2^2 \quad\text{for } L = D - S,$$
+$$\mathrm{tr}(U^\top L U) = \tfrac12\sum_{i,j}S_{ij}\,\lVert u_i - u_j\rVert_2^2 \quad\text{for } L = D - S,$$
 so each pair of drugs (or diseases) pays its similarity times the squared distance between their latent factor
 vectors. It is a **smoothness** penalty: latent factors must vary slowly over the similarity graph. With the
 normalised Laplacian used in SCMFDD's code, the vectors are first divided by $\sqrt{d_i}$:
@@ -2057,7 +2057,7 @@ $\tfrac12\sum_{ij}S_{ij}\lVert u_i/\sqrt{d_i} - u_j/\sqrt{d_j}\rVert^2$, which s
   (trace property 6), and each equals $\tfrac12\sum_{ij}S_{ij}(U_{if} - U_{jf})^2$ (§10.2). Summing over $f$ turns the
   squared differences of coordinates into squared Euclidean distances of rows (§11.1).
 * *Worked example.* Path graph, $u = (1, 1, 5)$ costs 16, $(1, 3, 5)$ costs 8, $(1,1,1)$ costs 0 (§11.1).
-* *Spectral view.* $\operatorname{tr}(U^\top LU) = \sum_i\lambda_i\lVert q_i^\top U\rVert^2$ (Exercise 9): components of $U$ along
+* *Spectral view.* $\mathrm{tr}(U^\top LU) = \sum_i\lambda_i\lVert q_i^\top U\rVert^2$ (Exercise 9): components of $U$ along
   smooth eigenvectors of $L$ (small $\lambda$) cost little, oscillating ones cost a lot — a low-pass filter on the
   graph. The constant direction is free, so the penalty never shrinks $U$ as a whole (that is the job of the
   $\mu\lVert U\rVert_F^2$ term).
@@ -2082,29 +2082,29 @@ $\tfrac12\sum_{ij}S_{ij}\lVert u_i/\sqrt{d_i} - u_j/\sqrt{d_j}\rVert^2$, which s
 | column mixing | $(AS)_{:,j} = \sum_l S_{lj} A_{:,l}$ | `(K @ Am.T).T`, `R @ Md` |
 | outer-product view | $AB = \sum_k A_{:,k}B_{k,:}$ | $UV^\top = \sum_f u_fv_f^\top$ |
 | transpose | $(AB)^\top = B^\top A^\top$ | `A.T` for disease←drug messages |
-| diagonal scaling | $\operatorname{diag}(d)M$ rows, $M\operatorname{diag}(d)$ columns | `S * d[:, None] * d[None, :]` |
+| diagonal scaling | $\mathrm{diag}(d)M$ rows, $M\mathrm{diag}(d)$ columns | `S * d[:, None] * d[None, :]` |
 | Gram matrix | $GG^\top \succeq 0$ | `G @ G.T` in `jaccard` |
-| rank | # independent columns = # non-zero $\sigma$; $\operatorname{rank}(UV^\top)\le k$ | rank(A) = 238 |
+| rank | # independent columns = # non-zero $\sigma$; $\mathrm{rank}(UV^\top)\le k$ | rank(A) = 238 |
 | eigen | $Mv = \lambda v$; symmetric ⇒ $M = Q\Lambda Q^\top$, real $\lambda$, orthonormal $Q$ | `eigh` |
 | Rayleigh | $\lambda_{\min} \le x^\top Mx/x^\top x \le \lambda_{\max}$ | PSD test, spectral bounds |
 | SVD | $A = U\Sigma V^\top = \sum\sigma_iu_iv_i^\top$; $\sigma_i^2 = \lambda_i(A^\top A)$ | DRRS |
 | Eckart–Young | best rank-$k$: $A_k$; errors $\sigma_{k+1}$ (2-norm), $\sqrt{\sum_{i>k}\sigma_i^2}$ (F) | low-rank recommenders |
-| Frobenius | $\lVert A\rVert_F^2 = \sum A_{ij}^2 = \operatorname{tr}(A^\top A) = \sum\sigma_i^2$ | SCMFDD fit term |
+| Frobenius | $\lVert A\rVert_F^2 = \sum A_{ij}^2 = \mathrm{tr}(A^\top A) = \sum\sigma_i^2$ | SCMFDD fit term |
 | spectral | $\lVert A\rVert_2 = \sigma_1$ | DRRS `tau` |
 | nuclear | $\lVert A\rVert_* = \sum\sigma_i = \min_{UV^\top = A}\tfrac12(\lVert U\rVert_F^2 + \lVert V\rVert_F^2)$ | matrix completion |
 | SVT | $\mathcal{D}_\tau(Y) = U(\Sigma - \tau)_+V^\top = \arg\min\tfrac12\lVert X - Y\rVert_F^2 + \tau\lVert X\rVert_*$ | `DRRS` loop |
-| trace | $\operatorname{tr}(AB) = \operatorname{tr}(BA)$; $\operatorname{tr}(A^\top B) = \sum A_{ij}B_{ij}$; $\operatorname{tr} = \sum\lambda$ | `torch.trace` |
+| trace | $\mathrm{tr}(AB) = \mathrm{tr}(BA)$; $\mathrm{tr}(A^\top B) = \sum A_{ij}B_{ij}$; $\mathrm{tr} = \sum\lambda$ | `torch.trace` |
 | degree / Laplacian | $d = S\mathbf1$, $L = D - S$, $x^\top Lx = \tfrac12\sum S_{ij}(x_i - x_j)^2$, $L\mathbf1 = 0$ | — |
 | sym. normalisation | $\tilde S = D^{-1/2}SD^{-1/2}$, eigenvalues in $[-1, 1]$, top eigvec $\propto\sqrt d$ | `sym_norm` |
 | normalised Laplacian | $L_{\text{sym}} = I - \tilde S$, eigenvalues in $[0, 2]$ | `SCMFDD` `Lr`, `Ld` |
 | random-walk normalisation | $P = D^{-1}S$, row-stochastic, same eigenvalues as $\tilde S$ | `knn_kernel` |
-| smoothness | $\operatorname{tr}(U^\top LU) = \tfrac12\sum S_{ij}\lVert u_i - u_j\rVert^2$; gradient $2LU$ | `SCMFDD` |
+| smoothness | $\mathrm{tr}(U^\top LU) = \tfrac12\sum S_{ij}\lVert u_i - u_j\rVert^2$; gradient $2LU$ | `SCMFDD` |
 | bilinear decoder | $\text{logit}_{ij} = h_i^\top Wh_j$, all pairs $H_rWH_d^\top$, rank ≤ width | `MVHGAT.forward` |
 
 **Five sentences to remember.** (1) Left multiplication mixes rows, right multiplication mixes columns.
 (2) Symmetric matrices are sums of perpendicular rank-1 pieces weighted by real eigenvalues. (3) Every matrix is a
 sum of rank-1 pieces weighted by singular values, and truncating that sum is the best low-rank approximation.
-(4) Normalise graphs by degree so propagation averages instead of sums and stays stable. (5) $\operatorname{tr}(U^\top LU)$
+(4) Normalise graphs by degree so propagation averages instead of sums and stays stable. (5) $\mathrm{tr}(U^\top LU)$
 is the total disagreement of embeddings across similarity edges; its gradient is propagation.
 
 ---
@@ -2147,7 +2147,7 @@ All links were checked to resolve when this unit was written. **Free** unless ma
 * Sheldon Axler, [*Linear Algebra Done Right*, 4th ed.](https://linear.axler.net/) — **Free** (open access).
   The rigorous, proof-based treatment of the spectral theorem and SVD for when you want full proofs.
 * [*The Matrix Cookbook* (Petersen & Pedersen)](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf) — **Free.**
-  Look-up table of identities and matrix derivatives (e.g. $\nabla_U\operatorname{tr}(U^\top LU)$).
+  Look-up table of identities and matrix derivatives (e.g. $\nabla_U\mathrm{tr}(U^\top LU)$).
 * Jeremy Kun, [*Singular Value Decomposition* (blog series)](https://jeremykun.com/2016/04/18/singular-value-decomposition-part-1-perspectives-on-linear-algebra/) — **Free.**
   A programmer's derivation of the SVD from scratch.
 
@@ -2189,7 +2189,7 @@ All links were checked to resolve when this unit was written. **Free** unless ma
 * **characteristic polynomial** — $\det(M - \lambda I)$; its roots are the eigenvalues.
 * **column space / row space** — span of the columns / rows.
 * **convex envelope** — the largest convex function lying below a given function on a set.
-* **degree / degree matrix** — $d_i = \sum_jS_{ij}$; $D = \operatorname{diag}(d)$.
+* **degree / degree matrix** — $d_i = \sum_jS_{ij}$; $D = \mathrm{diag}(d)$.
 * **Dirichlet energy** — $x^\top Lx$, the roughness of a node signal on a graph.
 * **eigenvalue / eigenvector** — $Mv = \lambda v$, $v \ne 0$.
 * **Eckart–Young–Mirsky theorem** — truncated SVD is the best rank-$k$ approximation (spectral and Frobenius norms).
@@ -2217,7 +2217,7 @@ All links were checked to resolve when this unit was written. **Free** unless ma
 * **row-stochastic** — non-negative with rows summing to 1.
 * **singular value decomposition (SVD)** — $A = U\Sigma V^\top$ with orthogonal $U, V$ and non-negative diagonal $\Sigma$.
 * **singular value thresholding (SVT)** — shrinking singular values by $\tau$ (prox of the nuclear norm); the matrix-completion algorithm built on it.
-* **soft thresholding** — $\operatorname{sign}(y)\max(|y| - \tau, 0)$.
+* **soft thresholding** — $\mathrm{sign}(y)\max(|y| - \tau, 0)$.
 * **spectral norm** — $\sigma_1$, the largest stretch of a unit vector.
 * **spectral theorem** — real symmetric matrices have real eigenvalues and an orthonormal eigenbasis.
 * **symmetric matrix** — $M = M^\top$.

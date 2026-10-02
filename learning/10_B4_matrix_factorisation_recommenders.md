@@ -18,7 +18,7 @@ After this chapter you will be able to:
 3. **Justify** the low-rank assumption with the SVD and the Eckart–Young theorem, and **compute** a best rank-$k$ approximation.
 4. **Derive** the matrix-factorisation objective from a probabilistic model, and **derive and implement** both alternating least squares (ALS) and stochastic gradient descent (SGD) for it, including the weighted (implicit-feedback) version.
 5. **Derive** the BPR loss from a Bayesian argument and **relate** it to AUC.
-6. **Prove** the identity $\operatorname{tr}(U^\top LU) = \tfrac12\sum_{ij}S_{ij}\lVert\mathbf u_i-\mathbf u_j\rVert^2$, and **explain** how SCMFDD uses it to give cold entities sensible factors.
+6. **Prove** the identity $\mathrm{tr}(U^\top LU) = \tfrac12\sum_{ij}S_{ij}\lVert\mathbf u_i-\mathbf u_j\rVert^2$, and **explain** how SCMFDD uses it to give cold entities sensible factors.
 7. **State and sketch the proof** that the nuclear norm is the convex envelope of rank on the spectral-norm unit ball; **derive** the singular value thresholding (SVT) operator and **implement** the Cai–Candès–Shen algorithm.
 8. **Describe** DRRS's heterogeneous block matrix, BNNR, inductive matrix completion and NIMCGCN, and **show** that a bilinear decoder is a learned matrix factorisation.
 9. **Read** the project's `SCMFDD`, `DRRS`, `NIMCGCN` and MV-HGAT decoder code line by line and **interpret** their Fdataset results.
@@ -158,11 +158,11 @@ Where it fails: unique drugs with idiosyncratic uses, and noise. Low rank is an 
 
 Every real $n\times m$ matrix has a **singular value decomposition**
 $$A = U_A\Sigma V_A^\top = \sum_{i=1}^{r}\sigma_i\,\mathbf u_i\mathbf v_i^\top,\qquad \sigma_1\ge\sigma_2\ge\dots\ge\sigma_r>0,$$
-with orthonormal columns in $U_A$, $V_A$ and $r=\operatorname{rank}(A)$.
+with orthonormal columns in $U_A$, $V_A$ and $r=\mathrm{rank}(A)$.
 
 **Eckart–Young–Mirsky theorem.** For any $k<r$, the truncated SVD $A_k=\sum_{i\le k}\sigma_i\mathbf u_i\mathbf v_i^\top$ is a best rank-$k$ approximation in both the Frobenius and spectral norms, with
-$$\min_{\operatorname{rank}(X)\le k}\lVert A-X\rVert_F = \lVert A-A_k\rVert_F = \sqrt{\textstyle\sum_{i>k}\sigma_i^2},\qquad \min_{\operatorname{rank}(X)\le k}\lVert A-X\rVert_2 = \sigma_{k+1}.$$
-*Sketch (spectral norm).* If $\operatorname{rank}(X)\le k$, its null space has dimension at least $m-k$, so it intersects the $(k+1)$-dimensional span of $\mathbf v_1,\dots,\mathbf v_{k+1}$ in some unit vector $\mathbf w$. Then $\lVert(A-X)\mathbf w\rVert = \lVert A\mathbf w\rVert\ge\sigma_{k+1}$. $\square$ (The Frobenius case follows from a similar argument applied to each $\sigma_{k+i}$, or from Weyl's inequalities.)
+$$\min_{\mathrm{rank}(X)\le k}\lVert A-X\rVert_F = \lVert A-A_k\rVert_F = \sqrt{\textstyle\sum_{i>k}\sigma_i^2},\qquad \min_{\mathrm{rank}(X)\le k}\lVert A-X\rVert_2 = \sigma_{k+1}.$$
+*Sketch (spectral norm).* If $\mathrm{rank}(X)\le k$, its null space has dimension at least $m-k$, so it intersects the $(k+1)$-dimensional span of $\mathbf v_1,\dots,\mathbf v_{k+1}$ in some unit vector $\mathbf w$. Then $\lVert(A-X)\mathbf w\rVert = \lVert A\mathbf w\rVert\ge\sigma_{k+1}$. $\square$ (The Frobenius case follows from a similar argument applied to each $\sigma_{k+i}$, or from Weyl's inequalities.)
 
 #### Worked example 4.1
 
@@ -353,19 +353,19 @@ Plain MF knows nothing about chemistry or phenotypes. Side information enters na
 $$\mathcal R(U) = \frac12\sum_{i,i'}S_{ii'}\lVert\mathbf u_i-\mathbf u_{i'}\rVert^2 .$$
 
 **Lemma (Laplacian quadratic form).** For symmetric $S\ge0$ with degree matrix $D$ and Laplacian $L=D-S$,
-$$\frac12\sum_{i,i'}S_{ii'}\lVert\mathbf u_i-\mathbf u_{i'}\rVert^2 = \operatorname{tr}(U^\top LU).$$
-*Proof.* Expand: $\tfrac12\sum_{ii'}S_{ii'}(\lVert\mathbf u_i\rVert^2+\lVert\mathbf u_{i'}\rVert^2-2\mathbf u_i^\top\mathbf u_{i'}) = \sum_i d_i\lVert\mathbf u_i\rVert^2 - \sum_{ii'}S_{ii'}\mathbf u_i^\top\mathbf u_{i'} = \operatorname{tr}(U^\top DU)-\operatorname{tr}(U^\top SU)$. $\square$
+$$\frac12\sum_{i,i'}S_{ii'}\lVert\mathbf u_i-\mathbf u_{i'}\rVert^2 = \mathrm{tr}(U^\top LU).$$
+*Proof.* Expand: $\tfrac12\sum_{ii'}S_{ii'}(\lVert\mathbf u_i\rVert^2+\lVert\mathbf u_{i'}\rVert^2-2\mathbf u_i^\top\mathbf u_{i'}) = \sum_i d_i\lVert\mathbf u_i\rVert^2 - \sum_{ii'}S_{ii'}\mathbf u_i^\top\mathbf u_{i'} = \mathrm{tr}(U^\top DU)-\mathrm{tr}(U^\top SU)$. $\square$
 
 **Worked example 9.1.** Three drugs with $S_{01}=1$, $S_{12}=2$ (others 0) and one-dimensional factors $\mathbf u=(1,3,0)$. Directly: $1\cdot(1-3)^2+2\cdot(3-0)^2 = 4+18=22$. Via the Laplacian: $D=\mathrm{diag}(1,3,2)$, $\mathbf u^\top D\mathbf u = 1+27+0 = 28$, $\mathbf u^\top S\mathbf u = 2(1\cdot1\cdot3 + 2\cdot3\cdot0) = 6$, so $\mathbf u^\top L\mathbf u = 22$. ✓
 
-**What $\operatorname{tr}(U^\top LU)$ penalises:** differences between the factor vectors of *strongly similar* entities, weighted by their similarity. Dissimilar pairs ($S=0$) are unconstrained. The **normalised** version $\operatorname{tr}(U^\top(I-D^{-1/2}SD^{-1/2})U) = \tfrac12\sum S_{ii'}\lVert\mathbf u_i/\sqrt{d_i}-\mathbf u_{i'}/\sqrt{d_{i'}}\rVert^2$ compares degree-scaled factors, so high-degree entities do not dominate the penalty. This is the same smoothness term as label propagation (Chapter 09, Section 4.2) — there it smoothed scores, here it smooths latent factors.
+**What $\mathrm{tr}(U^\top LU)$ penalises:** differences between the factor vectors of *strongly similar* entities, weighted by their similarity. Dissimilar pairs ($S=0$) are unconstrained. The **normalised** version $\mathrm{tr}(U^\top(I-D^{-1/2}SD^{-1/2})U) = \tfrac12\sum S_{ii'}\lVert\mathbf u_i/\sqrt{d_i}-\mathbf u_{i'}/\sqrt{d_{i'}}\rVert^2$ compares degree-scaled factors, so high-degree entities do not dominate the penalty. This is the same smoothness term as label propagation (Chapter 09, Section 4.2) — there it smoothed scores, here it smooths latent factors.
 
 ### 9.2 The SCMFDD objective
 
 Zhang et al. (2018) proposed **SCMFDD** (similarity-constrained MF for drug–disease associations):
 $$\min_{X,Y}\ \frac12\sum_{ij}(a_{ij}-\mathbf x_i\mathbf y_j^\top)^2 + \frac\mu2\Big(\sum_i\lVert\mathbf x_i\rVert^2+\sum_j\lVert\mathbf y_j\rVert^2\Big) + \frac\lambda2\sum_{ij}\lVert\mathbf x_i-\mathbf x_j\rVert^2w^d_{ij} + \frac\lambda2\sum_{ij}\lVert\mathbf y_i-\mathbf y_j\rVert^2w^s_{ij},$$
 with drug factors $\mathbf x_i$ (rows of $X$), disease factors $\mathbf y_j$, a drug similarity $W^d$ computed from drug features (substructures, targets, enzymes, pathways, drug–drug interactions) and a disease semantic similarity $W^s$. By the lemma, this equals
-$$\tfrac12\lVert A-XY^\top\rVert_F^2+\tfrac\mu2(\lVert X\rVert_F^2+\lVert Y\rVert_F^2)+\lambda\operatorname{tr}(X^\top L_dX)+\lambda\operatorname{tr}(Y^\top L_sY).$$
+$$\tfrac12\lVert A-XY^\top\rVert_F^2+\tfrac\mu2(\lVert X\rVert_F^2+\lVert Y\rVert_F^2)+\lambda\mathrm{tr}(X^\top L_dX)+\lambda\mathrm{tr}(Y^\top L_sY).$$
 Note: the sum is over **all** cells (AMAN). The authors tuned $\lambda,\mu\in\{2^{-3},\dots,2^3\}$ and the dimension $k$ as a percentage of the matrix size, reporting the best AUPR around $k=45\%$, $\mu=1$, $\lambda=4$ on their datasets.
 
 ### 9.3 Deriving the updates
@@ -376,7 +376,7 @@ Setting it to zero gives a closed-form row update (the paper derives it as one N
 $$\mathbf x_i = \Big(\mathbf a_iY+\lambda\sum_j(w^d_{ij}+w^d_{ji})\mathbf x_j\Big)\Big(Y^\top Y+\mu I+\lambda\sum_j(w^d_{ij}+w^d_{ji})I\Big)^{-1}.$$
 **Read it:** the new factor of drug $i$ is a blend of "what its own associations say" ($\mathbf a_iY$) and "the factors of its similar drugs" ($\sum_jw_{ij}\mathbf x_j$). For a **cold drug** ($\mathbf a_i=\mathbf 0$), $\mathbf x_i$ becomes a shrunk, similarity-weighted average of its neighbours' factors — exactly what plain MF cannot do (plain MF gives $\mathbf x_i=\mathbf 0$).
 
-**Whole-matrix form (Sylvester equation).** For $\lVert A-UV^\top\rVert_F^2+\mu\lVert U\rVert_F^2+\lambda\operatorname{tr}(U^\top L_rU)$ (no ½ factors) and fixed $V$, the gradient in $U$ is $-2(A-UV^\top)V+2\mu U+2\lambda L_rU$. Setting it to zero:
+**Whole-matrix form (Sylvester equation).** For $\lVert A-UV^\top\rVert_F^2+\mu\lVert U\rVert_F^2+\lambda\mathrm{tr}(U^\top L_rU)$ (no ½ factors) and fixed $V$, the gradient in $U$ is $-2(A-UV^\top)V+2\mu U+2\lambda L_rU$. Setting it to zero:
 $$\lambda L_rU + U(V^\top V+\mu I) = AV,$$
 a **Sylvester equation** $aX+Xb=q$ that `scipy.linalg.solve_sylvester` solves exactly. Alternating this with the analogous $V$-equation is graph-regularised ALS (Section 15, example 6).
 
@@ -391,7 +391,7 @@ In the synthetic experiment of Section 15, 12 drugs lose all their links. Plain 
 ### 10.1 The problem
 
 Observe the entries $M_{ij}$ for $(i,j)\in\Omega$ of an unknown $n_1\times n_2$ matrix, and assume $M$ has low rank. Let $\mathcal P_\Omega$ be the projection that keeps the observed entries and zeroes the rest. The natural formulation is
-$$\min_X\ \operatorname{rank}(X)\quad\text{s.t.}\quad\mathcal P_\Omega(X)=\mathcal P_\Omega(M).$$
+$$\min_X\ \mathrm{rank}(X)\quad\text{s.t.}\quad\mathcal P_\Omega(X)=\mathcal P_\Omega(M).$$
 This is NP-hard in general: rank is a non-convex, discontinuous, combinatorial function (it counts non-zero singular values).
 
 ### 10.2 The nuclear norm
@@ -406,15 +406,15 @@ a convex (semidefinite-representable) problem.
 
 The **convex envelope** of a function $f$ on a convex set $C$ is the largest convex function $g$ with $g\le f$ on $C$ — the tightest convex under-approximation.
 
-**Theorem (Fazel 2002).** On the set $C=\{X:\lVert X\rVert_2\le1\}$ (spectral norm at most 1), the convex envelope of $\operatorname{rank}(X)$ is $\lVert X\rVert_*$.
+**Theorem (Fazel 2002).** On the set $C=\{X:\lVert X\rVert_2\le1\}$ (spectral norm at most 1), the convex envelope of $\mathrm{rank}(X)$ is $\lVert X\rVert_*$.
 
-*Proof sketch.* A standard fact is that the convex envelope of $f$ equals its **biconjugate** $f^{**}$, where $f^*(Y) = \sup_{X\in C}\big(\langle X,Y\rangle-f(X)\big)$ and $\langle X,Y\rangle=\operatorname{tr}(X^\top Y)$.
+*Proof sketch.* A standard fact is that the convex envelope of $f$ equals its **biconjugate** $f^{**}$, where $f^*(Y) = \sup_{X\in C}\big(\langle X,Y\rangle-f(X)\big)$ and $\langle X,Y\rangle=\mathrm{tr}(X^\top Y)$.
 
-*Step 1: compute $f^*$.* By von Neumann's trace inequality, $\langle X,Y\rangle\le\sum_i\sigma_i(X)\sigma_i(Y)$, with equality when $X$ and $Y$ share singular vectors. So it suffices to choose singular values $\sigma_i(X)\in[0,1]$. If $\operatorname{rank}X = r$, the best is $\sigma_i(X)=1$ for the $r$ largest $\sigma_i(Y)$:
+*Step 1: compute $f^*$.* By von Neumann's trace inequality, $\langle X,Y\rangle\le\sum_i\sigma_i(X)\sigma_i(Y)$, with equality when $X$ and $Y$ share singular vectors. So it suffices to choose singular values $\sigma_i(X)\in[0,1]$. If $\mathrm{rank}X = r$, the best is $\sigma_i(X)=1$ for the $r$ largest $\sigma_i(Y)$:
 $$f^*(Y) = \max_{r}\Big(\sum_{i\le r}\sigma_i(Y)-r\Big) = \sum_i\big(\sigma_i(Y)-1\big)_+ .$$
 *Step 2: compute $f^{**}$ on $C$.* Again align singular vectors; then for each $i$, with $s=\sigma_i(X)\in[0,1]$ we maximise $g(y) = sy-(y-1)_+$ over $y\ge0$. For $y\le1$, $g(y)=sy\le s$ (attained at $y=1$); for $y>1$, $g(y) = 1-(1-s)y\le s$. So the maximum is $s$, and
 $$f^{**}(X) = \sum_i\sigma_i(X) = \lVert X\rVert_*.\qquad\square$$
-**Consequences.** (i) On the unit spectral ball, $\lVert X\rVert_*\le\operatorname{rank}(X)$, and no convex function is a tighter lower bound. (ii) For general $X$, scaling gives $\operatorname{rank}(X)\ge\lVert X\rVert_*/\lVert X\rVert_2$. Example: $X=\mathrm{diag}(3,1)$ has $\lVert X\rVert_*=4$, $\lVert X\rVert_2=3$, so $\operatorname{rank}\ge4/3$, i.e. at least 2 — correct.
+**Consequences.** (i) On the unit spectral ball, $\lVert X\rVert_*\le\mathrm{rank}(X)$, and no convex function is a tighter lower bound. (ii) For general $X$, scaling gives $\mathrm{rank}(X)\ge\lVert X\rVert_*/\lVert X\rVert_2$. Example: $X=\mathrm{diag}(3,1)$ has $\lVert X\rVert_*=4$, $\lVert X\rVert_2=3$, so $\mathrm{rank}\ge4/3$, i.e. at least 2 — correct.
 
 ### 10.4 When does it work? (Candès–Recht)
 
@@ -430,8 +430,8 @@ Why incoherence: if $M = \mathbf e_1\mathbf e_1^\top$ (a single non-zero entry),
 
 ### 10.5 Nuclear norm and factorisation are the same thing
 
-**Lemma.** $\lVert X\rVert_* = \min_{U,V:\ UV^\top=X}\tfrac12\big(\lVert U\rVert_F^2+\lVert V\rVert_F^2\big)$ (with inner dimension at least $\operatorname{rank}X$).
-*Proof.* "$\le$": for any factorisation, $\lVert UV^\top\rVert_*\le\lVert U\rVert_F\lVert V\rVert_F\le\tfrac12(\lVert U\rVert_F^2+\lVert V\rVert_F^2)$ (a Hölder-type inequality for Schatten norms, then the AM–GM inequality). "$\ge$": take the SVD $X=P\Sigma Q^\top$ and $U=P\Sigma^{1/2}$, $V=Q\Sigma^{1/2}$; then $\tfrac12(\lVert U\rVert_F^2+\lVert V\rVert_F^2) = \tfrac12(\operatorname{tr}\Sigma+\operatorname{tr}\Sigma)=\lVert X\rVert_*$. $\square$
+**Lemma.** $\lVert X\rVert_* = \min_{U,V:\ UV^\top=X}\tfrac12\big(\lVert U\rVert_F^2+\lVert V\rVert_F^2\big)$ (with inner dimension at least $\mathrm{rank}X$).
+*Proof.* "$\le$": for any factorisation, $\lVert UV^\top\rVert_*\le\lVert U\rVert_F\lVert V\rVert_F\le\tfrac12(\lVert U\rVert_F^2+\lVert V\rVert_F^2)$ (a Hölder-type inequality for Schatten norms, then the AM–GM inequality). "$\ge$": take the SVD $X=P\Sigma Q^\top$ and $U=P\Sigma^{1/2}$, $V=Q\Sigma^{1/2}$; then $\tfrac12(\lVert U\rVert_F^2+\lVert V\rVert_F^2) = \tfrac12(\mathrm{tr}\Sigma+\mathrm{tr}\Sigma)=\lVert X\rVert_*$. $\square$
 So regularised MF (Section 5) and nuclear-norm completion (this section) are two views of the same model: one convex but working with full matrices, the other non-convex but cheap.
 
 ---
@@ -449,7 +449,7 @@ It shrinks every singular value by $\tau$ and sets those below $\tau$ to zero, s
 *Proof sketch.* The objective is strictly convex, so it suffices to show $\mathbf 0\in\hat X-Y+\tau\,\partial\lVert\hat X\rVert_*$ at $\hat X = \mathcal D_\tau(Y)$. The subdifferential of the nuclear norm at $X=U_0\Sigma_0V_0^\top$ (compact SVD) is $\{U_0V_0^\top+W:\ U_0^\top W=0,\ WV_0=0,\ \lVert W\rVert_2\le1\}$. Split $Y$'s SVD into the part with $\sigma_i>\tau$ ($U_0,\Sigma_0,V_0$) and the rest ($U_1,\Sigma_1,V_1$). Then $\hat X = U_0(\Sigma_0-\tau I)V_0^\top$ and
 $$Y-\hat X = \tau U_0V_0^\top + U_1\Sigma_1V_1^\top = \tau\big(U_0V_0^\top+W\big),\qquad W = \tau^{-1}U_1\Sigma_1V_1^\top .$$
 $W$ is orthogonal to $U_0$ and $V_0$, and $\lVert W\rVert_2\le1$ because every singular value in $\Sigma_1$ is at most $\tau$. So $Y-\hat X\in\tau\partial\lVert\hat X\rVert_*$. $\square$
-This is the matrix analogue of **soft-thresholding** in the lasso, $\operatorname{sign}(y)(|y|-\tau)_+$, applied to singular values.
+This is the matrix analogue of **soft-thresholding** in the lasso, $\mathrm{sign}(y)(|y|-\tau)_+$, applied to singular values.
 
 #### Worked example 11.1 (by hand)
 
@@ -507,7 +507,7 @@ The quadratic term *tolerates* noise in the observed entries instead of enforcin
 
 MF and SVT are **transductive**: every entity has its own free parameters (a row of $U$, or a row/column of $X$). A drug that was not in the training matrix has no parameters, so it cannot be scored. **Inductive matrix completion** (IMC; Jain & Dhillon 2013; Natarajan & Dhillon 2014 for gene–disease prediction) makes the factors *functions of features*. With drug features $X\in\mathbb R^{n\times f_r}$ and disease features $Y\in\mathbb R^{m\times f_d}$:
 $$A\approx XWY^\top = (XG)(YH)^\top,\qquad W=GH^\top,\ G\in\mathbb R^{f_r\times k},\ H\in\mathbb R^{f_d\times k}.$$
-The number of parameters no longer grows with the number of entities, and a brand-new disease with a feature vector $\mathbf y$ gets embedding $H^\top\mathbf y$ immediately. A useful identity for fitting $W$ by least squares: $\operatorname{vec}(XWY^\top) = (Y\otimes X)\operatorname{vec}(W)$, which turns the problem into ordinary ridge regression in $\operatorname{vec}(W)$. In Section 15, IMC trained on 40 diseases scores 10 never-seen diseases with AUC 0.947.
+The number of parameters no longer grows with the number of entities, and a brand-new disease with a feature vector $\mathbf y$ gets embedding $H^\top\mathbf y$ immediately. A useful identity for fitting $W$ by least squares: $\mathrm{vec}(XWY^\top) = (Y\otimes X)\mathrm{vec}(W)$, which turns the problem into ordinary ridge regression in $\mathrm{vec}(W)$. In Section 15, IMC trained on 40 diseases scores 10 never-seen diseases with AUC 0.947.
 
 IMC fails when the features do not explain the associations (then $W$ has nothing to learn), and its linear form limits what it can express — hence neural versions.
 
@@ -1149,11 +1149,11 @@ class SCMFDD:
         return (U @ V.T).detach().cpu().numpy()                        # (6)
 ```
 
-1. **Normalised Laplacians** $L = I - D^{-1/2}SD^{-1/2}$ of the drug and disease similarity graphs (`sym_norm` is $D^{-1/2}SD^{-1/2}$; the unit diagonal of the filled similarities acts as a self-loop). The paper writes the penalty with the unnormalised Laplacian ($\sum w_{ij}\lVert\mathbf x_i-\mathbf x_j\rVert^2 = 2\operatorname{tr}(X^\top(D-W)X)$); the normalised one compares degree-scaled factors and keeps the penalty's scale independent of how dense each similarity matrix is.
+1. **Normalised Laplacians** $L = I - D^{-1/2}SD^{-1/2}$ of the drug and disease similarity graphs (`sym_norm` is $D^{-1/2}SD^{-1/2}$; the unit diagonal of the filled similarities acts as a self-loop). The paper writes the penalty with the unnormalised Laplacian ($\sum w_{ij}\lVert\mathbf x_i-\mathbf x_j\rVert^2 = 2\mathrm{tr}(X^\top(D-W)X)$); the normalised one compares degree-scaled factors and keeps the penalty's scale independent of how dense each similarity matrix is.
 2. The **whole** training matrix, zeros included (test cells are zeros too): this is the AMAN choice of Section 3.2. `neg_mask` is not used — SCMFDD never samples negatives.
 3. Factor matrices $U$ (593 × 128) and $V$ (313 × 128), initialised small. $k=128$ was tuned on the validation split (the paper used $k$ as a percentage of the matrix size).
 4. Adam on the full objective instead of the paper's row-wise closed-form updates; both minimise the same kind of objective, Adam is simpler and runs on the GPU.
-5. The loss is exactly Section 9.2's objective (without the ½ factors): squared reconstruction error over all cells $+$ $\mu$ times the L2 norms $+$ $\lambda$ times the two Laplacian trace penalties. `torch.trace(U.T @ Lr @ U)` is $\operatorname{tr}(U^\top L_rU)$. With $\mu=0.05$ and $\lambda=2$ (tuned), the smoothness term is much stronger than the plain norm penalty: similar drugs are strongly encouraged to share factors.
+5. The loss is exactly Section 9.2's objective (without the ½ factors): squared reconstruction error over all cells $+$ $\mu$ times the L2 norms $+$ $\lambda$ times the two Laplacian trace penalties. `torch.trace(U.T @ Lr @ U)` is $\mathrm{tr}(U^\top L_rU)$. With $\mu=0.05$ and $\lambda=2$ (tuned), the smoothness term is much stronger than the plain norm penalty: similar drugs are strongly encouraged to share factors.
 6. Scores are $UV^\top$, not probabilities (they can be slightly negative or above 1); only the ranking matters for AUC/AUPR.
 
 Because of the Laplacian term, SCMFDD *can* give a cold disease a non-zero factor vector: its only data term is "fit zeros", but the smoothness term pulls it towards its phenotype neighbours (Section 9.4).
@@ -1350,11 +1350,11 @@ $\mathbf h_j\leftarrow\mathbf h_j-\eta g\,\mathbf w_u = (0.4426, 0.1)$ (all usin
 New scores: $\hat x_{ui} = 0.9828\cdot0.2574+0.0230\cdot0.5 = 0.2645$; $\hat x_{uj} = 0.9828\cdot0.4426+0.0230\cdot0.1 = 0.4372$; $\hat x_{uij} = -0.173$ (was $-0.300$); the loss fell to 0.783. The disease vector rotated towards the known drug's direction and the two drug vectors moved apart.
 </details>
 
-**Exercise 7 (★★, maths).** (a) Prove that for the normalised Laplacian $\mathcal L = I-D^{-1/2}SD^{-1/2}$, $\operatorname{tr}(U^\top\mathcal LU) = \tfrac12\sum_{ij}S_{ij}\lVert\mathbf u_i/\sqrt{d_i}-\mathbf u_j/\sqrt{d_j}\rVert^2$. (b) In words, what does $\operatorname{tr}(U^\top LU)$ penalise in SCMFDD, and how does the normalised version differ?
+**Exercise 7 (★★, maths).** (a) Prove that for the normalised Laplacian $\mathcal L = I-D^{-1/2}SD^{-1/2}$, $\mathrm{tr}(U^\top\mathcal LU) = \tfrac12\sum_{ij}S_{ij}\lVert\mathbf u_i/\sqrt{d_i}-\mathbf u_j/\sqrt{d_j}\rVert^2$. (b) In words, what does $\mathrm{tr}(U^\top LU)$ penalise in SCMFDD, and how does the normalised version differ?
 
 <details><summary>Solution</summary>
 
-(a) Let $\tilde U = D^{-1/2}U$ (rows $\mathbf u_i/\sqrt{d_i}$). Then $U^\top\mathcal LU = U^\top U - \tilde U^\top S\tilde U$ and $U^\top U = \tilde U^\top D\tilde U$, so $\operatorname{tr}(U^\top\mathcal LU) = \operatorname{tr}(\tilde U^\top(D-S)\tilde U) = \tfrac12\sum_{ij}S_{ij}\lVert\tilde{\mathbf u}_i-\tilde{\mathbf u}_j\rVert^2$ by the lemma of Section 9.1.
+(a) Let $\tilde U = D^{-1/2}U$ (rows $\mathbf u_i/\sqrt{d_i}$). Then $U^\top\mathcal LU = U^\top U - \tilde U^\top S\tilde U$ and $U^\top U = \tilde U^\top D\tilde U$, so $\mathrm{tr}(U^\top\mathcal LU) = \mathrm{tr}(\tilde U^\top(D-S)\tilde U) = \tfrac12\sum_{ij}S_{ij}\lVert\tilde{\mathbf u}_i-\tilde{\mathbf u}_j\rVert^2$ by the lemma of Section 9.1.
 (b) It penalises **differences between the latent factors of similar entities**, each difference weighted by the similarity; pairs with zero similarity are free. In SCMFDD this forces chemically similar drugs (and phenotypically similar diseases) to have similar factors and hence similar predicted indication profiles, and gives entities without links the factors of their neighbours. The normalised version compares factors after dividing by $\sqrt{\text{degree}}$, so entities with very many similar neighbours do not dominate the penalty and the penalty's scale does not depend on the overall density of the similarity matrix.
 </details>
 
@@ -1371,8 +1371,8 @@ New scores: $\hat x_{ui} = 0.9828\cdot0.2574+0.0230\cdot0.5 = 0.2645$; $\hat x_{
 
 <details><summary>Solution</summary>
 
-*Upper bound for the minimum.* With the SVD $X=P\Sigma Q^\top$, take $U=P\Sigma^{1/2}$, $V=Q\Sigma^{1/2}$: $UV^\top = X$ and $\lVert U\rVert_F^2 = \operatorname{tr}(\Sigma^{1/2}P^\top P\Sigma^{1/2}) = \operatorname{tr}\Sigma = \lVert X\rVert_*$, likewise for $V$. So the minimum is at most $\lVert X\rVert_*$.
-*Lower bound.* For any $U,V$ with $UV^\top=X$: $\lVert X\rVert_* = \operatorname{tr}(P^\top XQ) = \operatorname{tr}(P^\top UV^\top Q) = \langle U^\top P, V^\top Q\rangle_F\le\lVert U^\top P\rVert_F\lVert V^\top Q\rVert_F\le\lVert U\rVert_F\lVert V\rVert_F\le\tfrac12(\lVert U\rVert_F^2+\lVert V\rVert_F^2)$, using Cauchy–Schwarz, the fact that multiplying by a matrix with orthonormal columns cannot increase the Frobenius norm, and AM–GM ($ab\le\tfrac12(a^2+b^2)$).
+*Upper bound for the minimum.* With the SVD $X=P\Sigma Q^\top$, take $U=P\Sigma^{1/2}$, $V=Q\Sigma^{1/2}$: $UV^\top = X$ and $\lVert U\rVert_F^2 = \mathrm{tr}(\Sigma^{1/2}P^\top P\Sigma^{1/2}) = \mathrm{tr}\Sigma = \lVert X\rVert_*$, likewise for $V$. So the minimum is at most $\lVert X\rVert_*$.
+*Lower bound.* For any $U,V$ with $UV^\top=X$: $\lVert X\rVert_* = \mathrm{tr}(P^\top XQ) = \mathrm{tr}(P^\top UV^\top Q) = \langle U^\top P, V^\top Q\rangle_F\le\lVert U^\top P\rVert_F\lVert V^\top Q\rVert_F\le\lVert U\rVert_F\lVert V\rVert_F\le\tfrac12(\lVert U\rVert_F^2+\lVert V\rVert_F^2)$, using Cauchy–Schwarz, the fact that multiplying by a matrix with orthonormal columns cannot increase the Frobenius norm, and AM–GM ($ab\le\tfrac12(a^2+b^2)$).
 *Implication.* $\min_{U,V}\lVert\mathcal P_\Omega(A-UV^\top)\rVert^2+\lambda(\lVert U\rVert_F^2+\lVert V\rVert_F^2)$ equals $\min_X\lVert\mathcal P_\Omega(A-X)\rVert^2+2\lambda\lVert X\rVert_*$ over matrices of rank at most $k$. So regularised MF is nuclear-norm-regularised completion in disguise: $\lambda$ controls an effective rank, and choosing $k$ larger than necessary is harmless when $\lambda$ is well tuned (the project's SCMFDD uses $k=128$).
 </details>
 
@@ -1529,9 +1529,9 @@ Details and consequences:
 * Going from 2 to 5 makes positives 1/6 instead of 1/3 of each epoch's loss, labels 2.5× as many unknowns per epoch as negatives (more true-but-unknown indications get pushed down), and, by Section 7.3, shifts the logits down by about $\ln(5/2)\approx0.92$ relative to ratio 2 — which changes the outputs' scale but, ideally, not the ranking.
 * Each unknown cell remains a *rare* negative: with about 433 supervised positives per epoch and a pool of about 146,900, ratio 5 would draw about 2,165 negatives per epoch, so each cell would be labelled negative in about 1.5% of epochs.
 
-### Bonus (from unit A2): What does $\operatorname{tr}(U^\top LU)$ penalise?
+### Bonus (from unit A2): What does $\mathrm{tr}(U^\top LU)$ penalise?
 
-$\operatorname{tr}(U^\top LU) = \tfrac12\sum_{ij}S_{ij}\lVert\mathbf u_i-\mathbf u_j\rVert^2$: the squared distances between the factor vectors of *similar* entities, weighted by their similarity. Minimising it makes similar drugs (or diseases) have similar latent factors, which is how SCMFDD injects chemical and phenotypic similarity into MF and gives entities with few or no links sensible factors (Section 9, Exercise 7).
+$\mathrm{tr}(U^\top LU) = \tfrac12\sum_{ij}S_{ij}\lVert\mathbf u_i-\mathbf u_j\rVert^2$: the squared distances between the factor vectors of *similar* entities, weighted by their similarity. Minimising it makes similar drugs (or diseases) have similar latent factors, which is how SCMFDD injects chemical and phenotypic similarity into MF and gives entities with few or no links sensible factors (Section 9, Exercise 7).
 
 ---
 
@@ -1549,8 +1549,8 @@ $\operatorname{tr}(U^\top LU) = \tfrac12\sum_{ij}S_{ij}\lVert\mathbf u_i-\mathbf
 | Weighted MF | $\sum c_{ij}(p_{ij}-\mathbf u_i^\top\mathbf v_j)^2$, $c=1+\alpha r$ | trick: $V^\top C^iV = V^\top V+V^\top(C^i-I)V$ |
 | Negative sampling | $\rho$ fresh uniform unknowns per positive per epoch | logit shift $\ln(s_+/s_-)$; project $\rho=2$ |
 | BPR | $-\sum\ln\sigma(\hat x_{ui}-\hat x_{uj})+\lambda\lVert\Theta\rVert^2$ | smooth per-user AUC; within-user only |
-| Laplacian penalty | $\operatorname{tr}(U^\top LU)=\tfrac12\sum S_{ij}\lVert\mathbf u_i-\mathbf u_j\rVert^2$ | similar entities → similar factors |
-| SCMFDD | $\lVert A-UV^\top\rVert^2+\mu(\ldots)+\lambda(\operatorname{tr}U^\top L_rU+\operatorname{tr}V^\top L_dV)$ | AMAN; Sylvester per half-step |
+| Laplacian penalty | $\mathrm{tr}(U^\top LU)=\tfrac12\sum S_{ij}\lVert\mathbf u_i-\mathbf u_j\rVert^2$ | similar entities → similar factors |
+| SCMFDD | $\lVert A-UV^\top\rVert^2+\mu(\ldots)+\lambda(\mathrm{tr}U^\top L_rU+\mathrm{tr}V^\top L_dV)$ | AMAN; Sylvester per half-step |
 | Nuclear norm | $\lVert X\rVert_*=\sum\sigma_i = \min_{UV^\top=X}\tfrac12(\lVert U\rVert_F^2+\lVert V\rVert_F^2)$ | convex envelope of rank on $\lVert X\rVert_2\le1$ |
 | SVT operator | $\mathcal D_\tau(Y)=U(\Sigma-\tau I)_+V^\top$ | prox of $\tau\lVert\cdot\rVert_*$ |
 | CCS iteration | $X=\mathcal D_\tau(Y)$; $Y\mathrel{+}=\delta\mathcal P_\Omega(M-X)$ | $0<\delta<2$; heuristic $1.2/p$ |

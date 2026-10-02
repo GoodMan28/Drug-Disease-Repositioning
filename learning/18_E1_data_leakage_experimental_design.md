@@ -225,7 +225,7 @@ And one rule: **never report the best seed.** The best of 10 seeds of a model wh
 
 Let $a_r$ and $b_r$ be the scores of methods A and B on split $r = 1,\dots,J$ (same splits for both). The paired differences $d_r = a_r - b_r$ remove the variation that both methods share (some folds are simply easier). If $a$ and $b$ have standard deviations $s_a, s_b$ and correlation $\rho_{ab}$ across folds,
 
-$$\operatorname{Var}(d) = s_a^2 + s_b^2 - 2\rho_{ab}\, s_a s_b,$$
+$$\mathrm{Var}(d) = s_a^2 + s_b^2 - 2\rho_{ab}\, s_a s_b,$$
 
 so pairing helps a lot when the methods' fold scores are strongly correlated and little when they are not. On Fdataset (Section 4.7), MV-HGAT's and SCMFDD's fold AUCs correlate at +0.59, but their fold AUPRs only at +0.09.
 

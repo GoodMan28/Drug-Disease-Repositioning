@@ -166,7 +166,7 @@ d=512: var(q.k)= 499.8  var(q.k/sqrt d)=0.98  avg max weight: unscaled=0.951  sc
 
 Suppose the components of $q$ and $k$ are independent with mean 0 and variance 1 (roughly true at initialisation). Then
 $$\mathbb E[q^\top k] = \sum_{c=1}^{d}\mathbb E[q_c]\,\mathbb E[k_c] = 0,\qquad
-\operatorname{Var}(q^\top k) = \sum_{c=1}^d \operatorname{Var}(q_c k_c) = \sum_{c=1}^d \mathbb E[q_c^2]\,\mathbb E[k_c^2] = d.$$
+\mathrm{Var}(q^\top k) = \sum_{c=1}^d \mathrm{Var}(q_c k_c) = \sum_{c=1}^d \mathbb E[q_c^2]\,\mathbb E[k_c^2] = d.$$
 The scores' standard deviation grows like $\sqrt d$; with $d = 512$, scores spread over $\pm 40$ or so, the softmax becomes nearly one-hot (average top weight 0.951 in the run above), and by Section 2.2 its gradient nearly vanishes. Dividing by $\sqrt d$ restores unit variance (0.97–1.03 above) and keeps the softmax in its sensitive range (top weight about 0.3 for 10 keys, regardless of $d$).
 
 GAT does not divide by anything: its score is a single learned linear functional of 2·$F'$ numbers, and the learned vector $a$ can absorb any scale. The project's per-head dimension is only 16.
@@ -871,7 +871,7 @@ z^\text{src}_j = W_\text{src} h^\text{src}_j,\quad z^\text{dst}_i = W_\text{dst}
 e_{ij} = \text{LeakyReLU}\big(a_\text{dst}^\top z^\text{dst}_i + a_\text{src}^\top z^\text{src}_j\big),
 $$
 $$
-\alpha_{ij} = \operatorname{softmax}_{j:\ M_{ij}=1}(e_{ij}),\qquad m_i = \Big\Vert_{h=1}^{H} \sum_j \alpha^h_{ij}\, z^{\text{src},h}_j .
+\alpha_{ij} = \mathrm{softmax}_{j:\ M_{ij}=1}(e_{ij}),\qquad m_i = \Big\Vert_{h=1}^{H} \sum_j \alpha^h_{ij}\, z^{\text{src},h}_j .
 $$
 
 * The **mask** $M$ is rectangular, $N_\text{dst}\times N_\text{src}$ (for `assoc>drug`: the visible part of $A$, 593 × 313; for `assoc>disease`: its transpose).
@@ -1116,11 +1116,11 @@ For receiver $i$, $\alpha_{ij}/\alpha_{ik} = \exp(e_{ij} - e_{ik})$ (the normali
 Intuition for GATv2: its score $a^\top\text{LeakyReLU}(W_\text{dst}h_i + W_\text{src}h_j)$ applies the nonlinearity *coordinate-wise* to a mixture of $i$ and $j$ before the final linear read-out, so each hidden unit can switch on or off depending on the *combination* of $i$ and $j$. That makes the score a genuine function of the pair (an MLP), which can rank $j$ above $k$ for one receiver and below for another.
 </details>
 
-**Exercise 5 (★★, math).** (a) Derive $\operatorname{Var}(q^\top k) = d$ for independent components with mean 0 and variance 1. (b) Using $\partial\alpha_j/\partial s_k = \alpha_j(\delta_{jk} - \alpha_k)$, show that the gradient of a softmax with $\alpha \approx (1, 0, \dots, 0)$ is nearly zero. (c) Connect (a) and (b) to the $1/\sqrt{d_k}$ in the Transformer.
+**Exercise 5 (★★, math).** (a) Derive $\mathrm{Var}(q^\top k) = d$ for independent components with mean 0 and variance 1. (b) Using $\partial\alpha_j/\partial s_k = \alpha_j(\delta_{jk} - \alpha_k)$, show that the gradient of a softmax with $\alpha \approx (1, 0, \dots, 0)$ is nearly zero. (c) Connect (a) and (b) to the $1/\sqrt{d_k}$ in the Transformer.
 
 <details><summary>Solution</summary>
 
-(a) $q^\top k = \sum_c q_ck_c$. Each term has mean $\mathbb E[q_c]\mathbb E[k_c] = 0$ and variance $\mathbb E[q_c^2k_c^2] - 0 = \mathbb E[q_c^2]\mathbb E[k_c^2] = 1$. Terms are independent across $c$, so variances add: $\operatorname{Var} = d$.
+(a) $q^\top k = \sum_c q_ck_c$. Each term has mean $\mathbb E[q_c]\mathbb E[k_c] = 0$ and variance $\mathbb E[q_c^2k_c^2] - 0 = \mathbb E[q_c^2]\mathbb E[k_c^2] = 1$. Terms are independent across $c$, so variances add: $\mathrm{Var} = d$.
 
 (b) Jacobian entries: diagonal $\alpha_j(1 - \alpha_j)$; off-diagonal $-\alpha_j\alpha_k$. With $\alpha_1 \approx 1$, others $\approx 0$: $\alpha_1(1-\alpha_1) \approx 0$, $\alpha_j(1-\alpha_j)\approx 0$ for $j > 1$, and every $\alpha_j\alpha_k \approx 0$. Whatever the upstream gradient, almost nothing flows back to the scores.
 
@@ -1340,7 +1340,7 @@ The code names the halves by the direction of the message: `a_dst` $= a_1$ multi
 | Softmax | shift invariant; $-\infty$ → weight 0; $\partial\alpha_j/\partial s_k = \alpha_j(\delta_{jk} - \alpha_k)$ |
 | Additive (Bahdanau) | $v^\top\tanh(W_qq + W_kk)$ |
 | Dot / general (Luong) | $q^\top k$ / $q^\top Wk$ |
-| Scaled dot (Transformer) | $\text{softmax}(QK^\top/\sqrt{d_k})V$; $\operatorname{Var}(q^\top k) = d_k$ |
+| Scaled dot (Transformer) | $\text{softmax}(QK^\top/\sqrt{d_k})V$; $\mathrm{Var}(q^\top k) = d_k$ |
 | Multi-head | $[\text{head}_1\Vert\dots\Vert\text{head}_H]W^O$, $d_k = d_\text{model}/H$ |
 | Transformer block | $\text{LN}(X + \text{MHA}(X))$, $\text{LN}(X' + \text{FFN}(X'))$, + positional encodings |
 | GAT score | $e_{ij} = \text{LeakyReLU}_{0.2}(a_\text{dst}^\top Wh_i + a_\text{src}^\top Wh_j)$ |

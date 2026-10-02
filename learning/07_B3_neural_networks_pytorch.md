@@ -461,21 +461,21 @@ LeakyReLU keeps 0.2; ELU keeps $e^{-3}\approx 0.05$ and $e^{-0.5}\approx 0.61$.
 Given a vector of real **scores** $z\in\mathbb{R}^K$, the **softmax** returns a probability vector:
 
 $$
-\operatorname{softmax}(z)_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}.
+\mathrm{softmax}(z)_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}.
 $$
 
 Properties (each one-line provable):
 
 1. **Positive and sums to 1.** Every $e^{z_i}>0$ and the denominator normalises.
 2. **Order-preserving.** $z_i>z_j \Rightarrow s_i>s_j$.
-3. **Shift-invariant.** $\operatorname{softmax}(z+c\mathbf{1})=\operatorname{softmax}(z)$ because
+3. **Shift-invariant.** $\mathrm{softmax}(z+c\mathbf{1})=\mathrm{softmax}(z)$ because
    $e^{z_i+c}/\sum_j e^{z_j+c} = e^c e^{z_i}/(e^c\sum_j e^{z_j})$. Only *differences* of scores matter.
-4. **Temperature.** $\operatorname{softmax}(z/T)$ approaches one-hot on the arg-max as $T\to 0$ and the
+4. **Temperature.** $\mathrm{softmax}(z/T)$ approaches one-hot on the arg-max as $T\to 0$ and the
    uniform distribution as $T\to\infty$. "Soft" max: a differentiable version of choosing the largest.
-5. **Two classes reduce to sigmoid.** $\operatorname{softmax}(z_1,z_2)_1 = 1/(1+e^{-(z_1-z_2)}) = \sigma(z_1-z_2)$.
+5. **Two classes reduce to sigmoid.** $\mathrm{softmax}(z_1,z_2)_1 = 1/(1+e^{-(z_1-z_2)}) = \sigma(z_1-z_2)$.
 
 **Worked example.** $z=(2,\,1,\,0.1)$: $e^{z}=(7.389,\ 2.718,\ 1.105)$, sum $=11.212$, so
-$\operatorname{softmax}(z)=(0.659,\ 0.242,\ 0.099)$.
+$\mathrm{softmax}(z)=(0.659,\ 0.242,\ 0.099)$.
 
 **Where it appears in the project.** Attention is "score → softmax → weighted sum":
 in `DenseGAT` the softmax runs over the *neighbours* of each node (`dim=1`, the source axis), producing
@@ -484,7 +484,7 @@ producing the view weights $\beta_i^r$ that sum to 1 over $r$.
 
 ### 5.2 The softmax Jacobian
 
-Let $s=\operatorname{softmax}(z)$. For $i=j$:
+Let $s=\mathrm{softmax}(z)$. For $i=j$:
 $$
 \frac{\partial s_i}{\partial z_i} = \frac{e^{z_i}\sum_k e^{z_k} - e^{z_i}e^{z_i}}{(\sum_k e^{z_k})^2} = s_i - s_i^2 .
 $$
@@ -492,7 +492,7 @@ For $i\neq j$:
 $$
 \frac{\partial s_i}{\partial z_j} = \frac{0 - e^{z_i}e^{z_j}}{(\sum_k e^{z_k})^2} = -s_i s_j .
 $$
-Together: $\dfrac{\partial s_i}{\partial z_j} = s_i(\delta_{ij}-s_j)$, i.e. $J = \operatorname{diag}(s) - s s^\top$.
+Together: $\dfrac{\partial s_i}{\partial z_j} = s_i(\delta_{ij}-s_j)$, i.e. $J = \mathrm{diag}(s) - s s^\top$.
 
 During backprop, if the upstream gradient is $g=\partial L/\partial s$, then
 $$
@@ -502,7 +502,7 @@ which is how autograd implements it (no $K\times K$ matrix is ever formed).
 
 ### 5.3 Softmax + cross-entropy: the gradient is $p-y$
 
-With a one-hot target $y$ and $p=\operatorname{softmax}(z)$, cross-entropy is $L=-\sum_i y_i\log p_i$.
+With a one-hot target $y$ and $p=\mathrm{softmax}(z)$, cross-entropy is $L=-\sum_i y_i\log p_i$.
 Using $\partial \log p_i/\partial z_j = \delta_{ij}-p_j$:
 $$
 \frac{\partial L}{\partial z_j} = -\sum_i y_i(\delta_{ij}-p_j) = -y_j + p_j\sum_i y_i = p_j - y_j.
@@ -520,7 +520,7 @@ to set the scores of forbidden entries to $-\infty$ **before** the softmax:
 $$
 \tilde z_j = \begin{cases} z_j & \text{if } \text{mask}_j\\ -\infty & \text{otherwise}\end{cases},
 \qquad
-\operatorname{softmax}(\tilde z)_i = \frac{\text{mask}_i\, e^{z_i}}{\sum_{j:\ \text{mask}_j} e^{z_j}},
+\mathrm{softmax}(\tilde z)_i = \frac{\text{mask}_i\, e^{z_i}}{\sum_{j:\ \text{mask}_j} e^{z_j}},
 $$
 
 because $e^{-\infty}=0$. The forbidden entries get weight exactly 0 and the allowed ones are
@@ -601,14 +601,14 @@ to 0 for $z<-103$ or so. A naive softmax of $(1000,1001,1002)$ computes `inf/inf
 
 Shift-invariance rescues us: subtract the maximum first. With $m=\max_j z_j$,
 $$
-\operatorname{softmax}(z)_i = \frac{e^{z_i-m}}{\sum_j e^{z_j-m}},
+\mathrm{softmax}(z)_i = \frac{e^{z_i-m}}{\sum_j e^{z_j-m}},
 $$
 where now every exponent is $\le 0$ and at least one term in the denominator equals 1, so neither
 overflow nor division by zero can happen. The same idea gives a stable **log-sum-exp**:
 $$
-\operatorname{LSE}(z) = \log\sum_j e^{z_j} = m + \log\sum_j e^{z_j-m}.
+\mathrm{LSE}(z) = \log\sum_j e^{z_j} = m + \log\sum_j e^{z_j-m}.
 $$
-Example: $\operatorname{LSE}(1000,1001,1002) = 1002 + \log(e^{-2}+e^{-1}+1) = 1002 + \log 1.5032 = 1002.4076$.
+Example: $\mathrm{LSE}(1000,1001,1002) = 1002 + \log(e^{-2}+e^{-1}+1) = 1002 + \log 1.5032 = 1002.4076$.
 `torch.softmax`, `torch.logsumexp` and `F.log_softmax` all do this internally. Never write
 `torch.exp(z) / torch.exp(z).sum()` yourself.
 
@@ -965,16 +965,16 @@ Random initialisation **breaks the symmetry**.
 **Why not "any random numbers"?** Because the *scale* matters. Consider $z=\sum_{k=1}^{n_{in}} w_k x_k$
 with independent, zero-mean $w_k$ and $x_k$. Then
 $$
-\operatorname{Var}(z) = \sum_{k=1}^{n_{in}}\operatorname{Var}(w_k x_k) = n_{in}\,\operatorname{Var}(w)\,\operatorname{Var}(x).
+\mathrm{Var}(z) = \sum_{k=1}^{n_{in}}\mathrm{Var}(w_k x_k) = n_{in}\,\mathrm{Var}(w)\,\mathrm{Var}(x).
 $$
-If $n_{in}\operatorname{Var}(w)>1$ the signal's variance is multiplied by that factor at every layer and
+If $n_{in}\mathrm{Var}(w)>1$ the signal's variance is multiplied by that factor at every layer and
 explodes exponentially with depth; if $<1$ it shrinks to nothing (and so do the gradients, by the same
 argument applied to the backward pass, which involves $W^\top$ and therefore $n_{out}$).
 
 **Xavier / Glorot initialisation** (Glorot & Bengio 2010). To keep variance constant forward we want
-$n_{in}\operatorname{Var}(w)=1$; backward we want $n_{out}\operatorname{Var}(w)=1$. The compromise is
+$n_{in}\mathrm{Var}(w)=1$; backward we want $n_{out}\mathrm{Var}(w)=1$. The compromise is
 $$
-\operatorname{Var}(w)=\frac{2}{n_{in}+n_{out}}.
+\mathrm{Var}(w)=\frac{2}{n_{in}+n_{out}}.
 $$
 A uniform distribution $U(-a,a)$ has variance $a^2/3$, so the uniform version uses
 $$
@@ -982,7 +982,7 @@ a = \sqrt{\frac{6}{n_{in}+n_{out}}}\qquad\text{(PyTorch: } \texttt{nn.init.xavie
 $$
 The derivation assumes activations that are roughly linear near 0 (tanh, sigmoid's middle). For ReLU,
 half the units are zero, which halves the variance, so **He/Kaiming initialisation** (He et al. 2015)
-uses $\operatorname{Var}(w)=2/n_{in}$.
+uses $\mathrm{Var}(w)=2/n_{in}$.
 
 **PyTorch defaults.** `nn.Linear(in, out)` initialises its weight from $U(-1/\sqrt{in},\ 1/\sqrt{in})$
 (Kaiming-uniform with a particular slope parameter) and its bias similarly. You only need to initialise
@@ -1221,7 +1221,7 @@ the observed labels.
 
 Substitute $p=\sigma(z)$, use $\log\sigma(z) = -\log(1+e^{-z})$ and $\log(1-\sigma(z)) = -z-\log(1+e^{-z})$:
 $$
-\ell(z,y) = \log(1+e^{-z}) + (1-y)\,z = \log(1+e^{z}) - y z = \operatorname{softplus}(z) - yz .
+\ell(z,y) = \log(1+e^{-z}) + (1-y)\,z = \log(1+e^{z}) - y z = \mathrm{softplus}(z) - yz .
 $$
 **Gradient:** $\dfrac{\partial\ell}{\partial z} = \sigma(z) - y$. Bounded between $-1$ and $1$, never
 vanishing while the prediction is wrong. (Compare: through a separate sigmoid, the gradient of BCE
@@ -2195,7 +2195,7 @@ Raw `nn.Parameter`s with hand-chosen starting values (no random init needed — 
 for scalars with distinct roles):
 
 * `view_weights()` returns `F.softplus(self.prop_w) * self.prop_scale`; at initialisation every view weight
-  is $\operatorname{softplus}(0)\cdot5=5\ln2\approx3.47$, and softplus keeps it positive forever (Section 4.2).
+  is $\mathrm{softplus}(0)\cdot5=5\ln2\approx3.47$, and softplus keeps it positive forever (Section 4.2).
 * `bias = -3` makes the initial base probability $\sigma(-3)\approx0.047$ — a sensible prior when only ~1% of
   pairs are positive (the sampled training set is 1/3 positive, but the bias still starts low).
 * The degree gate, `gnn_gate`, computes
@@ -2508,13 +2508,13 @@ True
 </details>
 
 **Exercise 6 [M ★★].** (a) Inputs $x_k$ have variance 1 and there are $n=100$ of them. What weight
-variance keeps $\operatorname{Var}(w^\top x)=1$? (b) What is the Xavier-uniform bound $a$ for a weight of shape
+variance keeps $\mathrm{Var}(w^\top x)=1$? (b) What is the Xavier-uniform bound $a$ for a weight of shape
 $(64, 2092)$ (the drug input layer), and what is PyTorch's default bound for `nn.Linear(2092, 64)`?
 (c) Which is larger, and why might the default be preferred for a first layer followed by ELU?
 
 <details><summary>Solution</summary>
 
-(a) $\operatorname{Var}(z)=n\operatorname{Var}(w)\operatorname{Var}(x)$, so $\operatorname{Var}(w)=1/100=0.01$ (std 0.1).
+(a) $\mathrm{Var}(z)=n\mathrm{Var}(w)\mathrm{Var}(x)$, so $\mathrm{Var}(w)=1/100=0.01$ (std 0.1).
 (b) Xavier: $a=\sqrt{6/(2092+64)}=\sqrt{6/2156}=0.05275$. Default: $1/\sqrt{2092}=0.02186$.
 (c) Xavier's is larger because it averages fan-in and fan-out, and fan-out (64) is small. The default
 depends only on fan-in, which is what controls the forward variance; with 2092 inputs, the more
@@ -2947,7 +2947,7 @@ organise parameters) and optimisers.
 | Softmax/sigmoid + CE gradient | $p-y$ |
 | BCE with logits (stable) | $\max(z,0)-zy+\log(1+e^{-\lvert z\rvert})$ |
 | Log-sum-exp | $m+\log\sum_j e^{z_j-m}$, $m=\max_j z_j$ |
-| Xavier uniform | $a=\sqrt{6/(n_{in}+n_{out})}$; He: $\operatorname{Var}=2/n_{in}$ |
+| Xavier uniform | $a=\sqrt{6/(n_{in}+n_{out})}$; He: $\mathrm{Var}=2/n_{in}$ |
 | Inverted dropout | $\tilde h=m\odot h/(1-p)$, identity at eval |
 | LayerNorm | normalise each row over its features, then $\gamma,\beta$ |
 | Residual | $h'=h+F(h)$, Jacobian $I+\partial F/\partial h$ |
