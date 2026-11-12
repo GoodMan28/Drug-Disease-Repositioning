@@ -20,7 +20,7 @@ After this unit you will be able to:
 8. **Distinguish** parameters from hyper-parameters and **classify** every field of `MVHGATConfig`.
 9. **Implement** k-fold, stratified, repeated and grouped cross-validation, and **explain** what CV estimates.
 10. **Design** a hyper-parameter search (grid, random, one-at-a-time) on a validation split and **explain** why nested CV is needed for an unbiased estimate of a tuned procedure.
-
+Explanation: https://docs.google.com/document/d/1NXwSuUJUR5v3_cIwoTKGWN0TSsvQJ3c8Y-fb8_Rka-U/edit?usp=sharing
 ---
 
 ## 1. Motivation: why this unit matters for this project
