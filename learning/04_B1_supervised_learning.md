@@ -58,7 +58,7 @@ Supervised learning means learning a function from examples where the right answ
 * A **model** or **hypothesis** $f_\theta: \mathcal X \to \mathbb R$ with **parameters** $\theta$ (the weights). The set of all functions the model can represent as $\theta$ varies is the **hypothesis class** $\mathcal F$.
 * A **loss function** $\ell(f_\theta(x), y) \ge 0$ measures how bad a prediction is.
 * The **true risk** (expected loss, generalisation error) is $R(\theta) = \mathbb E_{(x,y)\sim\mathcal D}\big[\ell(f_\theta(x), y)\big]$. This is what we want small, but we cannot compute it because $\mathcal D$ is unknown.
-* The **empirical risk** on a training set $S = \{(x_t, y_t)\}_{t=1}^n$ is $\hat R_S(\theta) = \frac1n\sum_t \ell(f_\theta(x_t), y_t)$.
+* The **empirical risk** on a training set $S = \{(x_t, y_t)\}_{t=1}^{n}$ is $\hat{R}_S(\theta) = \frac{1}{n}\sum_{t=1}^{n} \ell\big(f_\theta(x_t),\, y_t\big)$.
 * **Empirical risk minimisation (ERM):** choose $\hat\theta = \arg\min_\theta \hat R_S(\theta)$, usually plus a regulariser: $\hat\theta = \arg\min_\theta \hat R_S(\theta) + \lambda\Omega(\theta)$.
 
 Two flavours: **regression** ($\mathcal Y = \mathbb R$, e.g. predict a drug's IC50) and **classification** ($\mathcal Y$ finite, e.g. link / no link). With probabilistic outputs, binary classification is usually treated as predicting a probability $\sigma(f_\theta(x))$ (Unit A3).
